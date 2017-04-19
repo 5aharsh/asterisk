@@ -1,6 +1,6 @@
 /*
  * Saharsh: Line 100: Login(): commented "connection = sqliteConnection.dbConnector();". Added "connection = sqliteConnection.dbConnector();" in Line 183 in lgn_button action
- * 
+ * Saharsh: Line 189: clickAction() for Login. Added connection and login authentication system.
  * 
  * 
  * 
@@ -81,9 +81,9 @@ public class Login {
 	
 	static final String AB = "0123456789ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmonpqrstuvwxyz";
 	static SecureRandom rnd = new SecureRandom();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField passfield;
+	private JTextField dbname;
+	private JTextField confirmpass;
 	private JPasswordField lng_passwd_fld;
 	private JTextField pathField;
 	
@@ -113,7 +113,7 @@ public class Login {
 		formAsterisk.setType(Type.POPUP);
 		formAsterisk.setFont(new Font("Rockwell", Font.PLAIN, 12));
 		formAsterisk.setTitle("Asterisk* - Password Manager");
-		formAsterisk.setIconImage(Toolkit.getDefaultToolkit().getImage("F:\\College\\Mini-I\\Asterisk\\Logo\\logo.png"));
+		formAsterisk.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\College\\Mini-I\\Asterisk\\Logo\\logo.png"));
 		formAsterisk.getContentPane().setLocation(0, 162);
 		formAsterisk.getContentPane().setBackground(Color.WHITE);
 		formAsterisk.getContentPane().setLayout(new CardLayout(0, 0));
@@ -129,13 +129,13 @@ public class Login {
 		login.setLayout(null);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("F:\\College\\Mini-I\\asterisk\\Logo\\login.png"));
+		label.setIcon(new ImageIcon("D:\\College\\Mini-I\\asterisk\\Logo\\login.png"));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(0, 68, 1027, 229);
 		login.add(label);
 		
 		JButton lgn_bk_bnt = new JButton("");
-		lgn_bk_bnt.setIcon(new ImageIcon("F:\\College\\Mini-I\\Asterisk\\Logo\\Picture2.png"));
+		lgn_bk_bnt.setIcon(new ImageIcon("D:\\College\\Mini-I\\Asterisk\\Logo\\Picture2.png"));
 		lgn_bk_bnt.setSelectedIcon(null);
 		lgn_bk_bnt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -207,7 +207,7 @@ public class Login {
 						}
 						if(count == 1){
 							//Access Granted!
-							JOptionPane.showMessageDialog(null, "Password is " + loginPassword);
+							JOptionPane.showMessageDialog(null, "Authentication Successfull");
 						}
 						else{
 							JOptionPane.showMessageDialog(formAsterisk, "Invalid password!", "Access Denied!", JOptionPane.WARNING_MESSAGE);
@@ -250,26 +250,30 @@ public class Login {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon("F:\\College\\Mini-I\\Asterisk\\Logo\\signup.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("D:\\College\\Mini-I\\Asterisk\\Logo\\signup.png"));
 		lblNewLabel_1.setBounds(0, 46, 1027, 220);
 		signup.add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(338, 349, 344, 49);
-		signup.add(textField);
-		textField.setColumns(10);
+		passfield = new JTextField();
+		passfield.setBounds(338, 349, 344, 49);
+		signup.add(passfield);
+		passfield.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(338, 284, 344, 49);
-		signup.add(textField_1);
-		textField_1.setColumns(10);
+		dbname = new JTextField();
+		dbname.setBounds(338, 284, 344, 49);
+		signup.add(dbname);
+		dbname.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(338, 417, 344, 49);
-		signup.add(textField_2);
-		textField_2.setColumns(10);
+		confirmpass = new JTextField();
+		confirmpass.setBounds(338, 417, 344, 49);
+		signup.add(confirmpass);
+		confirmpass.setColumns(10);
 		
 		JButton signupConfirmBtn = new JButton("Done");
+		signupConfirmBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		signupConfirmBtn.setForeground(Color.WHITE);
 		signupConfirmBtn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		signupConfirmBtn.setBackground(new Color(8, 204, 120));
@@ -277,7 +281,7 @@ public class Login {
 		signup.add(signupConfirmBtn);
 		
 		JButton backBtn = new JButton("");
-		backBtn.setIcon(new ImageIcon("F:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		backBtn.setIcon(new ImageIcon("D:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				welcome.setVisible(true);
@@ -315,7 +319,7 @@ public class Login {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(0, 64, 1027, 229);
-		lblNewLabel.setIcon(new ImageIcon("F:\\College\\Mini-I\\asterisk\\Logo\\logo2.png"));
+		lblNewLabel.setIcon(new ImageIcon("D:\\College\\Mini-I\\asterisk\\Logo\\logo2.png"));
 		welcome.add(lblNewLabel);
 		
 		JButton loginBtn = new JButton("Login");
