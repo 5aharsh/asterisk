@@ -52,6 +52,7 @@ import java.awt.CardLayout;
 import java.awt.Toolkit;
 import java.awt.Window.Type;
 import java.io.File;
+import java.io.IOException;
 
 
 
@@ -79,11 +80,8 @@ public class Login {
 	 * Create the application.
 	 */
 	
-	static final String AB = "0123456789ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmonpqrstuvwxyz";
+	static final String AB = "0123456789ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmonpqrstuvwxyz@$#";
 	static SecureRandom rnd = new SecureRandom();
-	private JTextField passfield;
-	private JTextField dbname;
-	private JTextField confirmpass;
 	private JPasswordField lng_passwd_fld;
 	private JTextField pathField;
 	
@@ -106,6 +104,12 @@ public class Login {
 	 * Initialize the contents of the frame.
 	 */
 	String filePath, originalPath, loginPassword;
+	private JPasswordField passfield;
+	private JPasswordField confirmpass;
+	private JTextField savePathField;
+	private JTextField save_dest;
+	private String new_file_add;
+	private File created_File;
 	
 	private void initialize() {
 		formAsterisk = new JFrame();
@@ -160,10 +164,9 @@ public class Login {
 		fc.setFileFilter(filter);
 		final JButton db_choose_btn = new JButton("Choose");
 		db_choose_btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0){
 				int returnVal = fc.showDialog(db_choose_btn, "Choose");
-				if(returnVal == JFileChooser.APPROVE_OPTION)
-				{
+				if(returnVal == JFileChooser.APPROVE_OPTION){
 					File file = fc.getSelectedFile();
 					String returnAdd = file.getAbsolutePath();
 					String fixAdd = returnAdd.replace("\\", "\\\\");
@@ -188,7 +191,7 @@ public class Login {
 		lgn_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(originalPath==null){
-					JOptionPane.showMessageDialog(null, "No file chosen!");
+					JOptionPane.showMessageDialog(null, "No database chosen!");
 				}
 				else{
 					connection = sqliteConnection.dbConnector(filePath);
@@ -225,7 +228,7 @@ public class Login {
 			}
 		});
 		lgn_btn.setForeground(Color.WHITE);
-		lgn_btn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		lgn_btn.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		lgn_btn.setBackground(new Color(8, 204, 120));
 		lgn_btn.setBounds(435, 547, 154, 50);
 		login.add(lgn_btn);
@@ -254,30 +257,30 @@ public class Login {
 		lblNewLabel_1.setBounds(0, 46, 1027, 220);
 		signup.add(lblNewLabel_1);
 		
-		passfield = new JTextField();
-		passfield.setBounds(338, 349, 344, 49);
-		signup.add(passfield);
-		passfield.setColumns(10);
-		
-		dbname = new JTextField();
-		dbname.setBounds(338, 284, 344, 49);
-		signup.add(dbname);
-		dbname.setColumns(10);
-		
-		confirmpass = new JTextField();
-		confirmpass.setBounds(338, 417, 344, 49);
-		signup.add(confirmpass);
-		confirmpass.setColumns(10);
-		
 		JButton signupConfirmBtn = new JButton("Done");
 		signupConfirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String passwordField = passfield.getText();
+				String confirmPassword = confirmpass.getText();
+				
+				if(passwordField.equals(confirmPassword)){
+					try {
+						created_File.createNewFile();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null, "New DB Created!!");
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Password field doesn't match!");
+				}
 			}
 		});
 		signupConfirmBtn.setForeground(Color.WHITE);
-		signupConfirmBtn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		signupConfirmBtn.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		signupConfirmBtn.setBackground(new Color(8, 204, 120));
-		signupConfirmBtn.setBounds(395, 507, 238, 60);
+		signupConfirmBtn.setBounds(395, 547, 238, 60);
 		signup.add(signupConfirmBtn);
 		
 		JButton backBtn = new JButton("");
@@ -293,6 +296,99 @@ public class Login {
 		backBtn.setBackground(new Color(8, 204, 120));
 		backBtn.setBounds(10, 11, 37, 37);
 		signup.add(backBtn);
+		
+		JLabel databasename = new JLabel("Database Save Location:");
+		databasename.setForeground(Color.WHITE);
+		databasename.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		databasename.setBounds(338, 249, 198, 34);
+		signup.add(databasename);
+		
+		JLabel password = new JLabel("Password:");
+		password.setForeground(Color.WHITE);
+		password.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		password.setBounds(338, 344, 198, 34);
+		signup.add(password);
+		
+		JLabel confirmpassword = new JLabel("Confirm Password:");
+		confirmpassword.setForeground(Color.WHITE);
+		confirmpassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		confirmpassword.setBounds(338, 435, 198, 34);
+		signup.add(confirmpassword);
+		
+		passfield = new JPasswordField();
+		passfield.setFont(new Font("Century Gothic", Font.BOLD, 18));
+		passfield.setHorizontalAlignment(SwingConstants.LEFT);
+		passfield.setBounds(338, 375, 344, 49);
+		signup.add(passfield);
+		
+		confirmpass = new JPasswordField();
+		confirmpass.setFont(new Font("Century Gothic", Font.BOLD, 18));
+		confirmpass.setHorizontalAlignment(SwingConstants.LEFT);
+		confirmpass.setBounds(338, 467, 344, 49);
+		signup.add(confirmpass);
+		
+	/*	savePathField = new JTextField();
+	*	savePathField.setFont(new Font("Century Gothic", Font.BOLD | Font.ITALIC, 18));
+	*	savePathField.setEditable(false);
+	*	savePathField.setBounds(338, 283, 214, 50);
+	*	signup.add(savePathField);
+	*/	
+		final JFileChooser filesave = new JFileChooser();
+		filesave.setDialogTitle("Specify a file to save"); 
+		FileNameExtensionFilter savefilter = new FileNameExtensionFilter("SQLite Database", "sqlite");
+		filesave.setFileFilter(savefilter);
+		JButton btn_save_db = new JButton("Choose");
+		btn_save_db.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int returnVal = filesave.showSaveDialog(btn_save_db);
+				
+				if(returnVal == JFileChooser.APPROVE_OPTION){
+					File file = filesave.getSelectedFile();
+					new_file_add = file.getAbsolutePath();
+					save_dest.setText(new_file_add);
+					created_File = new File(new_file_add + ".sqlite");
+				}
+			}
+		});
+		btn_save_db.setForeground(Color.WHITE);
+		btn_save_db.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		btn_save_db.setBackground(new Color(245, 102, 23));
+		btn_save_db.setBounds(552, 283, 130, 50);
+		signup.add(btn_save_db);
+		
+		save_dest = new JTextField();
+		save_dest.setBounds(338, 284, 213, 49);
+		signup.add(save_dest);
+		save_dest.setColumns(10);
+		
+		
+		/*final JFileChooser filesave = new JFileChooser();
+		filesave.setDialogTitle("Specify a file to save"); 
+		FileNameExtensionFilter savefilter = new FileNameExtensionFilter("SQLite Database", "sqlite");
+		filesave.setFileFilter(savefilter);
+		final JButton db_save_btn = new JButton("Choose");
+		db_save_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
+				int returnVal = filesave.showSaveDialog(db_save_btn);
+				
+				if(returnVal == JFileChooser.APPROVE_OPTION){
+					File file = filesave.getSelectedFile();
+					String returnAdd = file.getAbsolutePath();
+				}
+			}
+		});
+		db_save_btn.setForeground(Color.WHITE);
+		db_save_btn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		db_save_btn.setBackground(new Color(245, 102, 23));
+		db_save_btn.setBounds(557, 332, 154, 50);
+		login.add(db_save_btn);
+		
+		savePathField = new JTextField();
+		savePathField.setEditable(false);
+		savePathField.setFont(new Font("Century Gothic", Font.BOLD | Font.ITALIC, 18));
+		savePathField.setBounds(317, 332, 238, 50);
+		login.add(savePathField);
+		 */
 		
 		JPanel display = new JPanel();
 		display.setBackground(new Color(0, 191, 255));
@@ -325,7 +421,7 @@ public class Login {
 		JButton loginBtn = new JButton("Login");
 		loginBtn.setForeground(new Color(255, 255, 255));
 		loginBtn.setBackground(new Color(8, 204, 120));
-		loginBtn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		loginBtn.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		loginBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				login.setVisible(true);
@@ -344,7 +440,7 @@ public class Login {
 		});
 		createBtn.setForeground(new Color(255, 255, 255));
 		createBtn.setBackground(new Color(255, 192, 0));
-		createBtn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		createBtn.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		createBtn.setBounds(603, 337, 238, 60);
 		welcome.add(createBtn);
 		
@@ -357,7 +453,7 @@ public class Login {
 		});
 		exitBtn.setForeground(new Color(255, 255, 255));
 		exitBtn.setBackground(new Color(245, 102, 23));
-		exitBtn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		exitBtn.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		exitBtn.setBounds(394, 497, 238, 60);
 		welcome.add(exitBtn);
 		
