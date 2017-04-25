@@ -75,6 +75,7 @@ public class Login {
 			}
 		});
 	}
+	
 	Connection connection = null;
 	/**
 	 * Create the application.
@@ -257,32 +258,6 @@ public class Login {
 		lblNewLabel_1.setBounds(0, 46, 1027, 220);
 		signup.add(lblNewLabel_1);
 		
-		JButton signupConfirmBtn = new JButton("Done");
-		signupConfirmBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String passwordField = passfield.getText();
-				String confirmPassword = confirmpass.getText();
-				
-				if(passwordField.equals(confirmPassword)){
-					try {
-						created_File.createNewFile();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					JOptionPane.showMessageDialog(null, "New DB Created!!");
-				}
-				else{
-					JOptionPane.showMessageDialog(null, "Password field doesn't match!");
-				}
-			}
-		});
-		signupConfirmBtn.setForeground(Color.WHITE);
-		signupConfirmBtn.setFont(new Font("Century Gothic", Font.BOLD, 25));
-		signupConfirmBtn.setBackground(new Color(8, 204, 120));
-		signupConfirmBtn.setBounds(395, 547, 238, 60);
-		signup.add(signupConfirmBtn);
-		
 		JButton backBtn = new JButton("");
 		backBtn.setIcon(new ImageIcon("D:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
 		backBtn.addActionListener(new ActionListener() {
@@ -306,33 +281,27 @@ public class Login {
 		JLabel password = new JLabel("Password:");
 		password.setForeground(Color.WHITE);
 		password.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		password.setBounds(338, 344, 198, 34);
+		password.setBounds(338, 333, 198, 34);
 		signup.add(password);
 		
 		JLabel confirmpassword = new JLabel("Confirm Password:");
 		confirmpassword.setForeground(Color.WHITE);
 		confirmpassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		confirmpassword.setBounds(338, 435, 198, 34);
+		confirmpassword.setBounds(338, 415, 198, 34);
 		signup.add(confirmpassword);
 		
 		passfield = new JPasswordField();
 		passfield.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		passfield.setHorizontalAlignment(SwingConstants.LEFT);
-		passfield.setBounds(338, 375, 344, 49);
+		passfield.setBounds(338, 364, 344, 49);
 		signup.add(passfield);
 		
 		confirmpass = new JPasswordField();
 		confirmpass.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		confirmpass.setHorizontalAlignment(SwingConstants.LEFT);
-		confirmpass.setBounds(338, 467, 344, 49);
+		confirmpass.setBounds(338, 447, 344, 49);
 		signup.add(confirmpass);
-		
-	/*	savePathField = new JTextField();
-	*	savePathField.setFont(new Font("Century Gothic", Font.BOLD | Font.ITALIC, 18));
-	*	savePathField.setEditable(false);
-	*	savePathField.setBounds(338, 283, 214, 50);
-	*	signup.add(savePathField);
-	*/	
+
 		final JFileChooser filesave = new JFileChooser();
 		filesave.setDialogTitle("Specify a file to save"); 
 		FileNameExtensionFilter savefilter = new FileNameExtensionFilter("SQLite Database", "sqlite");
@@ -345,7 +314,9 @@ public class Login {
 				if(returnVal == JFileChooser.APPROVE_OPTION){
 					File file = filesave.getSelectedFile();
 					new_file_add = file.getAbsolutePath();
-					save_dest.setText(new_file_add);
+					String dblocation = new_file_add+".sqlite";
+					save_dest.setText(dblocation);
+					filePath=dblocation;
 					created_File = new File(new_file_add + ".sqlite");
 				}
 			}
@@ -357,39 +328,65 @@ public class Login {
 		signup.add(btn_save_db);
 		
 		save_dest = new JTextField();
+		save_dest.setEditable(false);
+		save_dest.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		save_dest.setBounds(338, 284, 213, 49);
 		signup.add(save_dest);
 		save_dest.setColumns(10);
 		
-		
-		/*final JFileChooser filesave = new JFileChooser();
-		filesave.setDialogTitle("Specify a file to save"); 
-		FileNameExtensionFilter savefilter = new FileNameExtensionFilter("SQLite Database", "sqlite");
-		filesave.setFileFilter(savefilter);
-		final JButton db_save_btn = new JButton("Choose");
-		db_save_btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0){
-				int returnVal = filesave.showSaveDialog(db_save_btn);
+		JButton signupBtn = new JButton("Done");
+		signupBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String passwordField = passfield.getText();
+				String confirmPassword = confirmpass.getText();
 				
-				if(returnVal == JFileChooser.APPROVE_OPTION){
-					File file = filesave.getSelectedFile();
-					String returnAdd = file.getAbsolutePath();
+				if(!passwordField.contains(" ")&&!confirmPassword.equals("")&&!passwordField.equals("")&&passwordField.equals(confirmPassword)&&passwordField.length()>=8){
+					try {
+						created_File.createNewFile();
+						JOptionPane.showMessageDialog(null, "Database ready at location: "+filePath);
+						/*
+						String UD = "userdata";
+						String query = "CREATE TABLE IF NOT EXISTS " + UD + "(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, website text, username VARCHAR, password VARCHAR)";
+						Statement st = connection.createStatement();
+						st.execute(query);
+						
+						String WS = "whitestar";
+						String query1 = "CREATE TABLE IF NOT EXISTS " + WS + "(hash INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, content VARCHAR)";
+						Statement st1 = connection.createStatement();
+						st1.execute(query1);
+						String scrambledText = Encrypt.scramble(passwordField, "Rhapsody");
+						String query2 = "insert into " + WS + "('content') values ('" + scrambledText + "')";
+						PreparedStatement pst2 = connection.prepareStatement(query2);
+						pst2.execute();
+						*/
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else{
+					if(passwordField.equals("")||confirmPassword.equals(""))
+						JOptionPane.showMessageDialog(null, "Password field can't be empty");
+					else if(passwordField.length()<8)
+						JOptionPane.showMessageDialog(null, "Password length should be more than 8");
+					else if(passwordField.contains(" "))
+						JOptionPane.showMessageDialog(null, "No spaces are allowed in password");
 				}
 			}
 		});
-		db_save_btn.setForeground(Color.WHITE);
-		db_save_btn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
-		db_save_btn.setBackground(new Color(245, 102, 23));
-		db_save_btn.setBounds(557, 332, 154, 50);
-		login.add(db_save_btn);
+		signupBtn.setForeground(Color.WHITE);
+		signupBtn.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		signupBtn.setBackground(new Color(8, 204, 120));
+		signupBtn.setBounds(387, 524, 238, 60);
+		signup.add(signupBtn);
 		
-		savePathField = new JTextField();
-		savePathField.setEditable(false);
-		savePathField.setFont(new Font("Century Gothic", Font.BOLD | Font.ITALIC, 18));
-		savePathField.setBounds(317, 332, 238, 50);
-		login.add(savePathField);
-		 */
-		
+		JLabel lbldontForgetTo = new JLabel("*Don't forget to move your database to a secured location");
+		lbldontForgetTo.setFont(new Font("Source Sans Pro", Font.PLAIN, 15));
+		lbldontForgetTo.setForeground(Color.WHITE);
+		lbldontForgetTo.setHorizontalAlignment(SwingConstants.CENTER);
+		lbldontForgetTo.setBounds(314, 605, 380, 21);
+		signup.add(lbldontForgetTo);
+
 		JPanel display = new JPanel();
 		display.setBackground(new Color(0, 191, 255));
 		formAsterisk.getContentPane().add(display, "name_1031052111462232");
