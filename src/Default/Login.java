@@ -42,8 +42,16 @@ package Default;
 import java.awt.EventQueue;
 import java.security.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+
+import net.proteanit.sql.DbUtils;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -77,10 +85,17 @@ public class Login {
 	}
 	
 	Connection connection = null;
+	
 	/**
 	 * Create the application.
 	 */
 	
+	String filePath, originalPath, loginPassword;
+	
+
+	
+	static final private String rhapsody = "e3jwA8Mfrs8CqcFNj7RfH7RV";
+	static private String masterpass;
 	static final String AB = "0123456789ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmonpqrstuvwxyz@$#";
 	static SecureRandom rnd = new SecureRandom();
 	private JPasswordField lng_passwd_fld;
@@ -96,6 +111,8 @@ public class Login {
 		return sb.toString();
 	}
 	
+	
+	
 	public Login() {
 		initialize();
 		//connection = sqliteConnection.dbConnector();
@@ -104,21 +121,35 @@ public class Login {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	String filePath, originalPath, loginPassword;
+	private DefaultTableModel model;
+	private ArrayList<Users> users; 
 	private JPasswordField passfield;
 	private JPasswordField confirmpass;
 	private JTextField savePathField;
 	private JTextField save_dest;
 	private String new_file_add;
 	private File created_File;
+	private JPasswordField pass_input;
+	private JTextField user_input;
+	private JTextField web_input;
+	private JTextField search_site;
+	private JTextField search_user;
+	private JTextField show_decrypt;
+	private JTextField user_derycpt;
+	private JTextField web_decrypt;
+	private JTextField pass_decrypt;
+	private JTable table;
+	
+	
+	
 	
 	private void initialize() {
-		formAsterisk = new JFrame();
+		formAsterisk =  new JFrame();
 		formAsterisk.setResizable(false);
 		formAsterisk.setType(Type.POPUP);
 		formAsterisk.setFont(new Font("Rockwell", Font.PLAIN, 12));
 		formAsterisk.setTitle("Asterisk* - Password Manager");
-		formAsterisk.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\College\\Mini-I\\Asterisk\\Logo\\logo.png"));
+		formAsterisk.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\College\\Mini-I\\Asterisk\\Logo\\logo.png"));
 		formAsterisk.getContentPane().setLocation(0, 162);
 		formAsterisk.getContentPane().setBackground(Color.WHITE);
 		formAsterisk.getContentPane().setLayout(new CardLayout(0, 0));
@@ -133,14 +164,21 @@ public class Login {
 		formAsterisk.getContentPane().add(login, "name_1031052084328624");
 		login.setLayout(null);
 		
+		JPanel display = new JPanel();
+		display.setBackground(new Color(0, 191, 255));
+		formAsterisk.getContentPane().add(display, "name_1031052111462232");
+		display.setLayout(null);
+		
+		
+		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("D:\\College\\Mini-I\\asterisk\\Logo\\login.png"));
+		label.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\login.png"));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(0, 68, 1027, 229);
 		login.add(label);
 		
 		JButton lgn_bk_bnt = new JButton("");
-		lgn_bk_bnt.setIcon(new ImageIcon("D:\\College\\Mini-I\\Asterisk\\Logo\\Picture2.png"));
+		lgn_bk_bnt.setIcon(new ImageIcon("C:\\College\\Mini-I\\Asterisk\\Logo\\Picture2.png"));
 		lgn_bk_bnt.setSelectedIcon(null);
 		lgn_bk_bnt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -174,6 +212,7 @@ public class Login {
 					pathField.setText(returnAdd);
 					filePath = fixAdd;
 					originalPath = returnAdd;
+					masterpass = lng_passwd_fld.getText();
 				}
 			}
 		});
@@ -182,6 +221,8 @@ public class Login {
 		db_choose_btn.setBackground(new Color(245, 102, 23));
 		db_choose_btn.setBounds(557, 332, 154, 50);
 		login.add(db_choose_btn);
+		
+		
 		
 		pathField = new JTextField();
 		pathField.setEditable(false);
@@ -196,11 +237,12 @@ public class Login {
 				}
 				else{
 					connection = sqliteConnection.dbConnector(filePath);
+					
 					loginPassword = lng_passwd_fld.getText();
 					
 					
 					try{
-						String scrambled = Encrypt.scramble(loginPassword, "Rhapsody");
+						String scrambled = Encrypt.scramble(loginPassword, rhapsody);
 						String query = "select content from whitestar where content = ?";
 						PreparedStatement pst = connection.prepareStatement(query);
 						pst.setString(1,scrambled);
@@ -210,8 +252,59 @@ public class Login {
 							count++;
 						}
 						if(count == 1){
-							//Access Granted!
+							
 							JOptionPane.showMessageDialog(null, "Authentication Successfull");
+							
+							users = new ArrayList<Users>();
+						       
+						       try {
+						           
+						    	   String q = "SELECT * FROM Data";
+						           PreparedStatement pst1 = connection.prepareStatement(q);
+						           ResultSet rs1 = pst1.executeQuery();
+						           
+						           while(rs1.next()){
+						               
+						               Users u = new Users(
+						                       rs1.getInt("id"),
+						                      rs1.getString("website"),
+						                       rs1.getString("username"),
+						                       rs1.getString("password")
+						               );
+						               
+						               users.add(u);
+						           }
+						           
+						           model = new DefaultTableModel();
+						           
+						           Object[] columnsName = new Object[4];
+						           
+						           columnsName[0] = "Id";
+						           columnsName[1] = "Website";
+						           columnsName[2] = "UserName";
+						           columnsName[3] = "Password";
+						           
+						           model.setColumnIdentifiers(columnsName);
+						           
+						           Object[] rowData = new Object[4];
+						           
+						           for(int i = 0; i < users.size(); i++){
+						               
+						               rowData[0] = users.get(i).getId();
+						                rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb());
+						                 rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser());
+						                  rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass());
+						                  
+						                  model.addRow(rowData);
+						           }
+						            
+						       } catch (SQLException ex) {
+						           JOptionPane.showMessageDialog(null, ex);;
+						       }
+							
+							display.setVisible(true);
+							login.setVisible(false);
+							
 						}
 						else{
 							JOptionPane.showMessageDialog(formAsterisk, "Invalid password!", "Access Denied!", JOptionPane.WARNING_MESSAGE);
@@ -246,20 +339,168 @@ public class Login {
 		lblChooseFile.setBounds(317, 299, 198, 34);
 		login.add(lblChooseFile);
 		
+				
 		
 		JPanel signup = new JPanel();
 		signup.setBackground(new Color(0, 191, 255));
 		formAsterisk.getContentPane().add(signup, "name_1031052097970885");
 		signup.setLayout(null);
 		
+		JPanel input = new JPanel();
+		input.setBackground(new Color(0, 191, 255));
+		formAsterisk.getContentPane().add(input, "name_175497036809876");
+		input.setLayout(null);
+		
+		JPanel decrypt = new JPanel();
+		decrypt.setBackground(new Color(0, 191, 255));
+		formAsterisk.getContentPane().add(decrypt, "name_177123087508148");
+		decrypt.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(0, 191, 255));
+		panel.setBounds(0, 0, 1027, 626);
+		decrypt.add(panel);
+		
+		JLabel label_1 = new JLabel("Website:");
+		label_1.setForeground(Color.WHITE);
+		label_1.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		label_1.setBounds(343, 191, 198, 34);
+		panel.add(label_1);
+		
+		JLabel label_2 = new JLabel("Username:");
+		label_2.setForeground(Color.WHITE);
+		label_2.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		label_2.setBounds(343, 287, 198, 34);
+		panel.add(label_2);
+		
+		JLabel label_3 = new JLabel("Password:");
+		label_3.setForeground(Color.WHITE);
+		label_3.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		label_3.setBounds(343, 386, 198, 34);
+		panel.add(label_3);
+		
+		user_derycpt = new JTextField();
+		user_derycpt.setEditable(false);
+		user_derycpt.setColumns(10);
+		user_derycpt.setBounds(343, 323, 344, 47);
+		panel.add(user_derycpt);
+		
+		web_decrypt = new JTextField();
+		web_decrypt.setEditable(false);
+		web_decrypt.setColumns(10);
+		web_decrypt.setBounds(343, 221, 344, 47);
+		panel.add(web_decrypt);
+		
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				display.setVisible(true);
+				decrypt.setVisible(false);
+			}
+		});
+		button_1.setForeground(Color.WHITE);
+		button_1.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		button_1.setBackground(new Color(8, 204, 120));
+		button_1.setBounds(15, 16, 37, 37);
+		panel.add(button_1);
+		
+		pass_decrypt = new JTextField();
+		pass_decrypt.setEditable(false);
+		pass_decrypt.setColumns(10);
+		pass_decrypt.setBounds(343, 420, 344, 47);
+		panel.add(pass_decrypt);
+		
+		pass_input = new JPasswordField();
+		pass_input.setHorizontalAlignment(SwingConstants.LEFT);
+		pass_input.setFont(new Font("Century Gothic", Font.BOLD, 18));
+		pass_input.setBounds(343, 421, 344, 49);
+		input.add(pass_input);
+		
+		JButton btnRegister = new JButton("Register");
+		btnRegister.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				
+				try{
+					
+					String query = "insert into Data (website, username, password) values (?, ?, ?)";
+					PreparedStatement pst = connection.prepareStatement(query);
+					pst.setString(1, Encrypt.scramble("mypass", web_input.getText()));
+					pst.setString(2, Encrypt.scramble("mypass", user_input.getText()));
+					pst.setString(3, Encrypt.scramble("mypass", pass_input.getText()));
+					pst.execute();
+					
+					JOptionPane.showMessageDialog(formAsterisk, "Successfully Added", "Success", JOptionPane.PLAIN_MESSAGE, null);
+					
+					web_input.setText(null);
+					user_input.setText(null);
+					pass_input.setText(null);
+					
+				}catch(Exception e1){
+					JOptionPane.showMessageDialog(formAsterisk, e1, null, JOptionPane.WARNING_MESSAGE, null);
+				}
+				
+			}
+		});
+		btnRegister.setForeground(Color.WHITE);
+		btnRegister.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		btnRegister.setBackground(new Color(8, 204, 120));
+		btnRegister.setBounds(392, 515, 238, 60);
+		input.add(btnRegister);
+		
+		JLabel lblWebsite = new JLabel("Website:");
+		lblWebsite.setForeground(Color.WHITE);
+		lblWebsite.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		lblWebsite.setBounds(343, 191, 198, 34);
+		input.add(lblWebsite);
+		
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setForeground(Color.WHITE);
+		lblUsername.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		lblUsername.setBounds(343, 287, 198, 34);
+		input.add(lblUsername);
+		
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		lblPassword.setBounds(343, 386, 198, 34);
+		input.add(lblPassword);
+		
+		user_input = new JTextField();
+		user_input.setBounds(343, 323, 344, 47);
+		input.add(user_input);
+		user_input.setColumns(10);
+		
+		web_input = new JTextField();
+		web_input.setColumns(10);
+		web_input.setBounds(343, 221, 344, 47);
+		input.add(web_input);
+		
+		JButton back_input = new JButton("");
+		back_input.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				display.setVisible(true);
+				input.setVisible(false);
+			}
+		});
+		back_input.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		back_input.setForeground(Color.WHITE);
+		back_input.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		back_input.setBackground(new Color(8, 204, 120));
+		back_input.setBounds(15, 16, 37, 37);
+		input.add(back_input);
+		
+		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon("D:\\College\\Mini-I\\Asterisk\\Logo\\signup.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\College\\Mini-I\\Asterisk\\Logo\\signup.png"));
 		lblNewLabel_1.setBounds(0, 46, 1027, 220);
 		signup.add(lblNewLabel_1);
 		
 		JButton backBtn = new JButton("");
-		backBtn.setIcon(new ImageIcon("D:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		backBtn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				welcome.setVisible(true);
@@ -343,10 +584,10 @@ public class Login {
 				if(!passwordField.contains(" ")&&!confirmPassword.equals("")&&!passwordField.equals("")&&passwordField.equals(confirmPassword)&&passwordField.length()>=8){
 					try {
 						created_File.createNewFile();
-						JOptionPane.showMessageDialog(null, "Database ready at location: "+filePath);
-						/*
-						String UD = "userdata";
-						String query = "CREATE TABLE IF NOT EXISTS " + UD + "(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, website text, username VARCHAR, password VARCHAR)";
+						JOptionPane.showMessageDialog(null, "Database successfully created!");
+						connection = sqliteConnection.dbConnector(filePath); 
+						String UD = "Data";
+						String query = "CREATE TABLE IF NOT EXISTS " + UD + "(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, website text, username text, password text)";
 						Statement st = connection.createStatement();
 						st.execute(query);
 						
@@ -354,11 +595,13 @@ public class Login {
 						String query1 = "CREATE TABLE IF NOT EXISTS " + WS + "(hash INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, content VARCHAR)";
 						Statement st1 = connection.createStatement();
 						st1.execute(query1);
-						String scrambledText = Encrypt.scramble(passwordField, "Rhapsody");
+						String scrambledText = Encrypt.scramble(passwordField, rhapsody);
 						String query2 = "insert into " + WS + "('content') values ('" + scrambledText + "')";
 						PreparedStatement pst2 = connection.prepareStatement(query2);
 						pst2.execute();
-						*/
+						passfield.setText(null);
+						save_dest.setText(null);
+						confirmpass.setText(null);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -387,10 +630,143 @@ public class Login {
 		lbldontForgetTo.setBounds(314, 605, 380, 21);
 		signup.add(lbldontForgetTo);
 
-		JPanel display = new JPanel();
-		display.setBackground(new Color(0, 191, 255));
-		formAsterisk.getContentPane().add(display, "name_1031052111462232");
-		display.setLayout(null);
+		
+		
+		JButton disp_bk_btn = new JButton("");
+		disp_bk_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				display.setVisible(false);
+				welcome.setVisible(true);
+			}
+		});
+		disp_bk_btn.setIcon(new ImageIcon("D:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		disp_bk_btn.setForeground(Color.WHITE);
+		disp_bk_btn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		disp_bk_btn.setBackground(new Color(8, 204, 120));
+		disp_bk_btn.setBounds(15, 16, 37, 37);
+		display.add(disp_bk_btn);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(67, 255, 874, 363);
+		display.add(scrollPane);
+		
+		 
+
+        
+       
+		
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		//JScrollPane pane = new JScrollPane(table);
+		
+		
+		
+		JButton refresh = new JButton("Refresh");
+		refresh.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+					
+					 
+					table.setModel(model);
+					//table.setModel(DbUtils.resultSetToTableModel(rs));
+					table.show(true);
+					
+					
+					//rs.close();
+					//pst.close();
+				}catch(Exception e2){
+					JOptionPane.showMessageDialog(formAsterisk, e2);
+				}
+			}
+		});
+		refresh.setBounds(67, 16, 97, 37);
+		display.add(refresh);
+		
+		
+		
+		
+		
+		JButton addInfo = new JButton("Add Data");
+		addInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				input.setVisible(true);
+				display.setVisible(false);
+			}
+		});
+		addInfo.setBounds(54, 106, 110, 37);
+		display.add(addInfo);
+		
+		search_site = new JTextField();
+		search_site.setBounds(302, 16, 203, 37);
+		display.add(search_site);
+		search_site.setColumns(10);
+		
+		search_user = new JTextField();
+		search_user.setColumns(10);
+		search_user.setBounds(302, 106, 203, 37);
+		display.add(search_user);
+		
+		show_decrypt = new JTextField();
+		show_decrypt.setColumns(10);
+		show_decrypt.setBounds(648, 63, 203, 37);
+		display.add(show_decrypt);
+		
+		JButton site_search = new JButton("search_s");
+		site_search.setBounds(197, 16, 97, 37);
+		display.add(site_search);
+		
+		JButton user_search = new JButton("search_u");
+		user_search.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					String username = search_user.getText();
+					String query = "select * from Data where username = ?";
+					PreparedStatement pst = connection.prepareStatement(query);
+					pst.setString(1, Encrypt.scramble("mypass", username));
+					ResultSet rs = pst.executeQuery();
+					table.setModel(DbUtils.resultSetToTableModel(rs));
+					search_site.setText(null);
+					search_user.setText(null);						
+				}
+				catch(Exception e3)
+				{
+					JOptionPane.showMessageDialog(formAsterisk, e3, null, JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
+		user_search.setBounds(197, 106, 97, 37);
+		display.add(user_search);
+		
+		JButton showBtn = new JButton("Show");
+		showBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					int id = Integer.parseInt(show_decrypt.getText());
+					String query = "select * from Data where id = ?";
+					PreparedStatement pst = connection.prepareStatement(query);
+					pst.setString(1,Integer.toString(id) );
+					ResultSet rs = pst.executeQuery();
+					//web_decrypt.setText(Encrypt.unscramble("mypass", rs.getString(2)));
+				//	user_decrypt.setText(rs.getString(3));
+					//pass_decrypt.setText(Encrypt.unscramble("mypass", rs.getString(4)));
+					search_site.setText(null);
+					search_user.setText(null);	
+					decrypt.setVisible(true);
+					display.setVisible(false);
+				}
+				catch(Exception e3)
+				{
+					JOptionPane.showMessageDialog(formAsterisk, e3, null, JOptionPane.WARNING_MESSAGE);
+				}
+				
+			}
+		});
+		showBtn.setBounds(547, 63, 97, 37);
+		display.add(showBtn);
+		
 		
 		JPanel update = new JPanel();
 		update.setBackground(new Color(0, 191, 255));
@@ -412,7 +788,7 @@ public class Login {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(0, 64, 1027, 229);
-		lblNewLabel.setIcon(new ImageIcon("D:\\College\\Mini-I\\asterisk\\Logo\\logo2.png"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\logo2.png"));
 		welcome.add(lblNewLabel);
 		
 		JButton loginBtn = new JButton("Login");
@@ -457,5 +833,17 @@ public class Login {
 		
 		
 		
+		
+		
+		
+		
 	}
+	
+
+	
+	/*ArrayList<Users> getUsers(){
+       
+      
+       return users;
+   }*/
 }

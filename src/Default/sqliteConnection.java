@@ -9,7 +9,7 @@ public class sqliteConnection {
 	public static Connection dbConnector(String path){
 		try{
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:F:\\sqlites.sqlite");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:"+path);
 			return conn;
 			
 		}catch(Exception e){
