@@ -134,7 +134,6 @@ public class Login {
 	private JTextField web_input;
 	private JTextField search_site;
 	private JTextField search_user;
-	private JTextField show_decrypt;
 	private JTextField user_derycpt;
 	private JTextField web_decrypt;
 	private JTextField pass_decrypt;
@@ -639,7 +638,7 @@ public class Login {
 				welcome.setVisible(true);
 			}
 		});
-		disp_bk_btn.setIcon(new ImageIcon("D:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		disp_bk_btn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
 		disp_bk_btn.setForeground(Color.WHITE);
 		disp_bk_btn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		disp_bk_btn.setBackground(new Color(8, 204, 120));
@@ -647,7 +646,7 @@ public class Login {
 		display.add(disp_bk_btn);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(67, 255, 874, 363);
+		scrollPane.setBounds(12, 205, 1003, 363);
 		display.add(scrollPane);
 		
 		 
@@ -682,7 +681,7 @@ public class Login {
 				}
 			}
 		});
-		refresh.setBounds(67, 16, 97, 37);
+		refresh.setBounds(918, 16, 97, 37);
 		display.add(refresh);
 		
 		
@@ -696,29 +695,24 @@ public class Login {
 				display.setVisible(false);
 			}
 		});
-		addInfo.setBounds(54, 106, 110, 37);
+		addInfo.setBounds(15, 581, 110, 37);
 		display.add(addInfo);
 		
 		search_site = new JTextField();
-		search_site.setBounds(302, 16, 203, 37);
+		search_site.setBounds(423, 105, 203, 37);
 		display.add(search_site);
 		search_site.setColumns(10);
 		
 		search_user = new JTextField();
 		search_user.setColumns(10);
-		search_user.setBounds(302, 106, 203, 37);
+		search_user.setBounds(423, 155, 203, 37);
 		display.add(search_user);
 		
-		show_decrypt = new JTextField();
-		show_decrypt.setColumns(10);
-		show_decrypt.setBounds(648, 63, 203, 37);
-		display.add(show_decrypt);
-		
-		JButton site_search = new JButton("search_s");
-		site_search.setBounds(197, 16, 97, 37);
+		JButton site_search = new JButton("Site");
+		site_search.setBounds(318, 105, 97, 37);
 		display.add(site_search);
 		
-		JButton user_search = new JButton("search_u");
+		JButton user_search = new JButton("UserName");
 		user_search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
@@ -737,35 +731,12 @@ public class Login {
 				}
 			}
 		});
-		user_search.setBounds(197, 106, 97, 37);
+		user_search.setBounds(318, 155, 97, 37);
 		display.add(user_search);
 		
-		JButton showBtn = new JButton("Show");
-		showBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try{
-					int id = Integer.parseInt(show_decrypt.getText());
-					String query = "select * from Data where id = ?";
-					PreparedStatement pst = connection.prepareStatement(query);
-					pst.setString(1,Integer.toString(id) );
-					ResultSet rs = pst.executeQuery();
-					//web_decrypt.setText(Encrypt.unscramble("mypass", rs.getString(2)));
-				//	user_decrypt.setText(rs.getString(3));
-					//pass_decrypt.setText(Encrypt.unscramble("mypass", rs.getString(4)));
-					search_site.setText(null);
-					search_user.setText(null);	
-					decrypt.setVisible(true);
-					display.setVisible(false);
-				}
-				catch(Exception e3)
-				{
-					JOptionPane.showMessageDialog(formAsterisk, e3, null, JOptionPane.WARNING_MESSAGE);
-				}
-				
-			}
-		});
-		showBtn.setBounds(547, 63, 97, 37);
-		display.add(showBtn);
+		JButton btnDeleteData = new JButton("Delete Data");
+		btnDeleteData.setBounds(905, 581, 110, 37);
+		display.add(btnDeleteData);
 		
 		
 		JPanel update = new JPanel();
@@ -838,12 +809,4 @@ public class Login {
 		
 		
 	}
-	
-
-	
-	/*ArrayList<Users> getUsers(){
-       
-      
-       return users;
-   }*/
 }

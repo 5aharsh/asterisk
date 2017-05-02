@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Scanner;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
@@ -96,28 +98,30 @@ public class Encrypt
     	Encrypt.decrypt(scrambled);
     	return Encrypt.getDecryptedString();
     }
-    /*
-    static Scanner in = new Scanner(System.in);
+    
+   
     public static void main(String args[])
     {
+    	 		@SuppressWarnings("resource")
+				Scanner in = new Scanner(System.in);
         		System.out.println("Message to Encrypt:");
                 final String strToEncrypt = in.nextLine();
         		System.out.println("Password (or Key):");
                 final String strPssword = in.nextLine();
-                AES.setKey(strPssword);
+                Encrypt.setKey(strPssword);
                
-                AES.encrypt(strToEncrypt.trim());
+                Encrypt.encrypt(strToEncrypt.trim());
                 
                 System.out.println("String to Encrypt: " + strToEncrypt); 
-                System.out.println("Encrypted: " + AES.getEncryptedString());
+                System.out.println("Encrypted: " + Encrypt.getEncryptedString());
            
-                final String strToDecrypt =  AES.getEncryptedString();
-                AES.decrypt(strToDecrypt.trim());
+                final String strToDecrypt =  Encrypt.getEncryptedString();
+                Encrypt.decrypt(strToDecrypt.trim());
                
                 System.out.println("String To Decrypt : " + strToDecrypt);
-                System.out.println("Decrypted : " + AES.getDecryptedString());
+                System.out.println("Decrypted : " + Encrypt.getDecryptedString());
         
     }
-    */	
+    
      
 }
