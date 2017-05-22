@@ -43,14 +43,9 @@ import java.awt.EventQueue;
 import java.security.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-
-import net.proteanit.sql.DbUtils;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -60,7 +55,7 @@ import java.awt.CardLayout;
 import java.awt.Toolkit;
 import java.awt.Window.Type;
 import java.io.File;
-import java.io.IOException;
+import java.awt.SystemColor;
 
 
 
@@ -125,7 +120,6 @@ public class Login {
 	private ArrayList<Users> users; 
 	private JPasswordField passfield;
 	private JPasswordField confirmpass;
-	private JTextField savePathField;
 	private JTextField save_dest;
 	private String new_file_add;
 	private File created_File;
@@ -134,10 +128,12 @@ public class Login {
 	private JTextField web_input;
 	private JTextField search_site;
 	private JTextField search_user;
-	private JTextField user_derycpt;
-	private JTextField web_decrypt;
-	private JTextField pass_decrypt;
 	private JTable table;
+	private JPasswordField update_pass;
+	private JTextField update_user;
+	private JTextField update_web;
+	private JTextField delete_site;
+	private JTextField delete_user;
 	
 	
 	
@@ -168,19 +164,18 @@ public class Login {
 		formAsterisk.getContentPane().add(display, "name_1031052111462232");
 		display.setLayout(null);
 		
-		
-		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\login.png"));
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(0, 68, 1027, 229);
-		login.add(label);
+		JPanel delete = new JPanel();
+		delete.setBackground(new Color(0, 191, 255));
+		formAsterisk.getContentPane().add(delete, "name_1031052149777264");
+		delete.setLayout(null);
 		
 		JButton lgn_bk_bnt = new JButton("");
 		lgn_bk_bnt.setIcon(new ImageIcon("C:\\College\\Mini-I\\Asterisk\\Logo\\Picture2.png"));
 		lgn_bk_bnt.setSelectedIcon(null);
 		lgn_bk_bnt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				pathField.setText(null);
+				lng_passwd_fld.setText(null);
 				welcome.setVisible(true);
 				login.setVisible(false);
 			}
@@ -254,52 +249,6 @@ public class Login {
 							
 							JOptionPane.showMessageDialog(null, "Authentication Successfull");
 							
-							users = new ArrayList<Users>();
-						       
-						       try {
-						           
-						    	   String q = "SELECT * FROM Data";
-						           PreparedStatement pst1 = connection.prepareStatement(q);
-						           ResultSet rs1 = pst1.executeQuery();
-						           
-						           while(rs1.next()){
-						               
-						               Users u = new Users(
-						                       rs1.getInt("id"),
-						                      rs1.getString("website"),
-						                       rs1.getString("username"),
-						                       rs1.getString("password")
-						               );
-						               
-						               users.add(u);
-						           }
-						           
-						           model = new DefaultTableModel();
-						           
-						           Object[] columnsName = new Object[4];
-						           
-						           columnsName[0] = "Id";
-						           columnsName[1] = "Website";
-						           columnsName[2] = "UserName";
-						           columnsName[3] = "Password";
-						           
-						           model.setColumnIdentifiers(columnsName);
-						           
-						           Object[] rowData = new Object[4];
-						           
-						           for(int i = 0; i < users.size(); i++){
-						               
-						               rowData[0] = users.get(i).getId();
-						                rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb());
-						                 rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser());
-						                  rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass());
-						                  
-						                  model.addRow(rowData);
-						           }
-						            
-						       } catch (SQLException ex) {
-						           JOptionPane.showMessageDialog(null, ex);;
-						       }
 							
 							display.setVisible(true);
 							login.setVisible(false);
@@ -314,9 +263,10 @@ public class Login {
 					}catch(Exception e1){
 						JOptionPane.showMessageDialog(formAsterisk, "Invalid credentials!", "Access Denied!", JOptionPane.WARNING_MESSAGE);
 						JOptionPane.showMessageDialog(null, e1);
-						pathField.setText(null);
-						lng_passwd_fld.setText(null);
+						
 					}
+					pathField.setText(null);
+					lng_passwd_fld.setText(null);
 				}
 			}
 		});
@@ -338,6 +288,13 @@ public class Login {
 		lblChooseFile.setBounds(317, 299, 198, 34);
 		login.add(lblChooseFile);
 		
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\login.png"));
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setBounds(0, 13, 1027, 229);
+		login.add(label);
+		
 				
 		
 		JPanel signup = new JPanel();
@@ -345,77 +302,16 @@ public class Login {
 		formAsterisk.getContentPane().add(signup, "name_1031052097970885");
 		signup.setLayout(null);
 		
-		JPanel input = new JPanel();
-		input.setBackground(new Color(0, 191, 255));
-		formAsterisk.getContentPane().add(input, "name_175497036809876");
-		input.setLayout(null);
-		
-		JPanel decrypt = new JPanel();
-		decrypt.setBackground(new Color(0, 191, 255));
-		formAsterisk.getContentPane().add(decrypt, "name_177123087508148");
-		decrypt.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBackground(new Color(0, 191, 255));
-		panel.setBounds(0, 0, 1027, 626);
-		decrypt.add(panel);
-		
-		JLabel label_1 = new JLabel("Website:");
-		label_1.setForeground(Color.WHITE);
-		label_1.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		label_1.setBounds(343, 191, 198, 34);
-		panel.add(label_1);
-		
-		JLabel label_2 = new JLabel("Username:");
-		label_2.setForeground(Color.WHITE);
-		label_2.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		label_2.setBounds(343, 287, 198, 34);
-		panel.add(label_2);
-		
-		JLabel label_3 = new JLabel("Password:");
-		label_3.setForeground(Color.WHITE);
-		label_3.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		label_3.setBounds(343, 386, 198, 34);
-		panel.add(label_3);
-		
-		user_derycpt = new JTextField();
-		user_derycpt.setEditable(false);
-		user_derycpt.setColumns(10);
-		user_derycpt.setBounds(343, 323, 344, 47);
-		panel.add(user_derycpt);
-		
-		web_decrypt = new JTextField();
-		web_decrypt.setEditable(false);
-		web_decrypt.setColumns(10);
-		web_decrypt.setBounds(343, 221, 344, 47);
-		panel.add(web_decrypt);
-		
-		JButton button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				display.setVisible(true);
-				decrypt.setVisible(false);
-			}
-		});
-		button_1.setForeground(Color.WHITE);
-		button_1.setFont(new Font("Century Gothic", Font.PLAIN, 25));
-		button_1.setBackground(new Color(8, 204, 120));
-		button_1.setBounds(15, 16, 37, 37);
-		panel.add(button_1);
-		
-		pass_decrypt = new JTextField();
-		pass_decrypt.setEditable(false);
-		pass_decrypt.setColumns(10);
-		pass_decrypt.setBounds(343, 420, 344, 47);
-		panel.add(pass_decrypt);
+		JPanel add = new JPanel();
+		add.setBackground(new Color(0, 191, 255));
+		formAsterisk.getContentPane().add(add, "name_175497036809876");
+		add.setLayout(null);
 		
 		pass_input = new JPasswordField();
 		pass_input.setHorizontalAlignment(SwingConstants.LEFT);
 		pass_input.setFont(new Font("Century Gothic", Font.BOLD, 18));
-		pass_input.setBounds(343, 421, 344, 49);
-		input.add(pass_input);
+		pass_input.setBounds(344, 453, 344, 49);
+		add.add(pass_input);
 		
 		JButton btnRegister = new JButton("Register");
 		btnRegister.addActionListener(new ActionListener() {
@@ -423,20 +319,42 @@ public class Login {
 			public void actionPerformed(ActionEvent e) {
 				
 				try{
+					String web = Encrypt.scramble(masterpass, web_input.getText());
+					String user = Encrypt.scramble(masterpass, user_input.getText());
+					String pass = Encrypt.scramble(masterpass, pass_input.getText());
 					
-					String query = "insert into Data (website, username, password) values (?, ?, ?)";
-					PreparedStatement pst = connection.prepareStatement(query);
-					pst.setString(1, Encrypt.scramble("mypass", web_input.getText()));
-					pst.setString(2, Encrypt.scramble("mypass", user_input.getText()));
-					pst.setString(3, Encrypt.scramble("mypass", pass_input.getText()));
+					String query = "select * from Data where website = ? and username = ?";
+					
+					PreparedStatement pst1 = connection.prepareStatement(query);
+					pst1.setString(1, web);
+					pst1.setString(2, user);
+					ResultSet rs = pst1.executeQuery();
+					int count = 0;
+					while(rs.next())
+					{
+						count++;
+					}
+					
+					if(count == 0)
+					{
+					String query1 = "insert into Data (website, username, password) values (?, ?, ?)";
+					PreparedStatement pst = connection.prepareStatement(query1);
+					pst.setString(1, web);
+					pst.setString(2, user);
+					pst.setString(3, pass);
 					pst.execute();
-					
+					pst.close();
 					JOptionPane.showMessageDialog(formAsterisk, "Successfully Added", "Success", JOptionPane.PLAIN_MESSAGE, null);
-					
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(formAsterisk, "Username Password Combo already exist", "Failure", JOptionPane.PLAIN_MESSAGE, null);
+					}
 					web_input.setText(null);
 					user_input.setText(null);
 					pass_input.setText(null);
-					
+					pst1.close();
+					rs.close();
 				}catch(Exception e1){
 					JOptionPane.showMessageDialog(formAsterisk, e1, null, JOptionPane.WARNING_MESSAGE, null);
 				}
@@ -446,42 +364,47 @@ public class Login {
 		btnRegister.setForeground(Color.WHITE);
 		btnRegister.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		btnRegister.setBackground(new Color(8, 204, 120));
-		btnRegister.setBounds(392, 515, 238, 60);
-		input.add(btnRegister);
+		btnRegister.setBounds(393, 547, 238, 60);
+		add.add(btnRegister);
 		
 		JLabel lblWebsite = new JLabel("Website:");
 		lblWebsite.setForeground(Color.WHITE);
 		lblWebsite.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblWebsite.setBounds(343, 191, 198, 34);
-		input.add(lblWebsite);
+		lblWebsite.setBounds(344, 255, 198, 34);
+		add.add(lblWebsite);
 		
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setForeground(Color.WHITE);
 		lblUsername.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblUsername.setBounds(343, 287, 198, 34);
-		input.add(lblUsername);
+		lblUsername.setBounds(344, 334, 198, 34);
+		add.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblPassword.setBounds(343, 386, 198, 34);
-		input.add(lblPassword);
+		lblPassword.setBounds(344, 418, 198, 34);
+		add.add(lblPassword);
 		
 		user_input = new JTextField();
-		user_input.setBounds(343, 323, 344, 47);
-		input.add(user_input);
+		user_input.setFont(new Font("Century Gothic", Font.BOLD, 18));
+		user_input.setBounds(344, 370, 344, 47);
+		add.add(user_input);
 		user_input.setColumns(10);
 		
 		web_input = new JTextField();
+		web_input.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		web_input.setColumns(10);
-		web_input.setBounds(343, 221, 344, 47);
-		input.add(web_input);
+		web_input.setBounds(344, 285, 344, 47);
+		add.add(web_input);
 		
 		JButton back_input = new JButton("");
 		back_input.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				web_input.setText(null);
+				user_input.setText(null);
+				pass_input.setText(null);
 				display.setVisible(true);
-				input.setVisible(false);
+				add.setVisible(false);
 			}
 		});
 		back_input.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
@@ -489,7 +412,25 @@ public class Login {
 		back_input.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		back_input.setBackground(new Color(8, 204, 120));
 		back_input.setBounds(15, 16, 37, 37);
-		input.add(back_input);
+		add.add(back_input);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon("C:\\Mini-I\\asterisk\\Logo\\logo2.png"));
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setBounds(0, 13, 1027, 229);
+		add.add(label_1);
+		
+		JButton btnRandomize = new JButton("Randomize");
+		btnRandomize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pass_input.setText(randomString(10));
+			}
+		});
+		btnRandomize.setForeground(Color.WHITE);
+		btnRandomize.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		btnRandomize.setBackground(Color.LIGHT_GRAY);
+		btnRandomize.setBounds(700, 453, 180, 49);
+		add.add(btnRandomize);
 		
 		
 		JLabel lblNewLabel_1 = new JLabel("");
@@ -502,6 +443,9 @@ public class Login {
 		backBtn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				passfield.setText(null);
+				save_dest.setText(null);
+				confirmpass.setText(null);
 				welcome.setVisible(true);
 				signup.setVisible(false);
 			}
@@ -580,13 +524,13 @@ public class Login {
 				String passwordField = passfield.getText();
 				String confirmPassword = confirmpass.getText();
 				
-				if(!passwordField.contains(" ")&&!confirmPassword.equals("")&&!passwordField.equals("")&&passwordField.equals(confirmPassword)&&passwordField.length()>=8){
+				if(!passwordField.contains(" ")&&!confirmPassword.equals(null)&&!passwordField.equals(null)&&passwordField.equals(confirmPassword)&&passwordField.length()>=8){
 					try {
 						created_File.createNewFile();
 						JOptionPane.showMessageDialog(null, "Database successfully created!");
 						connection = sqliteConnection.dbConnector(filePath); 
 						String UD = "Data";
-						String query = "CREATE TABLE IF NOT EXISTS " + UD + "(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, website text, username text, password text)";
+						String query = "CREATE TABLE IF NOT EXISTS " + UD + "(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, website string, username string, password string)";
 						Statement st = connection.createStatement();
 						st.execute(query);
 						
@@ -601,6 +545,10 @@ public class Login {
 						passfield.setText(null);
 						save_dest.setText(null);
 						confirmpass.setText(null);
+						welcome.setVisible(true);
+						signup.setVisible(false);
+						st.close();
+						pst2.close();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -649,8 +597,6 @@ public class Login {
 		scrollPane.setBounds(12, 205, 1003, 363);
 		display.add(scrollPane);
 		
-		 
-
         
        
 		
@@ -663,22 +609,74 @@ public class Login {
 		
 		
 		JButton refresh = new JButton("Refresh");
+		refresh.setBackground(new Color(255, 165, 0));
+		refresh.setForeground(new Color(255, 255, 255));
+		refresh.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		refresh.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				try{
-					
+					users = new ArrayList<Users>();
+				       
+				       try {
+				           
+				    	   String q = "SELECT * FROM Data";
+				           PreparedStatement pst1 = connection.prepareStatement(q);
+				           ResultSet rs1 = pst1.executeQuery();
+				           int k = 1;
+				           while(rs1.next()){
+				               
+				               Users u = new Users(
+				                       k,
+				                       rs1.getString("website"),
+				                       rs1.getString("username"),
+				                       rs1.getString("password")
+				               );
+				               
+				               users.add(u);
+				               k++;
+				           }
+				           
+				           model = new DefaultTableModel();
+				           
+				           Object[] columnsName = new Object[4];
+				           
+				           columnsName[0] = "Id";
+				           columnsName[1] = "Website";
+				           columnsName[2] = "UserName";
+				           columnsName[3] = "Password";
+				           
+				           model.setColumnIdentifiers(columnsName);
+				           
+				           Object[] rowData = new Object[4];
+				           
+				           for(int i = 0; i < users.size(); i++){
+				               
+				               rowData[0] = users.get(i).getId();
+				                rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+				                 rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+				                  rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+				                  
+				                  model.addRow(rowData);
+				           }
+				           rs1.close();
+				           pst1.close();
+				            
+				       } catch (SQLException ex) {
+				           JOptionPane.showMessageDialog(null, ex);
+				       }
 					 
 					table.setModel(model);
 					//table.setModel(DbUtils.resultSetToTableModel(rs));
 					table.show(true);
 					
 					
-					//rs.close();
-					//pst.close();
+					
 				}catch(Exception e2){
 					JOptionPane.showMessageDialog(formAsterisk, e2);
 				}
+				search_site.setText(null);
+				search_user.setText(null);
 			}
 		});
 		refresh.setBounds(918, 16, 97, 37);
@@ -689,9 +687,14 @@ public class Login {
 		
 		
 		JButton addInfo = new JButton("Add Data");
+		addInfo.setBackground(new Color(102, 204, 102));
+		addInfo.setForeground(new Color(255, 255, 255));
+		addInfo.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		addInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				input.setVisible(true);
+				search_site.setText(null);
+				search_user.setText(null);
+				add.setVisible(true);
 				display.setVisible(false);
 			}
 		});
@@ -699,66 +702,427 @@ public class Login {
 		display.add(addInfo);
 		
 		search_site = new JTextField();
-		search_site.setBounds(423, 105, 203, 37);
+		search_site.setBackground(new Color(255, 255, 255));
+		search_site.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		search_site.setBounds(465, 107, 203, 37);
 		display.add(search_site);
 		search_site.setColumns(10);
 		
 		search_user = new JTextField();
+		search_user.setBackground(new Color(255, 255, 255));
+		search_user.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		search_user.setColumns(10);
-		search_user.setBounds(423, 155, 203, 37);
+		search_user.setBounds(465, 157, 203, 37);
 		display.add(search_user);
 		
 		JButton site_search = new JButton("Site");
-		site_search.setBounds(318, 105, 97, 37);
+		site_search.setBackground(new Color(106, 90, 205));
+		site_search.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				model.setRowCount(0);
+				users = new ArrayList<Users>();
+			       
+			       try {
+			           
+			    	   String q = "SELECT * FROM Data where website = ?";
+			           PreparedStatement pst1 = connection.prepareStatement(q);
+			           pst1.setString(1, Encrypt.scramble(masterpass, search_site.getText().toString()));
+			           ResultSet rs1 = pst1.executeQuery();
+			           int k = 1;
+			           while(rs1.next()){
+			               
+			               Users u = new Users(
+			                       k,
+			                       rs1.getString("website"),
+			                       rs1.getString("username"),
+			                       rs1.getString("password")
+			               );
+			               
+			               users.add(u);
+			               k++;
+			           }
+			           
+			         
+			           
+			           Object[] columnsName = new Object[4];
+			           
+			           columnsName[0] = "Id";
+			           columnsName[1] = "Website";
+			           columnsName[2] = "UserName";
+			           columnsName[3] = "Password";
+			           
+			           model.setColumnIdentifiers(columnsName);
+			           
+			           Object[] rowData = new Object[4];
+			           
+			           for(int i = 0; i < users.size(); i++){
+			               
+			               rowData[0] = users.get(i).getId();
+			                rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+			                 rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+			                  rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+			                  
+			                  model.addRow(rowData);
+			           }
+			           pst1.close();
+			            
+			       } catch (SQLException ex) {
+			           JOptionPane.showMessageDialog(null, ex);
+			       }
+			       search_user.setText(null);
+			
+				
+		}});
+		site_search.setForeground(new Color(255, 255, 255));
+		site_search.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		site_search.setBounds(360, 107, 97, 37);
 		display.add(site_search);
 		
-		JButton user_search = new JButton("UserName");
+		JButton user_search = new JButton("User");
+		user_search.setBackground(new Color(106, 90, 205));
+		user_search.setForeground(new Color(255, 255, 255));
+		user_search.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		user_search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try{
-					String username = search_user.getText();
-					String query = "select * from Data where username = ?";
-					PreparedStatement pst = connection.prepareStatement(query);
-					pst.setString(1, Encrypt.scramble("mypass", username));
-					ResultSet rs = pst.executeQuery();
-					table.setModel(DbUtils.resultSetToTableModel(rs));
-					search_site.setText(null);
-					search_user.setText(null);						
-				}
-				catch(Exception e3)
-				{
-					JOptionPane.showMessageDialog(formAsterisk, e3, null, JOptionPane.WARNING_MESSAGE);
-				}
+				model.setRowCount(0);
+				users = new ArrayList<Users>();
+			       
+			       try {
+			           
+			    	   String q = "SELECT * FROM Data where username = ?";
+			           PreparedStatement pst1 = connection.prepareStatement(q);
+			           pst1.setString(1, Encrypt.scramble(masterpass, search_user.getText().toString()));
+			           ResultSet rs1 = pst1.executeQuery();
+			           int k = 1;
+			           while(rs1.next()){
+			               
+			               Users u = new Users(
+			                       k,
+			                       rs1.getString("website"),
+			                       rs1.getString("username"),
+			                       rs1.getString("password")
+			               );
+			               
+			               users.add(u);
+			               k++;
+			           }
+			           
+			         
+			           
+			           Object[] columnsName = new Object[4];
+			           
+			           columnsName[0] = "Id";
+			           columnsName[1] = "Website";
+			           columnsName[2] = "UserName";
+			           columnsName[3] = "Password";
+			           
+			           model.setColumnIdentifiers(columnsName);
+			           
+			           Object[] rowData = new Object[4];
+			           
+			           for(int i = 0; i < users.size(); i++){
+			               
+			               rowData[0] = users.get(i).getId();
+			                rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+			                 rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+			                  rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+			                  
+			                  model.addRow(rowData);
+			           }
+			            
+			       } catch (SQLException ex) {
+			           JOptionPane.showMessageDialog(null, ex);
 			}
-		});
-		user_search.setBounds(318, 155, 97, 37);
+			       search_site.setText(null);
+		}});
+		user_search.setBounds(360, 157, 97, 37);
 		display.add(user_search);
 		
 		JButton btnDeleteData = new JButton("Delete Data");
-		btnDeleteData.setBounds(905, 581, 110, 37);
+		btnDeleteData.setBackground(new Color(255, 102, 51));
+		btnDeleteData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				search_site.setText(null);
+				search_user.setText(null);
+				display.setVisible(false);
+				delete.setVisible(true);
+			}
+		});
+		btnDeleteData.setForeground(new Color(255, 255, 255));
+		btnDeleteData.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		btnDeleteData.setBounds(886, 581, 129, 37);
 		display.add(btnDeleteData);
 		
+		JLabel lblSearchDataBy = new JLabel("Search Data By:");
+		lblSearchDataBy.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSearchDataBy.setForeground(Color.WHITE);
+		lblSearchDataBy.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		lblSearchDataBy.setBounds(413, 69, 198, 34);
+		display.add(lblSearchDataBy);
 		
 		JPanel update = new JPanel();
 		update.setBackground(new Color(0, 191, 255));
 		formAsterisk.getContentPane().add(update, "name_1031052123407705");
 		update.setLayout(null);
 		
-		JPanel setting = new JPanel();
-		setting.setBackground(new Color(0, 191, 255));
-		formAsterisk.getContentPane().add(setting, "name_1031052135985275");
-		setting.setLayout(null);
+		update_pass = new JPasswordField();
+		update_pass.setHorizontalAlignment(SwingConstants.LEFT);
+		update_pass.setFont(new Font("Century Gothic", Font.BOLD, 18));
+		update_pass.setBounds(344, 440, 344, 49);
+		update.add(update_pass);
 		
-		JPanel delete = new JPanel();
-		delete.setBackground(new Color(0, 191, 255));
-		formAsterisk.getContentPane().add(delete, "name_1031052149777264");
-		delete.setLayout(null);
+		
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				try{
+					String site = Encrypt.scramble(masterpass, update_web.getText().toString());
+					String user = Encrypt.scramble(masterpass, update_user.getText().toString());
+					String pass = Encrypt.scramble(masterpass, update_pass.getText());
+				
+					String query = "select * from Data WHERE website= ? and username= ?";
+					PreparedStatement pst1 = connection.prepareStatement(query);
+					pst1.setString(1, site);
+					pst1.setString(2, user);
+					ResultSet rs = pst1.executeQuery();
+					
+					int count = 0;
+					
+					while(rs.next())
+					{
+						count++;
+					}
+					
+					if(count == 1){
+					
+					
+						try{
+							
+						String q = "UPDATE Data SET password= ? WHERE website= ? and username= ?";
+						PreparedStatement pst = connection.prepareStatement(q);
+						pst.setString(1, pass);
+						pst.setString(2, site);
+						pst.setString(3, user);
+						pst.execute();
+						
+					
+						JOptionPane.showMessageDialog(formAsterisk, "Update Successfull");
+						update_web.setText(null);
+						update_user.setText(null);
+						update_pass.setText(null);
+						
+						pst.close();
+						}
+						catch(Exception e2)
+						{
+							JOptionPane.showMessageDialog(formAsterisk, e2);
+						}
+						
+	
+					
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(formAsterisk, "Website or Password Does not Exist!!");
+					}
+					
+					pst1.close();
+					rs.close();
+					
+				}
+				catch(Exception e1)
+				{
+					JOptionPane.showMessageDialog(null, e1);
+				}
+				
+			}
+		});
+		btnUpdate.setForeground(Color.WHITE);
+		btnUpdate.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		btnUpdate.setBackground(new Color(8, 204, 120));
+		btnUpdate.setBounds(395, 536, 238, 60);
+		update.add(btnUpdate);
+		
+		JLabel label_2 = new JLabel("Website:");
+		label_2.setForeground(Color.WHITE);
+		label_2.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		label_2.setBounds(344, 242, 198, 34);
+		update.add(label_2);
+		
+		JLabel label_3 = new JLabel("Username:");
+		label_3.setForeground(Color.WHITE);
+		label_3.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		label_3.setBounds(344, 321, 198, 34);
+		update.add(label_3);
+		
+		JLabel label_4 = new JLabel("Password:");
+		label_4.setForeground(Color.WHITE);
+		label_4.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		label_4.setBounds(344, 405, 198, 34);
+		update.add(label_4);
+		
+		update_user = new JTextField();
+		update_user.setFont(new Font("Century Gothic", Font.BOLD, 18));
+		update_user.setColumns(10);
+		update_user.setBounds(344, 357, 344, 47);
+		update.add(update_user);
+		
+		update_web = new JTextField();
+		update_web.setFont(new Font("Century Gothic", Font.BOLD, 18));
+		update_web.setColumns(10);
+		update_web.setBounds(344, 272, 344, 47);
+		update.add(update_web);
+		
+		JButton button_1 = new JButton("");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				update.setVisible(false);
+				display.setVisible(true);
+			}
+		});
+		button_1.setIcon(new ImageIcon("C:\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		button_1.setForeground(Color.WHITE);
+		button_1.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		button_1.setBackground(new Color(8, 204, 120));
+		button_1.setBounds(12, 13, 37, 37);
+		update.add(button_1);
+		
+		JLabel label_5 = new JLabel("");
+		label_5.setIcon(new ImageIcon("C:\\Mini-I\\asterisk\\Logo\\logo2.png"));
+		label_5.setHorizontalAlignment(SwingConstants.CENTER);
+		label_5.setBounds(0, 13, 1027, 229);
+		update.add(label_5);
+		
+		JButton btnUpdateData = new JButton("Update Data");
+		btnUpdateData.setBackground(SystemColor.activeCaption);
+		btnUpdateData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				search_site.setText(null);
+				search_user.setText(null);
+				update.setVisible(true);
+				display.setVisible(false);
+			}
+		});
+		btnUpdateData.setForeground(new Color(255, 255, 255));
+		btnUpdateData.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		btnUpdateData.setBounds(444, 581, 151, 37);
+		display.add(btnUpdateData);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_3.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Capture.PNG"));
+		lblNewLabel_3.setBounds(245, 13, 542, 55);
+		display.add(lblNewLabel_3);
+		
+		
+		
+		
+		
+		JLabel label_6 = new JLabel("Website:");
+		label_6.setForeground(Color.WHITE);
+		label_6.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		label_6.setBounds(344, 255, 198, 34);
+		delete.add(label_6);
+		
+		delete_site = new JTextField();
+		delete_site.setFont(new Font("Century Gothic", Font.BOLD, 18));
+		delete_site.setColumns(10);
+		delete_site.setBounds(344, 285, 344, 47);
+		delete.add(delete_site);
+		
+		JLabel label_7 = new JLabel("Username:");
+		label_7.setForeground(Color.WHITE);
+		label_7.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		label_7.setBounds(344, 334, 198, 34);
+		delete.add(label_7);
+		
+		delete_user = new JTextField();
+		delete_user.setFont(new Font("Century Gothic", Font.BOLD, 18));
+		delete_user.setColumns(10);
+		delete_user.setBounds(344, 370, 344, 47);
+		delete.add(delete_user);
+		
+		JButton button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				display.setVisible(true);
+				delete.setVisible(false);
+			}
+		});
+		button.setIcon(new ImageIcon("C:\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		button.setForeground(Color.WHITE);
+		button.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		button.setBackground(new Color(8, 204, 120));
+		button.setBounds(15, 16, 37, 37);
+		delete.add(button);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					
+					String site = Encrypt.scramble(masterpass, delete_site.getText().toString());
+					String user = Encrypt.scramble(masterpass, delete_user.getText().toString());
+					
+					
+					
+					String q = "select * FROM Data WHERE website = ? AND username = ?";
+					PreparedStatement pst = connection.prepareStatement(q);
+					pst.setString(1, site);
+					pst.setString(2, user);
+					ResultSet rs = pst.executeQuery();
+					int  count = 0;
+					while(rs.next())
+					{
+						count++;
+					}
+						if(count == 1)
+						{
+							String query = "delete FROM Data WHERE website = ? AND username = ?";
+							PreparedStatement pst1 = connection.prepareStatement(query);
+							pst1.setString(1, site);
+							pst1.setString(2, user);
+							pst1.execute();
+							pst1.close();
+							
+							JOptionPane.showMessageDialog(formAsterisk, "Successfully Data Deleted From " + delete_site.getText() + " " + delete_user.getText(), "Operation Successful", JOptionPane.PLAIN_MESSAGE, null);
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(formAsterisk, "Website or Username Does not exist" , "Failure", JOptionPane.PLAIN_MESSAGE, null);
+						}
+					
+						pst.close();
+						rs.close();
+				}
+				catch(Exception e1)
+				{
+					JOptionPane.showMessageDialog(formAsterisk, "Website or Username Does not exist" , "Failure", JOptionPane.PLAIN_MESSAGE, null);
+				}
+				delete_site.setText(null);
+				delete_user.setText(null);
+				
+			}
+		});
+		btnDelete.setForeground(Color.WHITE);
+		btnDelete.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		btnDelete.setBackground(new Color(8, 204, 120));
+		btnDelete.setBounds(396, 478, 238, 60);
+		delete.add(btnDelete);
+		
+		JLabel label_8 = new JLabel("");
+		label_8.setIcon(new ImageIcon("C:\\Mini-I\\asterisk\\Logo\\logo2.png"));
+		label_8.setHorizontalAlignment(SwingConstants.CENTER);
+		label_8.setBounds(0, 13, 1027, 229);
+		delete.add(label_8);
 		formAsterisk.setBounds(0, 64, 1033, 666);
 		formAsterisk.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 64, 1027, 229);
+		lblNewLabel.setBounds(0, 13, 1027, 229);
 		lblNewLabel.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\logo2.png"));
 		welcome.add(lblNewLabel);
 		
@@ -800,13 +1164,6 @@ public class Login {
 		exitBtn.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		exitBtn.setBounds(394, 497, 238, 60);
 		welcome.add(exitBtn);
-		
-		
-		
-		
-		
-		
-		
-		
+				
 	}
 }
