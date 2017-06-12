@@ -91,6 +91,7 @@ public class Login {
 	
 	static final private String rhapsody = "e3jwA8Mfrs8CqcFNj7RfH7RV";
 	static private String masterpass;
+	static private String prevMaster;
 	static final String AB = "0123456789ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmonpqrstuvwxyz@$#";
 	static SecureRandom rnd = new SecureRandom();
 	private JPasswordField lng_passwd_fld;
@@ -137,6 +138,7 @@ public class Login {
 	private JPasswordField prevPass;
 	private JPasswordField nuPass;
 	private JPasswordField conNuPass;
+	
 	
 	
 	
@@ -216,6 +218,13 @@ public class Login {
 				changeMP.setVisible(false);
 			}
 		});
+		
+		
+		
+		
+		
+		
+		
 		button_3.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
 		button_3.setForeground(Color.WHITE);
 		button_3.setFont(new Font("Century Gothic", Font.PLAIN, 25));
@@ -358,7 +367,6 @@ public class Login {
 					
 					try{
 						String scrambled = Encrypt.scramble(rhapsody, loginPassword);
-						JOptionPane.showMessageDialog(null,Encrypt.scramble(rhapsody, loginPassword));
 						String query = "select * from whitestar where content = ?";
 						PreparedStatement pst = connection.prepareStatement(query);
 						pst.setString(1,scrambled);
@@ -405,6 +413,10 @@ public class Login {
 				}
 			}
 		});
+		
+		
+		
+		
 		
 
 		JButton button_4 = new JButton("");
@@ -460,37 +472,6 @@ public class Login {
 		label.setBounds(0, 13, 1027, 229);
 		login.add(label);
 		
-				
-		JButton button_5 = new JButton("Done");
-		button_5.setForeground(Color.WHITE);
-		button_5.setFont(new Font("Century Gothic", Font.BOLD, 25));
-		button_5.setBackground(new Color(8, 204, 120));
-		button_5.setBounds(387, 534, 238, 60);
-		changeMP.add(button_5);
-		button_5.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {
-				if(masterpass.equals(prevPass.getText()) && nuPass.getText().equals(conNuPass.getText()))
-				{
-					
-					JOptionPane.showMessageDialog(null, "Success");
-					try {
-						String up = "update whitestar set content = ? ";
-						PreparedStatement pst = connection.prepareStatement(up);
-						pst.setString(1, Encrypt.scramble(rhapsody, nuPass.getText()));
-						int rs = pst.executeUpdate();
-						
-						
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					
-				}
-				
-			}
-		});
 		
 		
 		JPanel signup = new JPanel();
@@ -557,6 +538,71 @@ public class Login {
 				
 			}
 		});
+		
+		
+		JButton button_5 = new JButton("Done");
+		button_5.setForeground(Color.WHITE);
+		button_5.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		button_5.setBackground(new Color(8, 204, 120));
+		button_5.setBounds(387, 534, 238, 60);
+		changeMP.add(button_5);
+		button_5.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				if(masterpass.equals(prevPass.getText()) && nuPass.getText().equals(conNuPass.getText()))
+				{
+					
+					
+					
+					try {
+						
+						prevMaster = masterpass;
+						masterpass = nuPass.getText();
+						String fetch = "select * from Data";
+						PreparedStatement pst1 = connection.prepareStatement(fetch);
+						ResultSet rs1 = pst1.executeQuery();
+						String dataup;
+						PreparedStatement pst2;
+						int k = 1;
+						while(rs1.next())
+						{
+							/*JOptionPane.showMessageDialog(null, Encrypt.unscramble(prevMaster, rs1.getString("website")));
+							JOptionPane.showMessageDialog(null, Encrypt.unscramble(prevMaster, rs1.getString("username")));
+							JOptionPane.showMessageDialog(null, Encrypt.unscramble(prevMaster, rs1.getString("password")));*/
+							dataup = "update Data set website = ?, username = ?, password = ? where id = ?";
+							pst2 = connection.prepareStatement(dataup);
+							pst2.setString(1, Encrypt.scramble(masterpass, Encrypt.unscramble(prevMaster, rs1.getString("website"))));
+							pst2.setString(2, Encrypt.scramble(masterpass, Encrypt.unscramble(prevMaster, rs1.getString("username"))));
+							pst2.setString(3, Encrypt.scramble(masterpass, Encrypt.unscramble(prevMaster, rs1.getString("password"))));
+							pst2.setInt(4, k);
+							pst2.executeUpdate();
+							pst2.close();
+							k++;
+						}
+						
+						String up = "update whitestar set content = ? ";
+						PreparedStatement pst = connection.prepareStatement(up);
+						pst.setString(1, Encrypt.scramble(rhapsody, nuPass.getText()));
+						pst.executeUpdate();
+						JOptionPane.showMessageDialog(null, "Success");
+						pst.close();
+						pst1.close();
+						rs1.close();
+						
+						
+						
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
+				}
+				
+			}
+		});
+		
+		
 		btnRegister.setForeground(Color.WHITE);
 		btnRegister.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		btnRegister.setBackground(new Color(8, 204, 120));
