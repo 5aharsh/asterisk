@@ -46,7 +46,8 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -55,6 +56,8 @@ import java.awt.CardLayout;
 import java.awt.Toolkit;
 import java.awt.Window.Type;
 import java.io.File;
+import java.awt.Toolkit;
+import java.awt.datatransfer.*;
 import java.awt.SystemColor;
 
 
@@ -118,19 +121,21 @@ public class Login {
 	 * Initialize the contents of the frame.
 	 */
 	private DefaultTableModel model;
-	private ArrayList<Users> users; 
+	private DefaultTableModel logmodel;
+	private ArrayList<Users> users;
+	private ArrayList<Log> log;
 	private JPasswordField passfield;
 	private JPasswordField confirmpass;
 	private JTextField save_dest;
 	private String new_file_add;
 	private File created_File;
-	private JPasswordField pass_input;
+	private JTextField pass_input;
 	private JTextField user_input;
 	private JTextField web_input;
 	private JTextField search_site;
 	private JTextField search_user;
 	private JTable table;
-	private JPasswordField update_pass;
+	private JTextField update_pass;
 	private JTextField update_user;
 	private JTextField update_web;
 	private JTextField delete_site;
@@ -138,9 +143,8 @@ public class Login {
 	private JPasswordField prevPass;
 	private JPasswordField nuPass;
 	private JPasswordField conNuPass;
-	
-	
-	
+	private Date date = new Date();
+	private JTable logtable;
 	
 	
 	private void initialize() {
@@ -191,7 +195,7 @@ public class Login {
 		
 		
 		lng_passwd_fld = new JPasswordField();
-		lng_passwd_fld.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lng_passwd_fld.setFont(new Font("Century Gothic", Font.PLAIN, 20));
 		lng_passwd_fld.setBounds(317, 438, 394, 50);
 		login.add(lng_passwd_fld);
 		
@@ -206,9 +210,9 @@ public class Login {
 			}
 		});
 		btnChangeMasterPassword.setForeground(Color.WHITE);
-		btnChangeMasterPassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		btnChangeMasterPassword.setBackground(new Color(255, 165, 0));
-		btnChangeMasterPassword.setBounds(369, 180, 252, 55);
+		btnChangeMasterPassword.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnChangeMasterPassword.setBackground(new Color(30, 144, 255));
+		btnChangeMasterPassword.setBounds(352, 146, 321, 55);
 		menu.add(btnChangeMasterPassword);
 		
 		JButton button_3 = new JButton("");
@@ -229,7 +233,7 @@ public class Login {
 		button_3.setForeground(Color.WHITE);
 		button_3.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		button_3.setBackground(new Color(8, 204, 120));
-		button_3.setBounds(10, 13, 37, 37);
+		button_3.setBounds(15, 16, 37, 37);
 		changeMP.add(button_3);
 		
 		JLabel label_9 = new JLabel("");
@@ -241,25 +245,25 @@ public class Login {
 		JLabel lblPreviousPassword = new JLabel("Previous Password:");
 		lblPreviousPassword.setForeground(Color.WHITE);
 		lblPreviousPassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblPreviousPassword.setBounds(338, 261, 198, 34);
+		lblPreviousPassword.setBounds(344, 261, 198, 34);
 		changeMP.add(lblPreviousPassword);
 		
 		prevPass = new JPasswordField();
 		prevPass.setHorizontalAlignment(SwingConstants.LEFT);
 		prevPass.setFont(new Font("Century Gothic", Font.BOLD, 18));
-		prevPass.setBounds(338, 292, 344, 49);
+		prevPass.setBounds(344, 292, 344, 49);
 		changeMP.add(prevPass);
 		
 		JLabel lblNewPassword = new JLabel("New Password:");
 		lblNewPassword.setForeground(Color.WHITE);
 		lblNewPassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblNewPassword.setBounds(338, 348, 198, 34);
+		lblNewPassword.setBounds(344, 348, 198, 34);
 		changeMP.add(lblNewPassword);
 		
 		nuPass = new JPasswordField();
 		nuPass.setHorizontalAlignment(SwingConstants.LEFT);
 		nuPass.setFont(new Font("Century Gothic", Font.BOLD, 18));
-		nuPass.setBounds(338, 380, 344, 49);
+		nuPass.setBounds(344, 380, 344, 49);
 		changeMP.add(nuPass);
 		
 		
@@ -269,32 +273,32 @@ public class Login {
 		JLabel lblConfirmPassword = new JLabel("Confirm Password:");
 		lblConfirmPassword.setForeground(Color.WHITE);
 		lblConfirmPassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblConfirmPassword.setBounds(338, 432, 198, 34);
+		lblConfirmPassword.setBounds(344, 440, 198, 34);
 		changeMP.add(lblConfirmPassword);
 		
 		conNuPass = new JPasswordField();
 		conNuPass.setHorizontalAlignment(SwingConstants.LEFT);
 		conNuPass.setFont(new Font("Century Gothic", Font.BOLD, 18));
-		conNuPass.setBounds(338, 464, 344, 49);
+		conNuPass.setBounds(344, 472, 344, 49);
 		changeMP.add(conNuPass);
 		
-		JButton button_2 = new JButton("");
-		button_2.addActionListener(new ActionListener() {
+		JButton btnDone = new JButton("Done");
+		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			display.setVisible(true);
 			help.setVisible(false);
 			}
 		});
-		button_2.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
-		button_2.setForeground(Color.WHITE);
-		button_2.setFont(new Font("Century Gothic", Font.PLAIN, 25));
-		button_2.setBackground(new Color(8, 204, 120));
-		button_2.setBounds(12, 13, 37, 37);
-		help.add(button_2);
+		btnDone.setIcon(null);
+		btnDone.setForeground(Color.WHITE);
+		btnDone.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		btnDone.setBackground(new Color(0, 255, 127));
+		btnDone.setBounds(453, 583, 121, 48);
+		help.add(btnDone);
 		
 		JLabel lblNewLabel_4 = new JLabel("New label");
 		lblNewLabel_4.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\output (1).png"));
-		lblNewLabel_4.setBounds(0, 63, 1027, 561);
+		lblNewLabel_4.setBounds(0, 11, 1027, 561);
 		help.add(lblNewLabel_4);
 		
 		JButton lgn_bk_bnt = new JButton("");
@@ -314,7 +318,7 @@ public class Login {
 		lgn_bk_bnt.setForeground(Color.WHITE);
 		lgn_bk_bnt.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		lgn_bk_bnt.setBackground(new Color(245, 102, 23));
-		lgn_bk_bnt.setBounds(10, 11, 37, 37);
+		lgn_bk_bnt.setBounds(15, 16, 37, 37);
 		login.add(lgn_bk_bnt);
 		
 		
@@ -395,6 +399,16 @@ public class Login {
 							}
 							
 							login.setVisible(false);
+							String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
+							String time = Encrypt.scramble(masterpass, originalTime);
+							String activity = Encrypt.scramble(masterpass, "Logged in.");
+							
+							String addlog = "insert into userlog (time, activity) values (?, ?)";
+							PreparedStatement pstmt = connection.prepareStatement(addlog);
+							pstmt.setString(1, time);
+							pstmt.setString(2, activity);
+							pstmt.execute();
+							pstmt.close();
 							
 						}
 						else{
@@ -430,7 +444,7 @@ public class Login {
 		button_4.setForeground(Color.WHITE);
 		button_4.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		button_4.setBackground(new Color(8, 204, 120));
-		button_4.setBounds(12, 13, 37, 37);
+		button_4.setBounds(15, 16, 37, 37);
 		menu.add(button_4);
 		
 		JButton btnHelp = new JButton("Help");
@@ -441,10 +455,74 @@ public class Login {
 			}
 		});
 		btnHelp.setForeground(Color.WHITE);
-		btnHelp.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		btnHelp.setBackground(new Color(255, 165, 0));
-		btnHelp.setBounds(369, 97, 252, 55);
+		btnHelp.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnHelp.setBackground(new Color(30, 144, 255));
+		btnHelp.setBounds(352, 63, 321, 55);
 		menu.add(btnHelp);
+		
+		JScrollPane logscroll = new JScrollPane();
+		logscroll.setBounds(10, 300, 1003, 326);
+		menu.add(logscroll);
+		
+		logtable = new JTable();
+		logscroll.setViewportView(logtable);
+		
+		JButton showlog = new JButton("Show Log");
+		showlog.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+					log = new ArrayList<Log>();										
+					try{
+				    	   String q = "SELECT * FROM userlog";
+				           PreparedStatement pst1 = connection.prepareStatement(q);
+				           ResultSet rset= pst1.executeQuery();
+				           int k = 1;
+				           while(rset.next()){
+				               Log line = new Log(
+				                       k,
+				                       rset.getString("time"),
+				                       rset.getString("activity")
+				               );
+				               log.add(line);
+				               k++;
+				           }
+
+				           logmodel = new DefaultTableModel();
+				           
+				           Object[] columnsName = new Object[3];
+				           
+				           columnsName[0] = "#";
+				           columnsName[1] = "Time";
+				           columnsName[2] = "Activity";
+
+				           logmodel.setColumnIdentifiers(columnsName);
+				           Object[] rowData = new Object[4];
+				           for(int i = 0; i < log.size(); i++){
+				               rowData[0] = log.get(i).getId();
+				               rowData[1] = Encrypt.unscramble(masterpass, log.get(i).getTime().toString());
+				               rowData[2] = Encrypt.unscramble(masterpass, log.get(i).getActivity().toString());
+				               logmodel.addRow(rowData);
+				           }
+				           rset.close();
+				           pst1.close();
+
+				       } catch (Exception ex) {
+				           JOptionPane.showMessageDialog(null, ex);
+				       }
+					 
+					logtable.setModel(logmodel);
+					logtable.show(true);
+					
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(null, e);
+				}
+			}
+		});
+		showlog.setForeground(Color.WHITE);
+		showlog.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		showlog.setBackground(new Color(30, 144, 255));
+		showlog.setBounds(352, 223, 321, 55);
+		menu.add(showlog);
 		
 		
 		lgn_btn.setForeground(Color.WHITE);
@@ -484,13 +562,13 @@ public class Login {
 		formAsterisk.getContentPane().add(add, "name_175497036809876");
 		add.setLayout(null);
 		
-		pass_input = new JPasswordField();
+		pass_input = new JTextField();
 		pass_input.setHorizontalAlignment(SwingConstants.LEFT);
 		pass_input.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		pass_input.setBounds(344, 453, 344, 49);
 		add.add(pass_input);
 		
-		JButton btnRegister = new JButton("Register");
+		JButton btnRegister = new JButton("Add");
 		btnRegister.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
@@ -521,6 +599,17 @@ public class Login {
 					pst.setString(3, pass);
 					pst.execute();
 					pst.close();
+					
+					String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
+					String time = Encrypt.scramble(masterpass, originalTime);
+					String activity = Encrypt.scramble(masterpass, "Added new password for site: "+web_input.getText()+" and username: "+user_input.getText());
+					String addlog = "insert into userlog (time, activity) values (?, ?)";
+					PreparedStatement pstmt = connection.prepareStatement(addlog);
+					pstmt.setString(1, time);
+					pstmt.setString(2, activity);
+					pstmt.execute();
+					pstmt.close();
+					
 					JOptionPane.showMessageDialog(formAsterisk, "Successfully Added", "Success", JOptionPane.PLAIN_MESSAGE, null);
 					}
 					else
@@ -544,16 +633,19 @@ public class Login {
 		button_5.setForeground(Color.WHITE);
 		button_5.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		button_5.setBackground(new Color(8, 204, 120));
-		button_5.setBounds(387, 534, 238, 60);
+		button_5.setBounds(397, 542, 238, 60);
 		changeMP.add(button_5);
+		
+		JLabel lblPleaseWaitThis = new JLabel("Please wait... this may take a while");
+		lblPleaseWaitThis.setForeground(Color.WHITE);
+		lblPleaseWaitThis.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPleaseWaitThis.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPleaseWaitThis.setBounds(379, 612, 279, 25);
+		changeMP.add(lblPleaseWaitThis);
 		button_5.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				if(masterpass.equals(prevPass.getText()) && nuPass.getText().equals(conNuPass.getText()))
-				{
-					
-					
-					
+				if(masterpass.equals(prevPass.getText()) && nuPass.getText().equals(conNuPass.getText())){
 					try {
 						
 						prevMaster = masterpass;
@@ -564,11 +656,7 @@ public class Login {
 						String dataup;
 						PreparedStatement pst2;
 						int k = 1;
-						while(rs1.next())
-						{
-							/*JOptionPane.showMessageDialog(null, Encrypt.unscramble(prevMaster, rs1.getString("website")));
-							JOptionPane.showMessageDialog(null, Encrypt.unscramble(prevMaster, rs1.getString("username")));
-							JOptionPane.showMessageDialog(null, Encrypt.unscramble(prevMaster, rs1.getString("password")));*/
+						while(rs1.next()){
 							dataup = "update Data set website = ?, username = ?, password = ? where id = ?";
 							pst2 = connection.prepareStatement(dataup);
 							pst2.setString(1, Encrypt.scramble(masterpass, Encrypt.unscramble(prevMaster, rs1.getString("website"))));
@@ -584,12 +672,49 @@ public class Login {
 						PreparedStatement pst = connection.prepareStatement(up);
 						pst.setString(1, Encrypt.scramble(rhapsody, nuPass.getText()));
 						pst.executeUpdate();
-						JOptionPane.showMessageDialog(null, "Success");
 						pst.close();
 						pst1.close();
 						rs1.close();
 						
+						String logfetch = "select * from userlog";
+						PreparedStatement pstmt1 = connection.prepareStatement(logfetch);
+						ResultSet rset = pstmt1.executeQuery();
+						String logdataup;
+						PreparedStatement pstmt2;
+						k = 1;
+						while(rset.next()){
+							logdataup = "update userlog set time = ?, activity = ? where id = ?";
+							pstmt2 = connection.prepareStatement(logdataup);
+							pstmt2.setString(1, Encrypt.scramble(masterpass, Encrypt.unscramble(prevMaster, rset.getString("time"))));
+							pstmt2.setString(2, Encrypt.scramble(masterpass, Encrypt.unscramble(prevMaster, rset.getString("activity"))));
+							pstmt2.setInt(3, k);
+							pstmt2.executeUpdate();
+							pstmt2.close();
+							k++;
+						}
+						pstmt1.close();
+						rset.close();
 						
+						/* *
+						 * 
+						 * Adding to log with nuPass
+						 * 
+						 * */
+						String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
+						String time = Encrypt.scramble(masterpass, originalTime);
+						String activity = Encrypt.scramble(masterpass, "Master Password have been changed");
+						String addlog = "insert into userlog (time, activity) values (?, ?)";
+						PreparedStatement pstmt = connection.prepareStatement(addlog);
+						pstmt.setString(1, time);
+						pstmt.setString(2, activity);
+						pstmt.execute();
+						pstmt.close();
+						JOptionPane.showMessageDialog(null, "Success");
+						prevPass.setText(null);
+						nuPass.setText(null);
+						conNuPass.setText(null);
+						changeMP.setVisible(false);
+						display.setVisible(true);
 						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -597,6 +722,16 @@ public class Login {
 					}
 					
 					
+				}else{
+					if(!masterpass.equals(prevPass.getText())){
+						JOptionPane.showMessageDialog(null, "Seems previous password is incorrect. Try again!", "Failure", JOptionPane.PLAIN_MESSAGE, null);
+						prevPass.setText(null);
+					}
+					else if(!nuPass.getText().equals(conNuPass.getText())){
+						JOptionPane.showMessageDialog(null, "New password doesn't match!",  "Failure", JOptionPane.PLAIN_MESSAGE, null);
+						nuPass.setText(null);
+						conNuPass.setText(null);
+					}
 				}
 				
 			}
@@ -666,6 +801,10 @@ public class Login {
 		btnRandomize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pass_input.setText(randomString(10));
+				StringSelection stringSelection = new StringSelection(pass_input.getText());
+				Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+				clpbrd.setContents(stringSelection, null);
+				JOptionPane.showMessageDialog(null, "Password copied!");
 			}
 		});
 		btnRandomize.setForeground(Color.WHITE);
@@ -695,37 +834,37 @@ public class Login {
 		backBtn.setForeground(Color.WHITE);
 		backBtn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		backBtn.setBackground(new Color(8, 204, 120));
-		backBtn.setBounds(10, 11, 37, 37);
+		backBtn.setBounds(15, 16, 37, 37);
 		signup.add(backBtn);
 		
 		JLabel databasename = new JLabel("Database Save Location:");
 		databasename.setForeground(Color.WHITE);
 		databasename.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		databasename.setBounds(338, 249, 198, 34);
+		databasename.setBounds(315, 255, 198, 34);
 		signup.add(databasename);
 		
 		JLabel password = new JLabel("Password:");
 		password.setForeground(Color.WHITE);
 		password.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		password.setBounds(338, 333, 198, 34);
+		password.setBounds(315, 335, 198, 34);
 		signup.add(password);
 		
 		JLabel confirmpassword = new JLabel("Confirm Password:");
 		confirmpassword.setForeground(Color.WHITE);
 		confirmpassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		confirmpassword.setBounds(338, 415, 198, 34);
+		confirmpassword.setBounds(315, 417, 198, 34);
 		signup.add(confirmpassword);
 		
 		passfield = new JPasswordField();
 		passfield.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		passfield.setHorizontalAlignment(SwingConstants.LEFT);
-		passfield.setBounds(338, 364, 344, 49);
+		passfield.setBounds(315, 364, 382, 49);
 		signup.add(passfield);
 		
 		confirmpass = new JPasswordField();
 		confirmpass.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		confirmpass.setHorizontalAlignment(SwingConstants.LEFT);
-		confirmpass.setBounds(338, 447, 344, 49);
+		confirmpass.setBounds(315, 447, 382, 49);
 		signup.add(confirmpass);
 
 		final JFileChooser filesave = new JFileChooser();
@@ -750,13 +889,13 @@ public class Login {
 		btn_save_db.setForeground(Color.WHITE);
 		btn_save_db.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		btn_save_db.setBackground(new Color(245, 102, 23));
-		btn_save_db.setBounds(552, 283, 130, 50);
+		btn_save_db.setBounds(567, 283, 130, 50);
 		signup.add(btn_save_db);
 		
 		save_dest = new JTextField();
 		save_dest.setEditable(false);
 		save_dest.setFont(new Font("Century Gothic", Font.BOLD, 18));
-		save_dest.setBounds(338, 284, 213, 49);
+		save_dest.setBounds(315, 284, 251, 49);
 		signup.add(save_dest);
 		save_dest.setColumns(10);
 		
@@ -780,17 +919,37 @@ public class Login {
 						String query1 = "CREATE TABLE IF NOT EXISTS " + WS + "(hash INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, content VARCHAR)";
 						Statement st1 = connection.createStatement();
 						st1.execute(query1);
+						
+						String UL = "userlog";
+						String query2 = "CREATE TABLE IF NOT EXISTS " + UL + "(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Time VARCHAR NOT NULL, Activity VARCHAR)";
+						Statement st2 = connection.createStatement();
+						st2.execute(query2);
+						String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
+						String time = Encrypt.scramble(passwordField, originalTime);
+						String activity = Encrypt.scramble(passwordField, "Database created!");
+						
+						String addlog = "insert into userlog (time, activity) values (?, ?)";
+						PreparedStatement pst = connection.prepareStatement(addlog);
+						pst.setString(1, time);
+						pst.setString(2, activity);
+						pst.execute();
+						pst.close();
+						
+						
+						
 						String scrambledText = Encrypt.scramble(rhapsody, passwordField);
-						String query2 = "insert into " + WS + "('content') values ('" + scrambledText + "')";
-						PreparedStatement pst2 = connection.prepareStatement(query2);
-						pst2.execute();
+						String query3 = "insert into " + WS + "('content') values ('" + scrambledText + "')";
+						PreparedStatement pst3 = connection.prepareStatement(query3);
+						pst3.execute();
 						passfield.setText(null);
 						save_dest.setText(null);
 						confirmpass.setText(null);
 						welcome.setVisible(true);
 						signup.setVisible(false);
 						st.close();
-						pst2.close();
+						st1.close();
+						st2.close();
+						pst3.close();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -814,22 +973,24 @@ public class Login {
 
 		
 		
-		JButton disp_bk_btn = new JButton("");
+		JButton disp_bk_btn = new JButton("Logout");
 		disp_bk_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				masterpass = null;
+				connection = null;
 				display.setVisible(false);
 				welcome.setVisible(true);
 			}
 		});
-		disp_bk_btn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		disp_bk_btn.setIcon(null);
 		disp_bk_btn.setForeground(Color.WHITE);
-		disp_bk_btn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		disp_bk_btn.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		disp_bk_btn.setBackground(new Color(8, 204, 120));
-		disp_bk_btn.setBounds(15, 16, 37, 37);
+		disp_bk_btn.setBounds(15, 16, 120, 52);
 		display.add(disp_bk_btn);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 205, 1003, 363);
+		scrollPane.setBounds(12, 242, 1003, 326);
 		display.add(scrollPane);
 		
         
@@ -846,7 +1007,7 @@ public class Login {
 		JButton refresh = new JButton("Refresh");
 		refresh.setBackground(new Color(255, 165, 0));
 		refresh.setForeground(new Color(255, 255, 255));
-		refresh.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		refresh.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		refresh.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -876,9 +1037,9 @@ public class Login {
 				           
 				           Object[] columnsName = new Object[4];
 				           
-				           columnsName[0] = "Id";
+				           columnsName[0] = "#";
 				           columnsName[1] = "Website";
-				           columnsName[2] = "UserName";
+				           columnsName[2] = "Username";
 				           columnsName[3] = "Password";
 				           
 				           model.setColumnIdentifiers(columnsName);
@@ -886,13 +1047,11 @@ public class Login {
 				           Object[] rowData = new Object[4];
 				           
 				           for(int i = 0; i < users.size(); i++){
-				               
 				               rowData[0] = users.get(i).getId();
-				                rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
-				                 rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
-				                  rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
-				                  
-				                  model.addRow(rowData);
+				               rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+				               rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+				               rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+				               model.addRow(rowData);
 				           }
 				           rs1.close();
 				           pst1.close();
@@ -914,17 +1073,17 @@ public class Login {
 				search_user.setText(null);
 			}
 		});
-		refresh.setBounds(918, 16, 97, 37);
+		refresh.setBounds(902, 16, 113, 52);
 		display.add(refresh);
 		
 		
 		
 		
 		
-		JButton addInfo = new JButton("Add Data");
+		JButton addInfo = new JButton("Add");
 		addInfo.setBackground(new Color(102, 204, 102));
 		addInfo.setForeground(new Color(255, 255, 255));
-		addInfo.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		addInfo.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		addInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				search_site.setText(null);
@@ -933,21 +1092,21 @@ public class Login {
 				display.setVisible(false);
 			}
 		});
-		addInfo.setBounds(15, 581, 110, 37);
+		addInfo.setBounds(22, 581, 129, 45);
 		display.add(addInfo);
 		
 		search_site = new JTextField();
 		search_site.setBackground(new Color(255, 255, 255));
-		search_site.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		search_site.setBounds(465, 107, 203, 37);
+		search_site.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		search_site.setBounds(360, 107, 203, 50);
 		display.add(search_site);
 		search_site.setColumns(10);
 		
 		search_user = new JTextField();
 		search_user.setBackground(new Color(255, 255, 255));
-		search_user.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		search_user.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		search_user.setColumns(10);
-		search_user.setBounds(465, 157, 203, 37);
+		search_user.setBounds(360, 168, 203, 50);
 		display.add(search_user);
 		
 		JButton site_search = new JButton("Site");
@@ -1010,14 +1169,14 @@ public class Login {
 				
 		}});
 		site_search.setForeground(new Color(255, 255, 255));
-		site_search.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		site_search.setBounds(360, 107, 97, 37);
+		site_search.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		site_search.setBounds(571, 106, 97, 51);
 		display.add(site_search);
 		
 		JButton user_search = new JButton("User");
 		user_search.setBackground(new Color(106, 90, 205));
 		user_search.setForeground(new Color(255, 255, 255));
-		user_search.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		user_search.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		user_search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				model.setRowCount(0);
@@ -1071,11 +1230,11 @@ public class Login {
 			}
 			       search_site.setText(null);
 		}});
-		user_search.setBounds(360, 157, 97, 37);
+		user_search.setBounds(571, 168, 97, 50);
 		display.add(user_search);
 		
-		JButton btnDeleteData = new JButton("Delete Data");
-		btnDeleteData.setBackground(new Color(255, 102, 51));
+		JButton btnDeleteData = new JButton("Delete");
+		btnDeleteData.setBackground(new Color(255, 69, 0));
 		btnDeleteData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				search_site.setText(null);
@@ -1085,11 +1244,11 @@ public class Login {
 			}
 		});
 		btnDeleteData.setForeground(new Color(255, 255, 255));
-		btnDeleteData.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		btnDeleteData.setBounds(886, 581, 129, 37);
+		btnDeleteData.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnDeleteData.setBounds(886, 581, 129, 45);
 		display.add(btnDeleteData);
 		
-		JLabel lblSearchDataBy = new JLabel("Search Data By:");
+		JLabel lblSearchDataBy = new JLabel("Search By:");
 		lblSearchDataBy.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSearchDataBy.setForeground(Color.WHITE);
 		lblSearchDataBy.setFont(new Font("Century Gothic", Font.BOLD, 16));
@@ -1101,10 +1260,10 @@ public class Login {
 		formAsterisk.getContentPane().add(update, "name_1031052123407705");
 		update.setLayout(null);
 		
-		update_pass = new JPasswordField();
+		update_pass = new JTextField();
 		update_pass.setHorizontalAlignment(SwingConstants.LEFT);
 		update_pass.setFont(new Font("Century Gothic", Font.BOLD, 18));
-		update_pass.setBounds(344, 440, 344, 49);
+		update_pass.setBounds(344, 433, 344, 49);
 		update.add(update_pass);
 		
 		
@@ -1142,6 +1301,15 @@ public class Login {
 						pst.setString(3, user);
 						pst.execute();
 						
+						String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
+						String time = Encrypt.scramble(masterpass, originalTime);
+						String activity = Encrypt.scramble(masterpass, "Updated password for site: "+update_web.getText().toString()+" and username"+update_user.getText().toString());
+						String addlog = "insert into userlog (time, activity) values (?, ?)";
+						PreparedStatement pstmt = connection.prepareStatement(addlog);
+						pstmt.setString(1, time);
+						pstmt.setString(2, activity);
+						pstmt.execute();
+						pstmt.close();
 					
 						JOptionPane.showMessageDialog(formAsterisk, "Update Successfull");
 						update_web.setText(null);
@@ -1177,31 +1345,31 @@ public class Login {
 		btnUpdate.setForeground(Color.WHITE);
 		btnUpdate.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		btnUpdate.setBackground(new Color(8, 204, 120));
-		btnUpdate.setBounds(395, 536, 238, 60);
+		btnUpdate.setBounds(399, 522, 238, 60);
 		update.add(btnUpdate);
 		
 		JLabel label_2 = new JLabel("Website:");
 		label_2.setForeground(Color.WHITE);
 		label_2.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		label_2.setBounds(344, 242, 198, 34);
+		label_2.setBounds(344, 238, 198, 34);
 		update.add(label_2);
 		
 		JLabel label_3 = new JLabel("Username:");
 		label_3.setForeground(Color.WHITE);
 		label_3.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		label_3.setBounds(344, 321, 198, 34);
+		label_3.setBounds(344, 318, 198, 34);
 		update.add(label_3);
 		
 		JLabel label_4 = new JLabel("Password:");
 		label_4.setForeground(Color.WHITE);
 		label_4.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		label_4.setBounds(344, 405, 198, 34);
+		label_4.setBounds(344, 399, 198, 34);
 		update.add(label_4);
 		
 		update_user = new JTextField();
 		update_user.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		update_user.setColumns(10);
-		update_user.setBounds(344, 357, 344, 47);
+		update_user.setBounds(344, 351, 344, 47);
 		update.add(update_user);
 		
 		update_web = new JTextField();
@@ -1213,15 +1381,18 @@ public class Login {
 		JButton button_1 = new JButton("");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				update_web.setText(null);
+				update_user.setText(null);
+				update_pass.setText(null);
 				update.setVisible(false);
 				display.setVisible(true);
 			}
 		});
-		button_1.setIcon(new ImageIcon("C:\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		button_1.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
 		button_1.setForeground(Color.WHITE);
 		button_1.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		button_1.setBackground(new Color(8, 204, 120));
-		button_1.setBounds(12, 13, 37, 37);
+		button_1.setBounds(15, 16, 37, 37);
 		update.add(button_1);
 		
 		JLabel label_5 = new JLabel("");
@@ -1230,8 +1401,8 @@ public class Login {
 		label_5.setBounds(0, 13, 1027, 229);
 		update.add(label_5);
 		
-		JButton btnUpdateData = new JButton("Update Data");
-		btnUpdateData.setBackground(SystemColor.activeCaption);
+		JButton btnUpdateData = new JButton("Modify");
+		btnUpdateData.setBackground(new Color(255, 215, 0));
 		btnUpdateData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				search_site.setText(null);
@@ -1241,14 +1412,14 @@ public class Login {
 			}
 		});
 		btnUpdateData.setForeground(new Color(255, 255, 255));
-		btnUpdateData.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		btnUpdateData.setBounds(444, 581, 151, 37);
+		btnUpdateData.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnUpdateData.setBounds(429, 581, 151, 45);
 		display.add(btnUpdateData);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Capture.PNG"));
-		lblNewLabel_3.setBounds(245, 13, 542, 55);
+		lblNewLabel_3.setBounds(245, 0, 542, 82);
 		display.add(lblNewLabel_3);
 		
 		JButton btnMenu = new JButton("Menu");
@@ -1260,9 +1431,9 @@ public class Login {
 			
 		});
 		btnMenu.setForeground(Color.WHITE);
-		btnMenu.setFont(new Font("Century Gothic", Font.BOLD, 16));
+		btnMenu.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		btnMenu.setBackground(new Color(255, 165, 0));
-		btnMenu.setBounds(918, 66, 97, 37);
+		btnMenu.setBounds(902, 80, 113, 52);
 		display.add(btnMenu);
 		
 		
@@ -1296,11 +1467,13 @@ public class Login {
 		JButton button = new JButton("");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				delete_site.setText(null);
+				delete_user.setText(null);
 				display.setVisible(true);
 				delete.setVisible(false);
 			}
 		});
-		button.setIcon(new ImageIcon("C:\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		button.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
 		button.setForeground(Color.WHITE);
 		button.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		button.setBackground(new Color(8, 204, 120));
@@ -1323,8 +1496,7 @@ public class Login {
 					pst.setString(2, user);
 					ResultSet rs = pst.executeQuery();
 					int  count = 0;
-					while(rs.next())
-					{
+					while(rs.next()){
 						count++;
 					}
 						if(count == 1)
@@ -1335,7 +1507,15 @@ public class Login {
 							pst1.setString(2, user);
 							pst1.execute();
 							pst1.close();
-							
+							String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
+							String time = Encrypt.scramble(masterpass, originalTime);
+							String activity = Encrypt.scramble(masterpass, "Deleted password for site: "+delete_site.getText().toString()+" and username: "+delete_user.getText().toString());
+							String addlog = "insert into userlog (time, activity) values (?, ?)";
+							PreparedStatement pstmt = connection.prepareStatement(addlog);
+							pstmt.setString(1, time);
+							pstmt.setString(2, activity);
+							pstmt.execute();
+							pstmt.close();
 							JOptionPane.showMessageDialog(formAsterisk, "Successfully Data Deleted From " + delete_site.getText() + " " + delete_user.getText(), "Operation Successful", JOptionPane.PLAIN_MESSAGE, null);
 						}
 						else

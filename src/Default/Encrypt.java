@@ -99,7 +99,7 @@ public class Encrypt
     	return Encrypt.getDecryptedString();
     }
     
-   
+   /*
     public static void main(String args[])
     {
     	 		@SuppressWarnings("resource")
@@ -109,7 +109,6 @@ public class Encrypt
         		System.out.println("Password (or Key):");
                 final String strPssword = in.nextLine();
                 Encrypt.setKey(strPssword);
-               
                 Encrypt.encrypt(strToEncrypt.trim());
                 
                 System.out.println("String to Encrypt: " + strToEncrypt); 
@@ -122,6 +121,6 @@ public class Encrypt
                 System.out.println("Decrypted : " + Encrypt.getDecryptedString());
         
     }
-    
+    */
      
 }
