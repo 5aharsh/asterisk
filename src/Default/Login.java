@@ -202,6 +202,7 @@ public class Login {
 		
 		
 		JButton btnChangeMasterPassword = new JButton("Change Master Password");
+		btnChangeMasterPassword.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\password2.png"));
 		btnChangeMasterPassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				changeMP.setVisible(true);
@@ -216,6 +217,9 @@ public class Login {
 		menu.add(btnChangeMasterPassword);
 		
 		JButton button_3 = new JButton("");
+		button_3.setOpaque(false);
+		button_3.setFocusPainted(false);
+		button_3.setBorderPainted(false);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -292,17 +296,17 @@ public class Login {
 		
 		
 		
-		button_3.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		button_3.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\anotherback2.png"));
 		button_3.setForeground(Color.WHITE);
 		button_3.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		button_3.setBackground(new Color(8, 204, 120));
-		button_3.setBounds(15, 16, 37, 37);
+		button_3.setBounds(15, 16, 49, 46);
 		changeMP.add(button_3);
 		
 		JLabel label_9 = new JLabel("");
 		label_9.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\logo2.png"));
 		label_9.setHorizontalAlignment(SwingConstants.CENTER);
-		label_9.setBounds(0, 48, 1027, 220);
+		label_9.setBounds(0, 0, 1027, 244);
 		changeMP.add(label_9);
 		
 		JLabel lblPreviousPassword = new JLabel("Previous Password:");
@@ -428,8 +432,11 @@ public class Login {
 		help.add(lblNewLabel_4);
 		
 		JButton lgn_bk_bnt = new JButton("");
-		lgn_bk_bnt.setIcon(new ImageIcon("C:\\College\\Mini-I\\Asterisk\\Logo\\Picture2.png"));
+		lgn_bk_bnt.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\anotherback2.png"));
 		lgn_bk_bnt.setSelectedIcon(null);
+		lgn_bk_bnt.setOpaque(false);
+		lgn_bk_bnt.setFocusPainted(false);
+		lgn_bk_bnt.setBorderPainted(false);
 		lgn_bk_bnt.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
@@ -444,7 +451,7 @@ public class Login {
 		lgn_bk_bnt.setForeground(Color.WHITE);
 		lgn_bk_bnt.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		lgn_bk_bnt.setBackground(new Color(245, 102, 23));
-		lgn_bk_bnt.setBounds(15, 16, 37, 37);
+		lgn_bk_bnt.setBounds(15, 16, 49, 46);
 		login.add(lgn_bk_bnt);
 		
 		
@@ -453,7 +460,8 @@ public class Login {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 		        "SQLite Database", "sqlite");
 		fc.setFileFilter(filter);
-		final JButton db_choose_btn = new JButton("Choose");
+		final JButton db_choose_btn = new JButton("Pick");
+		db_choose_btn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\choose2.png"));
 		db_choose_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
 				int returnVal = fc.showDialog(db_choose_btn, "Choose");
@@ -469,9 +477,9 @@ public class Login {
 			}
 		});
 		db_choose_btn.setForeground(Color.WHITE);
-		db_choose_btn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		db_choose_btn.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		db_choose_btn.setBackground(new Color(245, 102, 23));
-		db_choose_btn.setBounds(557, 332, 154, 50);
+		db_choose_btn.setBounds(551, 353, 160, 50);
 		login.add(db_choose_btn);
 		
 
@@ -481,9 +489,10 @@ public class Login {
 		pathField = new JTextField();
 		pathField.setEditable(false);
 		pathField.setFont(new Font("Century Gothic", Font.BOLD | Font.ITALIC, 18));
-		pathField.setBounds(317, 332, 238, 50);
+		pathField.setBounds(317, 353, 235, 50);
 		login.add(pathField);
-		JButton lgn_btn = new JButton("Login");
+		JButton lgn_btn = new JButton(" Login");
+		lgn_btn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\done2.png"));
 		lgn_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(originalPath==null){
@@ -624,6 +633,9 @@ public class Login {
 		
 
 		JButton button_4 = new JButton("");
+		button_4.setOpaque(false);
+		button_4.setFocusPainted(false);
+		button_4.setBorderPainted(false);
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -693,14 +705,15 @@ public class Login {
 				display.setVisible(true);
 			}
 		});
-		button_4.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		button_4.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\anotherback2.png"));
 		button_4.setForeground(Color.WHITE);
 		button_4.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		button_4.setBackground(new Color(8, 204, 120));
-		button_4.setBounds(15, 16, 37, 37);
+		button_4.setBounds(15, 16, 49, 46);
 		menu.add(button_4);
 		
 		JButton btnHelp = new JButton("Help");
+		btnHelp.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\help2.png"));
 		btnHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -714,13 +727,14 @@ public class Login {
 		menu.add(btnHelp);
 		
 		JScrollPane logscroll = new JScrollPane();
-		logscroll.setBounds(10, 300, 1003, 326);
+		logscroll.setBounds(37, 300, 947, 300);
 		menu.add(logscroll);
 		
 		logtable = new JTable();
 		logscroll.setViewportView(logtable);
 		
-		JButton showlog = new JButton("Show Log");
+		JButton showlog = new JButton("Reload Log");
+		showlog.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\history2.png"));
 		showlog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try{
@@ -793,14 +807,14 @@ public class Login {
 		JLabel lblChooseFile = new JLabel("Choose File:");
 		lblChooseFile.setForeground(Color.WHITE);
 		lblChooseFile.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblChooseFile.setBounds(317, 299, 198, 34);
+		lblChooseFile.setBounds(317, 320, 198, 34);
 		login.add(lblChooseFile);
 		
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\login.png"));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(0, 13, 1027, 229);
+		label.setBounds(0, 0, 1027, 242);
 		login.add(label);
 		
 		
@@ -818,18 +832,22 @@ public class Login {
 		pass_input = new JTextField();
 		pass_input.setHorizontalAlignment(SwingConstants.LEFT);
 		pass_input.setFont(new Font("Century Gothic", Font.BOLD, 18));
-		pass_input.setBounds(344, 453, 344, 49);
+		pass_input.setBounds(339, 453, 344, 49);
 		add.add(pass_input);
 		
-		JButton btnRegister = new JButton("Add");
+		JButton btnRegister = new JButton(" Add");
+		btnRegister.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\done2.png"));
 		btnRegister.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				
 				try{
-					String web = Encrypt.scramble(masterpass, web_input.getText());
-					String user = Encrypt.scramble(masterpass, user_input.getText());
-					String pass = Encrypt.scramble(masterpass, pass_input.getText());
+					String webo = web_input.getText();
+					String usero = user_input.getText();
+					String passo = pass_input.getText();
+					String web = Encrypt.scramble(masterpass, webo);
+					String user = Encrypt.scramble(masterpass, usero);
+					String pass = Encrypt.scramble(masterpass, passo);
 					
 					String query = "select * from Data where website = ? and username = ?";
 					
@@ -843,35 +861,39 @@ public class Login {
 						count++;
 					}
 					
-					if(count == 0)
-					{
-					String query1 = "insert into Data (website, username, password) values (?, ?, ?)";
-					PreparedStatement pst = connection.prepareStatement(query1);
-					pst.setString(1, web);
-					pst.setString(2, user);
-					pst.setString(3, pass);
-					pst.execute();
-					pst.close();
-					
-					String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
-					String time = Encrypt.scramble(masterpass, originalTime);
-					String activity = Encrypt.scramble(masterpass, "Added new password for site: "+web_input.getText()+" and username: "+user_input.getText());
-					String addlog = "insert into userlog (time, activity) values (?, ?)";
-					PreparedStatement pstmt = connection.prepareStatement(addlog);
-					pstmt.setString(1, time);
-					pstmt.setString(2, activity);
-					pstmt.execute();
-					pstmt.close();
-					
-					JOptionPane.showMessageDialog(formAsterisk, "Successfully Added", "Success", JOptionPane.PLAIN_MESSAGE, null);
+					if((count == 0)&&!(webo.equals(""))&&!(usero.equals(""))&&!(passo.equals(""))&&!(passo.contains(" "))){
+						String query1 = "insert into Data (website, username, password) values (?, ?, ?)";
+						PreparedStatement pst = connection.prepareStatement(query1);
+						pst.setString(1, web);
+						pst.setString(2, user);
+						pst.setString(3, pass);
+						pst.execute();
+						pst.close();
+						
+						String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
+						String time = Encrypt.scramble(masterpass, originalTime);
+						String activity = Encrypt.scramble(masterpass, "Added new password for site: "+web_input.getText()+" and username: "+user_input.getText());
+						String addlog = "insert into userlog (time, activity) values (?, ?)";
+						PreparedStatement pstmt = connection.prepareStatement(addlog);
+						pstmt.setString(1, time);
+						pstmt.setString(2, activity);
+						pstmt.execute();
+						pstmt.close();
+						
+						JOptionPane.showMessageDialog(formAsterisk, "Successfully Added", "Success", JOptionPane.PLAIN_MESSAGE, null);
+						web_input.setText(null);
+						user_input.setText(null);
+						pass_input.setText(null);
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(formAsterisk, "Username Password Combo already exist", "Failure", JOptionPane.PLAIN_MESSAGE, null);
+						if(count!=0)
+							JOptionPane.showMessageDialog(formAsterisk, "Username Password Combo already exist", "Failure", JOptionPane.PLAIN_MESSAGE, null);
+						else if(passo.contains(" "))
+							JOptionPane.showMessageDialog(formAsterisk, "Password can't contain spaces", "Failure", JOptionPane.PLAIN_MESSAGE, null);
+						else
+							JOptionPane.showMessageDialog(formAsterisk, "Uh oh! Did you filled up all fields?", "Failure", JOptionPane.PLAIN_MESSAGE, null);
 					}
-					web_input.setText(null);
-					user_input.setText(null);
-					pass_input.setText(null);
 					pst1.close();
 					rs.close();
 				}catch(Exception e1){
@@ -882,20 +904,21 @@ public class Login {
 		});
 		
 		
-		JButton button_5 = new JButton("Done");
-		button_5.setForeground(Color.WHITE);
-		button_5.setFont(new Font("Century Gothic", Font.BOLD, 25));
-		button_5.setBackground(new Color(8, 204, 120));
-		button_5.setBounds(397, 542, 238, 60);
-		changeMP.add(button_5);
+		JButton btnDone_1 = new JButton(" Done");
+		btnDone_1.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\done2.png"));
+		btnDone_1.setForeground(Color.WHITE);
+		btnDone_1.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		btnDone_1.setBackground(new Color(8, 204, 120));
+		btnDone_1.setBounds(399, 532, 238, 60);
+		changeMP.add(btnDone_1);
 		
 		JLabel lblPleaseWaitThis = new JLabel("Please wait... this may take a while");
 		lblPleaseWaitThis.setForeground(Color.WHITE);
-		lblPleaseWaitThis.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPleaseWaitThis.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblPleaseWaitThis.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPleaseWaitThis.setBounds(379, 612, 279, 25);
+		lblPleaseWaitThis.setBounds(366, 601, 304, 25);
 		changeMP.add(lblPleaseWaitThis);
-		button_5.addActionListener(new ActionListener() {
+		btnDone_1.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				if(masterpass.equals(prevPass.getText()) && nuPass.getText().equals(conNuPass.getText())){
@@ -994,40 +1017,43 @@ public class Login {
 		btnRegister.setForeground(Color.WHITE);
 		btnRegister.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		btnRegister.setBackground(new Color(8, 204, 120));
-		btnRegister.setBounds(393, 547, 238, 60);
+		btnRegister.setBounds(388, 547, 238, 60);
 		add.add(btnRegister);
 		
 		JLabel lblWebsite = new JLabel("Website:");
 		lblWebsite.setForeground(Color.WHITE);
 		lblWebsite.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblWebsite.setBounds(344, 255, 198, 34);
+		lblWebsite.setBounds(339, 255, 198, 34);
 		add.add(lblWebsite);
 		
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setForeground(Color.WHITE);
 		lblUsername.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblUsername.setBounds(344, 334, 198, 34);
+		lblUsername.setBounds(339, 334, 198, 34);
 		add.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblPassword.setBounds(344, 418, 198, 34);
+		lblPassword.setBounds(339, 418, 198, 34);
 		add.add(lblPassword);
 		
 		user_input = new JTextField();
 		user_input.setFont(new Font("Century Gothic", Font.BOLD, 18));
-		user_input.setBounds(344, 370, 344, 47);
+		user_input.setBounds(339, 370, 344, 47);
 		add.add(user_input);
 		user_input.setColumns(10);
 		
 		web_input = new JTextField();
 		web_input.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		web_input.setColumns(10);
-		web_input.setBounds(344, 285, 344, 47);
+		web_input.setBounds(339, 285, 344, 47);
 		add.add(web_input);
 		
 		JButton back_input = new JButton("");
+		back_input.setOpaque(false);
+		back_input.setFocusPainted(false);
+		back_input.setBorderPainted(false);
 		back_input.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				web_input.setText(null);
@@ -1100,20 +1126,21 @@ public class Login {
 				add.setVisible(false);
 			}
 		});
-		back_input.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		back_input.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\anotherback2.png"));
 		back_input.setForeground(Color.WHITE);
 		back_input.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		back_input.setBackground(new Color(8, 204, 120));
-		back_input.setBounds(15, 16, 37, 37);
+		back_input.setBounds(15, 16, 49, 46);
 		add.add(back_input);
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("C:\\Mini-I\\asterisk\\Logo\\logo2.png"));
+		label_1.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\addpass2.png"));
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setBounds(0, 13, 1027, 229);
+		label_1.setBounds(0, 0, 1027, 230);
 		add.add(label_1);
 		
-		JButton btnRandomize = new JButton("Randomize");
+		JButton btnRandomize = new JButton("Generate");
+		btnRandomize.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\generate2.png"));
 		btnRandomize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pass_input.setText(randomString(10));
@@ -1126,18 +1153,21 @@ public class Login {
 		btnRandomize.setForeground(Color.WHITE);
 		btnRandomize.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		btnRandomize.setBackground(Color.LIGHT_GRAY);
-		btnRandomize.setBounds(700, 453, 180, 49);
+		btnRandomize.setBounds(695, 453, 184, 49);
 		add.add(btnRandomize);
 		
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\College\\Mini-I\\Asterisk\\Logo\\signup.png"));
-		lblNewLabel_1.setBounds(0, 46, 1027, 220);
+		lblNewLabel_1.setBounds(0, 0, 1027, 242);
 		signup.add(lblNewLabel_1);
 		
 		JButton backBtn = new JButton("");
-		backBtn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		backBtn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\anotherback2.png"));
+		backBtn.setOpaque(false);
+		backBtn.setFocusPainted(false);
+		backBtn.setBorderPainted(false);
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				passfield.setText(null);
@@ -1150,44 +1180,45 @@ public class Login {
 		backBtn.setForeground(Color.WHITE);
 		backBtn.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		backBtn.setBackground(new Color(8, 204, 120));
-		backBtn.setBounds(15, 16, 37, 37);
+		backBtn.setBounds(15, 16, 49, 46);
 		signup.add(backBtn);
 		
-		JLabel databasename = new JLabel("Database Save Location:");
+		JLabel databasename = new JLabel("Database Name & Location:");
 		databasename.setForeground(Color.WHITE);
 		databasename.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		databasename.setBounds(315, 255, 198, 34);
+		databasename.setBounds(315, 261, 251, 34);
 		signup.add(databasename);
 		
 		JLabel password = new JLabel("Password:");
 		password.setForeground(Color.WHITE);
 		password.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		password.setBounds(315, 335, 198, 34);
+		password.setBounds(315, 344, 198, 34);
 		signup.add(password);
 		
 		JLabel confirmpassword = new JLabel("Confirm Password:");
 		confirmpassword.setForeground(Color.WHITE);
 		confirmpassword.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		confirmpassword.setBounds(315, 417, 198, 34);
+		confirmpassword.setBounds(315, 427, 198, 34);
 		signup.add(confirmpassword);
 		
 		passfield = new JPasswordField();
 		passfield.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		passfield.setHorizontalAlignment(SwingConstants.LEFT);
-		passfield.setBounds(315, 364, 382, 49);
+		passfield.setBounds(315, 377, 382, 49);
 		signup.add(passfield);
 		
 		confirmpass = new JPasswordField();
 		confirmpass.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		confirmpass.setHorizontalAlignment(SwingConstants.LEFT);
-		confirmpass.setBounds(315, 447, 382, 49);
+		confirmpass.setBounds(315, 462, 382, 49);
 		signup.add(confirmpass);
 
 		final JFileChooser filesave = new JFileChooser();
 		filesave.setDialogTitle("Specify a file to save"); 
 		FileNameExtensionFilter savefilter = new FileNameExtensionFilter("SQLite Database", "sqlite");
 		filesave.setFileFilter(savefilter);
-		JButton btn_save_db = new JButton("Choose");
+		JButton btn_save_db = new JButton("Select");
+		btn_save_db.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\choose2.png"));
 		btn_save_db.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int returnVal = filesave.showSaveDialog(btn_save_db);
@@ -1203,19 +1234,20 @@ public class Login {
 			}
 		});
 		btn_save_db.setForeground(Color.WHITE);
-		btn_save_db.setFont(new Font("Century Gothic", Font.PLAIN, 25));
+		btn_save_db.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		btn_save_db.setBackground(new Color(245, 102, 23));
-		btn_save_db.setBounds(567, 283, 130, 50);
+		btn_save_db.setBounds(542, 294, 155, 50);
 		signup.add(btn_save_db);
 		
 		save_dest = new JTextField();
 		save_dest.setEditable(false);
 		save_dest.setFont(new Font("Century Gothic", Font.BOLD, 18));
-		save_dest.setBounds(315, 284, 251, 49);
+		save_dest.setBounds(315, 295, 227, 49);
 		signup.add(save_dest);
 		save_dest.setColumns(10);
 		
-		JButton signupBtn = new JButton("Done");
+		JButton signupBtn = new JButton(" Done");
+		signupBtn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\done2.png"));
 		signupBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String passwordField = passfield.getText();
@@ -1284,7 +1316,7 @@ public class Login {
 		signupBtn.setForeground(Color.WHITE);
 		signupBtn.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		signupBtn.setBackground(new Color(8, 204, 120));
-		signupBtn.setBounds(387, 524, 238, 60);
+		signupBtn.setBounds(386, 539, 238, 60);
 		signup.add(signupBtn);
 
 		
@@ -1298,15 +1330,15 @@ public class Login {
 				welcome.setVisible(true);
 			}
 		});
-		disp_bk_btn.setIcon(null);
+		disp_bk_btn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\logout2.png"));
 		disp_bk_btn.setForeground(Color.WHITE);
-		disp_bk_btn.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		disp_bk_btn.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		disp_bk_btn.setBackground(new Color(8, 204, 120));
-		disp_bk_btn.setBounds(15, 16, 120, 52);
+		disp_bk_btn.setBounds(15, 16, 127, 45);
 		display.add(disp_bk_btn);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 242, 1003, 326);
+		scrollPane.setBounds(38, 261, 949, 300);
 		display.add(scrollPane);
 		
         
@@ -1397,6 +1429,7 @@ public class Login {
 		
 		
 		JButton addInfo = new JButton("Add");
+		addInfo.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\add2.png"));
 		addInfo.setBackground(new Color(102, 204, 102));
 		addInfo.setForeground(new Color(255, 255, 255));
 		addInfo.setFont(new Font("Century Gothic", Font.BOLD, 20));
@@ -1408,13 +1441,13 @@ public class Login {
 				display.setVisible(false);
 			}
 		});
-		addInfo.setBounds(22, 581, 129, 45);
+		addInfo.setBounds(22, 581, 120, 45);
 		display.add(addInfo);
 		
 		search_site = new JTextField();
 		search_site.setBackground(new Color(255, 255, 255));
 		search_site.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		search_site.setBounds(360, 107, 203, 50);
+		search_site.setBounds(368, 145, 203, 43);
 		display.add(search_site);
 		search_site.setColumns(10);
 		
@@ -1422,10 +1455,11 @@ public class Login {
 		search_user.setBackground(new Color(255, 255, 255));
 		search_user.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		search_user.setColumns(10);
-		search_user.setBounds(360, 168, 203, 50);
+		search_user.setBounds(368, 194, 203, 43);
 		display.add(search_user);
 		
 		JButton site_search = new JButton("Site");
+		site_search.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\site2.png"));
 		site_search.setBackground(new Color(106, 90, 205));
 		site_search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -1552,10 +1586,11 @@ public class Login {
 		}});
 		site_search.setForeground(new Color(255, 255, 255));
 		site_search.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		site_search.setBounds(571, 106, 97, 51);
+		site_search.setBounds(576, 144, 112, 44);
 		display.add(site_search);
 		
 		JButton user_search = new JButton("User");
+		user_search.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\user2.png"));
 		user_search.setBackground(new Color(106, 90, 205));
 		user_search.setForeground(new Color(255, 255, 255));
 		user_search.setFont(new Font("Century Gothic", Font.BOLD, 20));
@@ -1612,10 +1647,11 @@ public class Login {
 			}
 			       search_site.setText(null);
 		}});
-		user_search.setBounds(571, 168, 97, 50);
+		user_search.setBounds(576, 194, 112, 43);
 		display.add(user_search);
 		
 		JButton btnDeleteData = new JButton("Delete");
+		btnDeleteData.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\delete2.png"));
 		btnDeleteData.setBackground(new Color(255, 69, 0));
 		btnDeleteData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1627,14 +1663,14 @@ public class Login {
 		});
 		btnDeleteData.setForeground(new Color(255, 255, 255));
 		btnDeleteData.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		btnDeleteData.setBounds(886, 581, 129, 45);
+		btnDeleteData.setBounds(888, 581, 127, 45);
 		display.add(btnDeleteData);
 		
 		JLabel lblSearchDataBy = new JLabel("Search By:");
 		lblSearchDataBy.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSearchDataBy.setForeground(Color.WHITE);
 		lblSearchDataBy.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblSearchDataBy.setBounds(413, 69, 198, 34);
+		lblSearchDataBy.setBounds(419, 107, 198, 34);
 		display.add(lblSearchDataBy);
 		
 		JPanel update = new JPanel();
@@ -1649,7 +1685,8 @@ public class Login {
 		update.add(update_pass);
 		
 		
-		JButton btnUpdate = new JButton("Update");
+		JButton btnUpdate = new JButton(" Update");
+		btnUpdate.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\done2.png"));
 		btnUpdate.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
@@ -1761,6 +1798,9 @@ public class Login {
 		update.add(update_web);
 		
 		JButton button_1 = new JButton("");
+		button_1.setOpaque(false);
+		button_1.setFocusPainted(false);
+		button_1.setBorderPainted(false);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				update_web.setText(null);
@@ -1833,20 +1873,21 @@ public class Login {
 				display.setVisible(true);
 			}
 		});
-		button_1.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		button_1.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\anotherback2.png"));
 		button_1.setForeground(Color.WHITE);
 		button_1.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		button_1.setBackground(new Color(8, 204, 120));
-		button_1.setBounds(15, 16, 37, 37);
+		button_1.setBounds(15, 16, 49, 46);
 		update.add(button_1);
 		
 		JLabel label_5 = new JLabel("");
-		label_5.setIcon(new ImageIcon("C:\\Mini-I\\asterisk\\Logo\\logo2.png"));
+		label_5.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\addpass2.png"));
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		label_5.setBounds(0, 13, 1027, 229);
+		label_5.setBounds(0, 0, 1027, 230);
 		update.add(label_5);
 		
 		JButton btnUpdateData = new JButton("Modify");
+		btnUpdateData.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\edit2.png"));
 		btnUpdateData.setBackground(new Color(255, 215, 0));
 		btnUpdateData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -1858,16 +1899,17 @@ public class Login {
 		});
 		btnUpdateData.setForeground(new Color(255, 255, 255));
 		btnUpdateData.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		btnUpdateData.setBounds(429, 581, 151, 45);
+		btnUpdateData.setBounds(445, 581, 135, 45);
 		display.add(btnUpdateData);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Capture.PNG"));
-		lblNewLabel_3.setBounds(245, 0, 542, 82);
+		lblNewLabel_3.setBounds(133, 0, 771, 82);
 		display.add(lblNewLabel_3);
 		
 		JButton btnMenu = new JButton("Menu");
+		btnMenu.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\menu2.png"));
 		btnMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				display.setVisible(false);
@@ -1878,11 +1920,11 @@ public class Login {
 		btnMenu.setForeground(Color.WHITE);
 		btnMenu.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		btnMenu.setBackground(new Color(255, 165, 0));
-		btnMenu.setBounds(902, 18, 113, 52);
+		btnMenu.setBounds(877, 16, 138, 45);
 		display.add(btnMenu);
 		
-		JButton button_2 = new JButton("");
-		button_2.addActionListener(new ActionListener() {
+		JButton btnClear = new JButton("Reload");
+		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try{
@@ -1948,12 +1990,12 @@ public class Login {
 
 			}
 		});
-		button_2.setIcon(new ImageIcon("C:\\Users\\Krushnal Dhandhukia\\Desktop\\Picture3.png"));
-		button_2.setForeground(Color.WHITE);
-		button_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		button_2.setBackground(new Color(106, 90, 205));
-		button_2.setBounds(680, 137, 43, 45);
-		display.add(button_2);
+		btnClear.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\reload2.png"));
+		btnClear.setForeground(Color.WHITE);
+		btnClear.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnClear.setBackground(new Color(32, 178, 170));
+		btnClear.setBounds(877, 68, 138, 45);
+		display.add(btnClear);
 		
 		
 		
@@ -1962,28 +2004,31 @@ public class Login {
 		JLabel label_6 = new JLabel("Website:");
 		label_6.setForeground(Color.WHITE);
 		label_6.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		label_6.setBounds(344, 255, 198, 34);
+		label_6.setBounds(345, 317, 198, 34);
 		delete.add(label_6);
 		
 		delete_site = new JTextField();
 		delete_site.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		delete_site.setColumns(10);
-		delete_site.setBounds(344, 285, 344, 47);
+		delete_site.setBounds(345, 347, 344, 47);
 		delete.add(delete_site);
 		
 		JLabel label_7 = new JLabel("Username:");
 		label_7.setForeground(Color.WHITE);
 		label_7.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		label_7.setBounds(344, 334, 198, 34);
+		label_7.setBounds(345, 396, 198, 34);
 		delete.add(label_7);
 		
 		delete_user = new JTextField();
 		delete_user.setFont(new Font("Century Gothic", Font.BOLD, 18));
 		delete_user.setColumns(10);
-		delete_user.setBounds(344, 370, 344, 47);
+		delete_user.setBounds(345, 432, 344, 47);
 		delete.add(delete_user);
 		
 		JButton button = new JButton("");
+		button.setOpaque(false);
+		button.setFocusPainted(false);
+		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				delete_site.setText(null);
@@ -2056,14 +2101,15 @@ public class Login {
 				delete.setVisible(false);
 			}
 		});
-		button.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Picture2.png"));
+		button.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\anotherback2.png"));
 		button.setForeground(Color.WHITE);
 		button.setFont(new Font("Century Gothic", Font.PLAIN, 25));
 		button.setBackground(new Color(8, 204, 120));
-		button.setBounds(15, 16, 37, 37);
+		button.setBounds(15, 16, 49, 46);
 		delete.add(button);
 		
-		JButton btnDelete = new JButton("Delete");
+		JButton btnDelete = new JButton(" Delete");
+		btnDelete.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\done2.png"));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
@@ -2121,24 +2167,25 @@ public class Login {
 		btnDelete.setForeground(Color.WHITE);
 		btnDelete.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		btnDelete.setBackground(new Color(8, 204, 120));
-		btnDelete.setBounds(396, 478, 238, 60);
+		btnDelete.setBounds(396, 515, 238, 60);
 		delete.add(btnDelete);
 		
 		JLabel label_8 = new JLabel("");
-		label_8.setIcon(new ImageIcon("C:\\Mini-I\\asterisk\\Logo\\logo2.png"));
+		label_8.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\addpass2.png"));
 		label_8.setHorizontalAlignment(SwingConstants.CENTER);
-		label_8.setBounds(0, 13, 1027, 229);
+		label_8.setBounds(10, 0, 1027, 229);
 		delete.add(label_8);
 		formAsterisk.setBounds(0, 64, 1033, 666);
 		formAsterisk.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 13, 1027, 229);
+		lblNewLabel.setBounds(0, 0, 1027, 242);
 		lblNewLabel.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\logo2.png"));
 		welcome.add(lblNewLabel);
 		
-		JButton loginBtn = new JButton("Login");
+		JButton loginBtn = new JButton(" Login");
+		loginBtn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\login2.png"));
 		loginBtn.setForeground(new Color(255, 255, 255));
 		loginBtn.setBackground(new Color(8, 204, 120));
 		loginBtn.setFont(new Font("Century Gothic", Font.BOLD, 25));
@@ -2151,7 +2198,8 @@ public class Login {
 		loginBtn.setBounds(186, 337, 238, 60);
 		welcome.add(loginBtn);
 		
-		JButton createBtn = new JButton("Create");
+		JButton createBtn = new JButton(" Create");
+		createBtn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\signup2.png"));
 		createBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				signup.setVisible(true);
@@ -2164,8 +2212,8 @@ public class Login {
 		createBtn.setBounds(603, 337, 238, 60);
 		welcome.add(createBtn);
 		
-		JButton exitBtn = new JButton("Exit");
-		exitBtn.setIcon(null);
+		JButton exitBtn = new JButton(" Exit");
+		exitBtn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\exit2.png"));
 		exitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
