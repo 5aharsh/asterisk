@@ -218,6 +218,69 @@ public class Login {
 		JButton button_3 = new JButton("");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try{
+					users = new ArrayList<Users>();
+				       
+				       try {
+				           
+				    	   String q = "SELECT * FROM Data";
+				           PreparedStatement pst1 = connection.prepareStatement(q);
+				           ResultSet rs1 = pst1.executeQuery();
+				           int k = 1;
+				           while(rs1.next()){
+				               
+				               Users u = new Users(
+				                       k,
+				                       rs1.getString("website"),
+				                       rs1.getString("username"),
+				                       rs1.getString("password")
+				               );
+				               
+				               users.add(u);
+				               k++;
+				           }
+				           
+				           model = new DefaultTableModel();
+				           
+				           Object[] columnsName = new Object[4];
+				           
+				           columnsName[0] = "#";
+				           columnsName[1] = "Website";
+				           columnsName[2] = "Username";
+				           columnsName[3] = "Password";
+				           
+				           model.setColumnIdentifiers(columnsName);
+				           
+				           Object[] rowData = new Object[4];
+				           
+				           for(int i = 0; i < users.size(); i++){
+				               rowData[0] = users.get(i).getId();
+				               rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+				               rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+				               rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+				               model.addRow(rowData);
+				           }
+				           rs1.close();
+				           pst1.close();
+				            
+				       } catch (SQLException ex) {
+				           JOptionPane.showMessageDialog(null, ex);
+				       }
+					 
+					table.setModel(model);
+					//table.setModel(DbUtils.resultSetToTableModel(rs));
+					table.show(true);
+					
+					
+					
+				}catch(Exception e2){
+					JOptionPane.showMessageDialog(formAsterisk, e2);
+				}
+				search_site.setText(null);
+				search_user.setText(null);
+			
+				
 				menu.setVisible(true);
 				changeMP.setVisible(false);
 			}
@@ -285,6 +348,69 @@ public class Login {
 		JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				try{
+					users = new ArrayList<Users>();
+				       
+				       try {
+				           
+				    	   String q = "SELECT * FROM Data";
+				           PreparedStatement pst1 = connection.prepareStatement(q);
+				           ResultSet rs1 = pst1.executeQuery();
+				           int k = 1;
+				           while(rs1.next()){
+				               
+				               Users u = new Users(
+				                       k,
+				                       rs1.getString("website"),
+				                       rs1.getString("username"),
+				                       rs1.getString("password")
+				               );
+				               
+				               users.add(u);
+				               k++;
+				           }
+				           
+				           model = new DefaultTableModel();
+				           
+				           Object[] columnsName = new Object[4];
+				           
+				           columnsName[0] = "#";
+				           columnsName[1] = "Website";
+				           columnsName[2] = "Username";
+				           columnsName[3] = "Password";
+				           
+				           model.setColumnIdentifiers(columnsName);
+				           
+				           Object[] rowData = new Object[4];
+				           
+				           for(int i = 0; i < users.size(); i++){
+				               rowData[0] = users.get(i).getId();
+				               rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+				               rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+				               rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+				               model.addRow(rowData);
+				           }
+				           rs1.close();
+				           pst1.close();
+				            
+				       } catch (SQLException ex) {
+				           JOptionPane.showMessageDialog(null, ex);
+				       }
+					 
+					table.setModel(model);
+					//table.setModel(DbUtils.resultSetToTableModel(rs));
+					table.show(true);
+					
+					
+					
+				}catch(Exception e2){
+					JOptionPane.showMessageDialog(formAsterisk, e2);
+				}
+				search_site.setText(null);
+				search_user.setText(null);
+			
+				
 			display.setVisible(true);
 			help.setVisible(false);
 			}
@@ -395,6 +521,70 @@ public class Login {
 							}
 							else
 							{
+								
+								
+									try{
+										users = new ArrayList<Users>();
+									       
+									       try {
+									           
+									    	   String q = "SELECT * FROM Data";
+									           PreparedStatement pst1 = connection.prepareStatement(q);
+									           ResultSet rs1 = pst1.executeQuery();
+									           int k = 1;
+									           while(rs1.next()){
+									               
+									               Users u = new Users(
+									                       k,
+									                       rs1.getString("website"),
+									                       rs1.getString("username"),
+									                       rs1.getString("password")
+									               );
+									               
+									               users.add(u);
+									               k++;
+									           }
+									           
+									           model = new DefaultTableModel();
+									           
+									           Object[] columnsName = new Object[4];
+									           
+									           columnsName[0] = "#";
+									           columnsName[1] = "Website";
+									           columnsName[2] = "Username";
+									           columnsName[3] = "Password";
+									           
+									           model.setColumnIdentifiers(columnsName);
+									           
+									           Object[] rowData = new Object[4];
+									           
+									           for(int i = 0; i < users.size(); i++){
+									               rowData[0] = users.get(i).getId();
+									               rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+									               rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+									               rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+									               model.addRow(rowData);
+									           }
+									           rs1.close();
+									           pst1.close();
+									            
+									       } catch (SQLException ex) {
+									           JOptionPane.showMessageDialog(null, ex);
+									       }
+										 
+										table.setModel(model);
+										//table.setModel(DbUtils.resultSetToTableModel(rs));
+										table.show(true);
+										
+										
+										
+									}catch(Exception e2){
+										JOptionPane.showMessageDialog(formAsterisk, e2);
+									}
+									search_site.setText(null);
+									search_user.setText(null);
+								
+								
 								display.setVisible(true);
 							}
 							
@@ -436,6 +626,69 @@ public class Login {
 		JButton button_4 = new JButton("");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try{
+					users = new ArrayList<Users>();
+				       
+				       try {
+				           
+				    	   String q = "SELECT * FROM Data";
+				           PreparedStatement pst1 = connection.prepareStatement(q);
+				           ResultSet rs1 = pst1.executeQuery();
+				           int k = 1;
+				           while(rs1.next()){
+				               
+				               Users u = new Users(
+				                       k,
+				                       rs1.getString("website"),
+				                       rs1.getString("username"),
+				                       rs1.getString("password")
+				               );
+				               
+				               users.add(u);
+				               k++;
+				           }
+				           
+				           model = new DefaultTableModel();
+				           
+				           Object[] columnsName = new Object[4];
+				           
+				           columnsName[0] = "#";
+				           columnsName[1] = "Website";
+				           columnsName[2] = "Username";
+				           columnsName[3] = "Password";
+				           
+				           model.setColumnIdentifiers(columnsName);
+				           
+				           Object[] rowData = new Object[4];
+				           
+				           for(int i = 0; i < users.size(); i++){
+				               rowData[0] = users.get(i).getId();
+				               rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+				               rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+				               rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+				               model.addRow(rowData);
+				           }
+				           rs1.close();
+				           pst1.close();
+				            
+				       } catch (SQLException ex) {
+				           JOptionPane.showMessageDialog(null, ex);
+				       }
+					 
+					table.setModel(model);
+					//table.setModel(DbUtils.resultSetToTableModel(rs));
+					table.show(true);
+					
+					
+					
+				}catch(Exception e2){
+					JOptionPane.showMessageDialog(formAsterisk, e2);
+				}
+				search_site.setText(null);
+				search_user.setText(null);
+			
+				
 				menu.setVisible(false);
 				display.setVisible(true);
 			}
@@ -780,6 +1033,69 @@ public class Login {
 				web_input.setText(null);
 				user_input.setText(null);
 				pass_input.setText(null);
+				
+				try{
+					users = new ArrayList<Users>();
+				       
+				       try {
+				           
+				    	   String q = "SELECT * FROM Data";
+				           PreparedStatement pst1 = connection.prepareStatement(q);
+				           ResultSet rs1 = pst1.executeQuery();
+				           int k = 1;
+				           while(rs1.next()){
+				               
+				               Users u = new Users(
+				                       k,
+				                       rs1.getString("website"),
+				                       rs1.getString("username"),
+				                       rs1.getString("password")
+				               );
+				               
+				               users.add(u);
+				               k++;
+				           }
+				           
+				           model = new DefaultTableModel();
+				           
+				           Object[] columnsName = new Object[4];
+				           
+				           columnsName[0] = "#";
+				           columnsName[1] = "Website";
+				           columnsName[2] = "Username";
+				           columnsName[3] = "Password";
+				           
+				           model.setColumnIdentifiers(columnsName);
+				           
+				           Object[] rowData = new Object[4];
+				           
+				           for(int i = 0; i < users.size(); i++){
+				               rowData[0] = users.get(i).getId();
+				               rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+				               rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+				               rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+				               model.addRow(rowData);
+				           }
+				           rs1.close();
+				           pst1.close();
+				            
+				       } catch (SQLException ex) {
+				           JOptionPane.showMessageDialog(null, ex);
+				       }
+					 
+					table.setModel(model);
+					//table.setModel(DbUtils.resultSetToTableModel(rs));
+					table.show(true);
+					
+					
+					
+				}catch(Exception e2){
+					JOptionPane.showMessageDialog(formAsterisk, e2);
+				}
+				search_site.setText(null);
+				search_user.setText(null);
+			
+				
 				display.setVisible(true);
 				add.setVisible(false);
 			}
@@ -1004,7 +1320,7 @@ public class Login {
 		
 		
 		
-		JButton refresh = new JButton("Refresh");
+		/*JButton refresh = new JButton("Refresh");
 		refresh.setBackground(new Color(255, 165, 0));
 		refresh.setForeground(new Color(255, 255, 255));
 		refresh.setFont(new Font("Century Gothic", Font.BOLD, 20));
@@ -1075,7 +1391,7 @@ public class Login {
 		});
 		refresh.setBounds(902, 16, 113, 52);
 		display.add(refresh);
-		
+		*/
 		
 		
 		
@@ -1113,7 +1429,7 @@ public class Login {
 		site_search.setBackground(new Color(106, 90, 205));
 		site_search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if(search_site.getText() != ""){
 				model.setRowCount(0);
 				users = new ArrayList<Users>();
 			       
@@ -1165,7 +1481,73 @@ public class Login {
 			           JOptionPane.showMessageDialog(null, ex);
 			       }
 			       search_user.setText(null);
-			
+		}
+				
+				else{
+					try{
+						users = new ArrayList<Users>();
+					       
+					       try {
+					           
+					    	   String q = "SELECT * FROM Data";
+					           PreparedStatement pst1 = connection.prepareStatement(q);
+					           ResultSet rs1 = pst1.executeQuery();
+					           int k = 1;
+					           while(rs1.next()){
+					               
+					               Users u = new Users(
+					                       k,
+					                       rs1.getString("website"),
+					                       rs1.getString("username"),
+					                       rs1.getString("password")
+					               );
+					               
+					               users.add(u);
+					               k++;
+					           }
+					           
+					           model = new DefaultTableModel();
+					           
+					           Object[] columnsName = new Object[4];
+					           
+					           columnsName[0] = "#";
+					           columnsName[1] = "Website";
+					           columnsName[2] = "Username";
+					           columnsName[3] = "Password";
+					           
+					           model.setColumnIdentifiers(columnsName);
+					           
+					           Object[] rowData = new Object[4];
+					           
+					           for(int i = 0; i < users.size(); i++){
+					               rowData[0] = users.get(i).getId();
+					               rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+					               rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+					               rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+					               model.addRow(rowData);
+					           }
+					           rs1.close();
+					           pst1.close();
+					            
+					       } catch (SQLException ex) {
+					           JOptionPane.showMessageDialog(null, ex);
+					       }
+						 
+						table.setModel(model);
+						//table.setModel(DbUtils.resultSetToTableModel(rs));
+						table.show(true);
+						
+						
+						
+					}catch(Exception e2){
+						JOptionPane.showMessageDialog(formAsterisk, e2);
+					}
+					search_site.setText(null);
+					search_user.setText(null);
+				
+					
+					
+				}
 				
 		}});
 		site_search.setForeground(new Color(255, 255, 255));
@@ -1384,6 +1766,69 @@ public class Login {
 				update_web.setText(null);
 				update_user.setText(null);
 				update_pass.setText(null);
+				
+				try{
+					users = new ArrayList<Users>();
+				       
+				       try {
+				           
+				    	   String q = "SELECT * FROM Data";
+				           PreparedStatement pst1 = connection.prepareStatement(q);
+				           ResultSet rs1 = pst1.executeQuery();
+				           int k = 1;
+				           while(rs1.next()){
+				               
+				               Users u = new Users(
+				                       k,
+				                       rs1.getString("website"),
+				                       rs1.getString("username"),
+				                       rs1.getString("password")
+				               );
+				               
+				               users.add(u);
+				               k++;
+				           }
+				           
+				           model = new DefaultTableModel();
+				           
+				           Object[] columnsName = new Object[4];
+				           
+				           columnsName[0] = "#";
+				           columnsName[1] = "Website";
+				           columnsName[2] = "Username";
+				           columnsName[3] = "Password";
+				           
+				           model.setColumnIdentifiers(columnsName);
+				           
+				           Object[] rowData = new Object[4];
+				           
+				           for(int i = 0; i < users.size(); i++){
+				               rowData[0] = users.get(i).getId();
+				               rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+				               rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+				               rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+				               model.addRow(rowData);
+				           }
+				           rs1.close();
+				           pst1.close();
+				            
+				       } catch (SQLException ex) {
+				           JOptionPane.showMessageDialog(null, ex);
+				       }
+					 
+					table.setModel(model);
+					//table.setModel(DbUtils.resultSetToTableModel(rs));
+					table.show(true);
+					
+					
+					
+				}catch(Exception e2){
+					JOptionPane.showMessageDialog(formAsterisk, e2);
+				}
+				search_site.setText(null);
+				search_user.setText(null);
+			
+				
 				update.setVisible(false);
 				display.setVisible(true);
 			}
@@ -1433,7 +1878,7 @@ public class Login {
 		btnMenu.setForeground(Color.WHITE);
 		btnMenu.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		btnMenu.setBackground(new Color(255, 165, 0));
-		btnMenu.setBounds(902, 80, 113, 52);
+		btnMenu.setBounds(902, 18, 113, 52);
 		display.add(btnMenu);
 		
 		
@@ -1469,6 +1914,70 @@ public class Login {
 			public void actionPerformed(ActionEvent arg0) {
 				delete_site.setText(null);
 				delete_user.setText(null);
+				
+				try{
+					users = new ArrayList<Users>();
+				       
+				       try {
+				           
+				    	   String q = "SELECT * FROM Data";
+				           PreparedStatement pst1 = connection.prepareStatement(q);
+				           ResultSet rs1 = pst1.executeQuery();
+				           int k = 1;
+				           while(rs1.next()){
+				               
+				               Users u = new Users(
+				                       k,
+				                       rs1.getString("website"),
+				                       rs1.getString("username"),
+				                       rs1.getString("password")
+				               );
+				               
+				               users.add(u);
+				               k++;
+				           }
+				           
+				           model = new DefaultTableModel();
+				           
+				           Object[] columnsName = new Object[4];
+				           
+				           columnsName[0] = "#";
+				           columnsName[1] = "Website";
+				           columnsName[2] = "Username";
+				           columnsName[3] = "Password";
+				           
+				           model.setColumnIdentifiers(columnsName);
+				           
+				           Object[] rowData = new Object[4];
+				           
+				           for(int i = 0; i < users.size(); i++){
+				               rowData[0] = users.get(i).getId();
+				               rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+				               rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+				               rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+				               model.addRow(rowData);
+				           }
+				           rs1.close();
+				           pst1.close();
+				            
+				       } catch (SQLException ex) {
+				           JOptionPane.showMessageDialog(null, ex);
+				       }
+					 
+					table.setModel(model);
+					//table.setModel(DbUtils.resultSetToTableModel(rs));
+					table.show(true);
+					
+					
+					
+				}catch(Exception e2){
+					JOptionPane.showMessageDialog(formAsterisk, e2);
+				}
+				search_site.setText(null);
+				search_user.setText(null);
+			
+				
+				
 				display.setVisible(true);
 				delete.setVisible(false);
 			}
