@@ -1457,7 +1457,7 @@ public class Login {
 			           
 			           Object[] columnsName = new Object[4];
 			           
-			           columnsName[0] = "Id";
+			           columnsName[0] = "#";
 			           columnsName[1] = "Website";
 			           columnsName[2] = "UserName";
 			           columnsName[3] = "Password";
@@ -1588,7 +1588,7 @@ public class Login {
 			           
 			           Object[] columnsName = new Object[4];
 			           
-			           columnsName[0] = "Id";
+			           columnsName[0] = "#";
 			           columnsName[1] = "Website";
 			           columnsName[2] = "UserName";
 			           columnsName[3] = "Password";
@@ -1880,6 +1880,80 @@ public class Login {
 		btnMenu.setBackground(new Color(255, 165, 0));
 		btnMenu.setBounds(902, 18, 113, 52);
 		display.add(btnMenu);
+		
+		JButton button_2 = new JButton("");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try{
+					users = new ArrayList<Users>();
+				       
+				       try {
+				           
+				    	   String q = "SELECT * FROM Data";
+				           PreparedStatement pst1 = connection.prepareStatement(q);
+				           ResultSet rs1 = pst1.executeQuery();
+				           int k = 1;
+				           while(rs1.next()){
+				               
+				               Users u = new Users(
+				                       k,
+				                       rs1.getString("website"),
+				                       rs1.getString("username"),
+				                       rs1.getString("password")
+				               );
+				               
+				               users.add(u);
+				               k++;
+				           }
+				           
+				           model = new DefaultTableModel();
+				           
+				           Object[] columnsName = new Object[4];
+				           
+				           columnsName[0] = "#";
+				           columnsName[1] = "Website";
+				           columnsName[2] = "Username";
+				           columnsName[3] = "Password";
+				           
+				           model.setColumnIdentifiers(columnsName);
+				           
+				           Object[] rowData = new Object[4];
+				           
+				           for(int i = 0; i < users.size(); i++){
+				               rowData[0] = users.get(i).getId();
+				               rowData[1] = Encrypt.unscramble(masterpass, users.get(i).getWeb().toString());
+				               rowData[2] = Encrypt.unscramble(masterpass, users.get(i).getUser().toString());
+				               rowData[3] = Encrypt.unscramble(masterpass, users.get(i).getPass().toString());
+				               model.addRow(rowData);
+				           }
+				           rs1.close();
+				           pst1.close();
+				            
+				       } catch (SQLException ex) {
+				           JOptionPane.showMessageDialog(null, ex);
+				       }
+					 
+					table.setModel(model);
+					//table.setModel(DbUtils.resultSetToTableModel(rs));
+					table.show(true);
+					
+					
+					
+				}catch(Exception e2){
+					JOptionPane.showMessageDialog(formAsterisk, e2);
+				}
+				search_site.setText(null);
+				search_user.setText(null);
+
+			}
+		});
+		button_2.setIcon(new ImageIcon("C:\\Users\\Krushnal Dhandhukia\\Desktop\\Picture3.png"));
+		button_2.setForeground(Color.WHITE);
+		button_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		button_2.setBackground(new Color(106, 90, 205));
+		button_2.setBounds(680, 137, 43, 45);
+		display.add(button_2);
 		
 		
 		
