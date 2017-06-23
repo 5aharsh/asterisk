@@ -24,12 +24,9 @@ public class Encrypt
         MessageDigest sha = null;
         try {
             key = myKey.getBytes("UTF-8");
-            //System.out.println(key.length);
             sha = MessageDigest.getInstance("SHA-1");
             key = sha.digest(key);
-            key = Arrays.copyOf(key, 16); // use only first 128 bit
-            //System.out.println(key.length);
-            //System.out.println(new String(key,"UTF-8"));
+            key = Arrays.copyOf(key, 16);
             secretKey = new SecretKeySpec(key, "AES");
             
             
@@ -99,28 +96,21 @@ public class Encrypt
     	return Encrypt.getDecryptedString();
     }
     
-   /*
-    public static void main(String args[])
-    {
-    	 		@SuppressWarnings("resource")
-				Scanner in = new Scanner(System.in);
-        		System.out.println("Message to Encrypt:");
-                final String strToEncrypt = in.nextLine();
-        		System.out.println("Password (or Key):");
-                final String strPssword = in.nextLine();
-                Encrypt.setKey(strPssword);
-                Encrypt.encrypt(strToEncrypt.trim());
-                
-                System.out.println("String to Encrypt: " + strToEncrypt); 
-                System.out.println("Encrypted: " + Encrypt.getEncryptedString());
-           
-                final String strToDecrypt =  Encrypt.getEncryptedString();
-                Encrypt.decrypt(strToDecrypt.trim());
-               
-                System.out.println("String To Decrypt : " + strToDecrypt);
-                System.out.println("Decrypted : " + Encrypt.getDecryptedString());
-        
-    }
-    */
+    public static String rhapsody(String str){
+		long hash = 5381;
+		int c=0;
+		while(c<=str.length()){
+			hash = (hash<<5)+hash+c;
+			c++;
+		}
+		hash = Math.abs(hash);
+		long num = hash;
+		String s="";
+    	while(num!=0){
+    		s+=(char) (((num%100)%75)+48);
+    		num/=100;
+    	}
+    	return s;
+	}
      
 }

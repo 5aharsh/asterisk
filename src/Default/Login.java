@@ -143,7 +143,6 @@ public class Login {
 	private JPasswordField prevPass;
 	private JPasswordField nuPass;
 	private JPasswordField conNuPass;
-	private Date date = new Date();
 	private JTable logtable;
 	
 	
@@ -206,44 +205,44 @@ public class Login {
 		
 		JLabel lblDevelopedBy = new JLabel("Developers");
 		lblDevelopedBy.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDevelopedBy.setForeground(Color.CYAN);
+		lblDevelopedBy.setForeground(Color.WHITE);
 		lblDevelopedBy.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		lblDevelopedBy.setBounds(354, 406, 317, 38);
+		lblDevelopedBy.setBounds(354, 401, 317, 38);
 		about.add(lblDevelopedBy);
 		
 		JLabel lblSaharshAnand = new JLabel("Saharsh Anand");
 		lblSaharshAnand.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSaharshAnand.setForeground(Color.WHITE);
+		lblSaharshAnand.setForeground(new Color(255, 255, 102));
 		lblSaharshAnand.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblSaharshAnand.setBounds(183, 442, 225, 29);
+		lblSaharshAnand.setBounds(183, 454, 225, 29);
 		about.add(lblSaharshAnand);
 		
 		JLabel lblKrushnalDhandhukia = new JLabel("Krushnal Dhandhukia");
 		lblKrushnalDhandhukia.setHorizontalAlignment(SwingConstants.CENTER);
-		lblKrushnalDhandhukia.setForeground(Color.WHITE);
+		lblKrushnalDhandhukia.setForeground(new Color(255, 255, 102));
 		lblKrushnalDhandhukia.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblKrushnalDhandhukia.setBounds(594, 442, 225, 29);
+		lblKrushnalDhandhukia.setBounds(594, 454, 225, 29);
 		about.add(lblKrushnalDhandhukia);
 		
 		JLabel lblbitnirmauniacin = new JLabel("@guywhogeek");
 		lblbitnirmauniacin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblbitnirmauniacin.setForeground(Color.WHITE);
 		lblbitnirmauniacin.setFont(new Font("Segoe UI", Font.ITALIC, 17));
-		lblbitnirmauniacin.setBounds(183, 472, 225, 29);
+		lblbitnirmauniacin.setBounds(183, 484, 225, 29);
 		about.add(lblbitnirmauniacin);
 		
 		JLabel lblbitnirmauniacin_1 = new JLabel("@krushnald9");
 		lblbitnirmauniacin_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblbitnirmauniacin_1.setForeground(Color.WHITE);
 		lblbitnirmauniacin_1.setFont(new Font("Segoe UI", Font.ITALIC, 17));
-		lblbitnirmauniacin_1.setBounds(594, 472, 225, 29);
+		lblbitnirmauniacin_1.setBounds(594, 484, 225, 29);
 		about.add(lblbitnirmauniacin_1);
 		
 		JLabel lblDevelopedAsA = new JLabel("Asterisk* is a minimalistic password manager with complete transparency where user is the");
 		lblDevelopedAsA.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDevelopedAsA.setForeground(Color.WHITE);
+		lblDevelopedAsA.setForeground(SystemColor.textInactiveText);
 		lblDevelopedAsA.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblDevelopedAsA.setBounds(0, 124, 1027, 29);
+		lblDevelopedAsA.setBounds(0, 133, 1027, 29);
 		about.add(lblDevelopedAsA);
 		
 		JButton button_2 = new JButton("");
@@ -263,72 +262,73 @@ public class Login {
 		button_2.setBounds(15, 16, 49, 46);
 		about.add(button_2);
 		
-		JLabel lblApplicationMakesUser = new JLabel("ultimate owner of all their passwords with added security of AES based encryption on data.");
+		JLabel lblApplicationMakesUser = new JLabel("ultimate owner of all their passwords with the security of AES based encryption on your data.");
 		lblApplicationMakesUser.setHorizontalAlignment(SwingConstants.CENTER);
-		lblApplicationMakesUser.setForeground(Color.WHITE);
+		lblApplicationMakesUser.setForeground(SystemColor.textInactiveText);
 		lblApplicationMakesUser.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblApplicationMakesUser.setBounds(0, 163, 1027, 29);
+		lblApplicationMakesUser.setBounds(0, 166, 1027, 29);
 		about.add(lblApplicationMakesUser);
 		
 		JLabel lblConsideringAllYour = new JLabel("Keeping data online is the best way to make it vulnerable. Thus, it's important to have your");
 		lblConsideringAllYour.setHorizontalAlignment(SwingConstants.CENTER);
-		lblConsideringAllYour.setForeground(Color.WHITE);
+		lblConsideringAllYour.setForeground(SystemColor.textInactiveText);
 		lblConsideringAllYour.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblConsideringAllYour.setBounds(0, 200, 1027, 27);
+		lblConsideringAllYour.setBounds(0, 199, 1027, 27);
 		about.add(lblConsideringAllYour);
 		
-		JLabel lblSolutionIs = new JLabel("sensetive information, like passwords, to be kept within your personal system and this is where");
+		JLabel lblSolutionIs = new JLabel("sensetive information, like passwords, to be kept within your personal system. This is where");
 		lblSolutionIs.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSolutionIs.setForeground(Color.WHITE);
+		lblSolutionIs.setForeground(SystemColor.textInactiveText);
 		lblSolutionIs.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblSolutionIs.setBounds(0, 236, 1027, 29);
+		lblSolutionIs.setBounds(0, 230, 1027, 29);
 		about.add(lblSolutionIs);
 		
 		JLabel lblAsteriskHelpsYou = new JLabel("Asterisk* helps you to manage passwords offline with added security and also make it mobile");
 		lblAsteriskHelpsYou.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAsteriskHelpsYou.setForeground(Color.WHITE);
+		lblAsteriskHelpsYou.setForeground(SystemColor.textInactiveText);
 		lblAsteriskHelpsYou.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblAsteriskHelpsYou.setBounds(0, 274, 1027, 29);
+		lblAsteriskHelpsYou.setBounds(0, 263, 1027, 29);
 		about.add(lblAsteriskHelpsYou);
 		
 		JLabel lblByProvidingYou = new JLabel("by providing you a movable database, which can be moved and used on any system with");
 		lblByProvidingYou.setHorizontalAlignment(SwingConstants.CENTER);
-		lblByProvidingYou.setForeground(Color.WHITE);
+		lblByProvidingYou.setForeground(SystemColor.textInactiveText);
 		lblByProvidingYou.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblByProvidingYou.setBounds(0, 312, 1027, 29);
+		lblByProvidingYou.setBounds(0, 296, 1027, 29);
 		about.add(lblByProvidingYou);
 		
 		JLabel lblAsterisk = new JLabel("Asterisk*.");
 		lblAsterisk.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAsterisk.setForeground(Color.WHITE);
+		lblAsterisk.setForeground(SystemColor.textInactiveText);
 		lblAsterisk.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-		lblAsterisk.setBounds(0, 349, 1027, 29);
+		lblAsterisk.setBounds(0, 329, 1027, 29);
 		about.add(lblAsterisk);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBackground(Color.YELLOW);
-		separator.setForeground(Color.ORANGE);
-		separator.setBounds(354, 389, 317, 2);
+		separator.setBackground(Color.DARK_GRAY);
+		separator.setForeground(Color.LIGHT_GRAY);
+		separator.setBounds(354, 439, 317, 2);
 		about.add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setForeground(Color.ORANGE);
-		separator_1.setBackground(Color.YELLOW);
-		separator_1.setBounds(354, 524, 317, 2);
+		separator_1.setForeground(Color.LIGHT_GRAY);
+		separator_1.setBackground(Color.DARK_GRAY);
+		separator_1.setBounds(354, 564, 317, 2);
 		about.add(separator_1);
 		
 		JLabel lblCredits = new JLabel("Credits");
 		lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCredits.setForeground(Color.CYAN);
+		lblCredits.setForeground(Color.WHITE);
 		lblCredits.setFont(new Font("Segoe UI", Font.BOLD, 25));
-		lblCredits.setBounds(354, 537, 317, 38);
+		lblCredits.setBounds(354, 528, 317, 38);
 		about.add(lblCredits);
 		
 		JLabel lblEclipse = new JLabel("Eclipse IDE       Stackoverflow       Flaticons       YouTube       Spotify");
+		lblEclipse.setBackground(Color.DARK_GRAY);
 		lblEclipse.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEclipse.setForeground(Color.WHITE);
+		lblEclipse.setForeground(Color.DARK_GRAY);
 		lblEclipse.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
-		lblEclipse.setBounds(0, 586, 1027, 29);
+		lblEclipse.setBounds(0, 580, 1027, 29);
 		about.add(lblEclipse);
 		
 		
@@ -560,12 +560,13 @@ public class Login {
 		btnDone.setIcon(null);
 		btnDone.setForeground(Color.WHITE);
 		btnDone.setFont(new Font("Century Gothic", Font.BOLD, 25));
-		btnDone.setBackground(new Color(0, 255, 127));
+		btnDone.setBackground(new Color(255, 255, 51));
 		btnDone.setBounds(453, 583, 121, 48);
 		help.add(btnDone);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\output (1).png"));
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\steps.png"));
 		lblNewLabel_4.setBounds(0, 11, 1027, 561);
 		help.add(lblNewLabel_4);
 		
@@ -643,7 +644,7 @@ public class Login {
 					masterpass = loginPassword;
 					
 					try{
-						String scrambled = Encrypt.scramble(rhapsody, loginPassword);
+						String scrambled = Encrypt.scramble(Encrypt.rhapsody(loginPassword), loginPassword);
 						String query = "select * from whitestar where content = ?";
 						PreparedStatement pst = connection.prepareStatement(query);
 						pst.setString(1,scrambled);
@@ -655,9 +656,9 @@ public class Login {
 							count++;
 						}
 						if(count == 1){
-							
 							JOptionPane.showMessageDialog(null, "Authentication Successfull");
-						
+							pathField.setText(null);
+							lng_passwd_fld.setText(null);
 							if(hlp_int == 1)
 							{
 								help.setVisible(true);
@@ -668,8 +669,6 @@ public class Login {
 							}
 							else
 							{
-								
-								
 									try{
 										users = new ArrayList<Users>();
 									       
@@ -736,6 +735,7 @@ public class Login {
 							}
 							
 							login.setVisible(false);
+							Date date = new Date();
 							String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
 							String time = Encrypt.scramble(masterpass, originalTime);
 							String activity = Encrypt.scramble(masterpass, "Logged in.");
@@ -755,7 +755,6 @@ public class Login {
 						pst.close();
 					
 					}catch(Exception e1){
-						JOptionPane.showMessageDialog(formAsterisk, "Invalid credentials!", "Access Denied!", JOptionPane.WARNING_MESSAGE);
 						JOptionPane.showMessageDialog(null, e1);
 						
 					}
@@ -1008,7 +1007,7 @@ public class Login {
 						pst.setString(3, pass);
 						pst.execute();
 						pst.close();
-						
+						Date date = new Date();
 						String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
 						String time = Encrypt.scramble(masterpass, originalTime);
 						String activity = Encrypt.scramble(masterpass, "Added new password for site: "+web_input.getText()+" and username: "+user_input.getText());
@@ -1085,7 +1084,7 @@ public class Login {
 						
 						String up = "update whitestar set content = ? ";
 						PreparedStatement pst = connection.prepareStatement(up);
-						pst.setString(1, Encrypt.scramble(rhapsody, nuPass.getText()));
+						pst.setString(1, Encrypt.scramble(Encrypt.rhapsody(nuPass.getText()), nuPass.getText()));
 						pst.executeUpdate();
 						pst.close();
 						pst1.close();
@@ -1115,6 +1114,7 @@ public class Login {
 						 * Adding to log with nuPass
 						 * 
 						 * */
+						Date date = new Date();
 						String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
 						String time = Encrypt.scramble(masterpass, originalTime);
 						String activity = Encrypt.scramble(masterpass, "Master Password have been changed");
@@ -1124,7 +1124,7 @@ public class Login {
 						pstmt.setString(2, activity);
 						pstmt.execute();
 						pstmt.close();
-						JOptionPane.showMessageDialog(null, "Success");
+						JOptionPane.showMessageDialog(null, "Successfully changed");
 						prevPass.setText(null);
 						nuPass.setText(null);
 						conNuPass.setText(null);
@@ -1411,6 +1411,7 @@ public class Login {
 						String query2 = "CREATE TABLE IF NOT EXISTS " + UL + "(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Time VARCHAR NOT NULL, Activity VARCHAR)";
 						Statement st2 = connection.createStatement();
 						st2.execute(query2);
+						Date date = new Date();
 						String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
 						String time = Encrypt.scramble(passwordField, originalTime);
 						String activity = Encrypt.scramble(passwordField, "Database created!");
@@ -1424,7 +1425,7 @@ public class Login {
 						
 						
 						
-						String scrambledText = Encrypt.scramble(rhapsody, passwordField);
+						String scrambledText = Encrypt.scramble(Encrypt.rhapsody(passwordField), passwordField);
 						String query3 = "insert into " + WS + "('content') values ('" + scrambledText + "')";
 						PreparedStatement pst3 = connection.prepareStatement(query3);
 						pst3.execute();
@@ -1729,7 +1730,7 @@ public class Login {
 		btnDeleteData.setBounds(888, 581, 127, 45);
 		display.add(btnDeleteData);
 		
-		JLabel lblSearchDataBy = new JLabel("Search (Case-sensetive)");
+		JLabel lblSearchDataBy = new JLabel("Search");
 		lblSearchDataBy.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSearchDataBy.setForeground(Color.WHITE);
 		lblSearchDataBy.setFont(new Font("Century Gothic", Font.BOLD, 16));
@@ -1782,7 +1783,7 @@ public class Login {
 						pst.setString(2, site);
 						pst.setString(3, user);
 						pst.execute();
-						
+						Date date = new Date();
 						String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
 						String time = Encrypt.scramble(masterpass, originalTime);
 						String activity = Encrypt.scramble(masterpass, "Updated password for site: "+update_web.getText().toString()+" and username"+update_user.getText().toString());
@@ -2199,6 +2200,7 @@ public class Login {
 							pst1.setString(2, user);
 							pst1.execute();
 							pst1.close();
+							Date date = new Date();
 							String originalTime =  new SimpleDateFormat("HH:mm dd.MM.yyyy").format(date);
 							String time = Encrypt.scramble(masterpass, originalTime);
 							String activity = Encrypt.scramble(masterpass, "Deleted password for site: "+delete_site.getText().toString()+" and username: "+delete_user.getText().toString());
