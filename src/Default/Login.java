@@ -201,43 +201,49 @@ public class Login {
 		JLabel label_10 = new JLabel("");
 		label_10.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Capture.PNG"));
 		label_10.setHorizontalAlignment(SwingConstants.CENTER);
-		label_10.setBounds(116, 13, 771, 82);
+		label_10.setBounds(0, 13, 1027, 82);
 		about.add(label_10);
 		
-		JLabel lblDevelopedBy = new JLabel("Developed By:");
-		lblDevelopedBy.setForeground(Color.WHITE);
-		lblDevelopedBy.setFont(new Font("Tw Cen MT", Font.ITALIC, 25));
-		lblDevelopedBy.setBounds(71, 108, 171, 29);
+		JLabel lblDevelopedBy = new JLabel("Developers");
+		lblDevelopedBy.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDevelopedBy.setForeground(Color.CYAN);
+		lblDevelopedBy.setFont(new Font("Segoe UI", Font.BOLD, 25));
+		lblDevelopedBy.setBounds(354, 406, 317, 38);
 		about.add(lblDevelopedBy);
 		
 		JLabel lblSaharshAnand = new JLabel("Saharsh Anand");
+		lblSaharshAnand.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSaharshAnand.setForeground(Color.WHITE);
-		lblSaharshAnand.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 25));
-		lblSaharshAnand.setBounds(71, 186, 171, 35);
+		lblSaharshAnand.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lblSaharshAnand.setBounds(183, 442, 225, 29);
 		about.add(lblSaharshAnand);
 		
 		JLabel lblKrushnalDhandhukia = new JLabel("Krushnal Dhandhukia");
+		lblKrushnalDhandhukia.setHorizontalAlignment(SwingConstants.CENTER);
 		lblKrushnalDhandhukia.setForeground(Color.WHITE);
-		lblKrushnalDhandhukia.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 25));
-		lblKrushnalDhandhukia.setBounds(708, 192, 202, 29);
+		lblKrushnalDhandhukia.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lblKrushnalDhandhukia.setBounds(594, 442, 225, 29);
 		about.add(lblKrushnalDhandhukia);
 		
-		JLabel lblbitnirmauniacin = new JLabel("15bit050@nirmauni.ac.in");
+		JLabel lblbitnirmauniacin = new JLabel("@guywhogeek");
+		lblbitnirmauniacin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblbitnirmauniacin.setForeground(Color.WHITE);
-		lblbitnirmauniacin.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 16));
-		lblbitnirmauniacin.setBounds(71, 228, 160, 29);
+		lblbitnirmauniacin.setFont(new Font("Segoe UI", Font.ITALIC, 17));
+		lblbitnirmauniacin.setBounds(183, 472, 225, 29);
 		about.add(lblbitnirmauniacin);
 		
-		JLabel lblbitnirmauniacin_1 = new JLabel("15bit023@nirmauni.ac.in");
+		JLabel lblbitnirmauniacin_1 = new JLabel("@krushnald9");
+		lblbitnirmauniacin_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblbitnirmauniacin_1.setForeground(Color.WHITE);
-		lblbitnirmauniacin_1.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 16));
-		lblbitnirmauniacin_1.setBounds(708, 228, 160, 29);
+		lblbitnirmauniacin_1.setFont(new Font("Segoe UI", Font.ITALIC, 17));
+		lblbitnirmauniacin_1.setBounds(594, 472, 225, 29);
 		about.add(lblbitnirmauniacin_1);
 		
-		JLabel lblDevelopedAsA = new JLabel("Developed as a part of 1st alloted Mini Project for College");
-		lblDevelopedAsA.setForeground(Color.CYAN);
-		lblDevelopedAsA.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 25));
-		lblDevelopedAsA.setBounds(214, 408, 654, 82);
+		JLabel lblDevelopedAsA = new JLabel("Asterisk* is a minimalistic password manager with complete transparency where user is the");
+		lblDevelopedAsA.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDevelopedAsA.setForeground(Color.WHITE);
+		lblDevelopedAsA.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+		lblDevelopedAsA.setBounds(0, 124, 1027, 29);
 		about.add(lblDevelopedAsA);
 		
 		JButton button_2 = new JButton("");
@@ -254,8 +260,76 @@ public class Login {
 		button_2.setFocusPainted(false);
 		button_2.setBorderPainted(false);
 		button_2.setBackground(new Color(8, 204, 120));
-		button_2.setBounds(12, 13, 49, 46);
+		button_2.setBounds(15, 16, 49, 46);
 		about.add(button_2);
+		
+		JLabel lblApplicationMakesUser = new JLabel("ultimate owner of all their passwords with added security of AES based encryption on data.");
+		lblApplicationMakesUser.setHorizontalAlignment(SwingConstants.CENTER);
+		lblApplicationMakesUser.setForeground(Color.WHITE);
+		lblApplicationMakesUser.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+		lblApplicationMakesUser.setBounds(0, 163, 1027, 29);
+		about.add(lblApplicationMakesUser);
+		
+		JLabel lblConsideringAllYour = new JLabel("Keeping data online is the best way to make it vulnerable. Thus, it's important to have your");
+		lblConsideringAllYour.setHorizontalAlignment(SwingConstants.CENTER);
+		lblConsideringAllYour.setForeground(Color.WHITE);
+		lblConsideringAllYour.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+		lblConsideringAllYour.setBounds(0, 200, 1027, 27);
+		about.add(lblConsideringAllYour);
+		
+		JLabel lblSolutionIs = new JLabel("sensetive information, like passwords, to be kept within your personal system and this is where");
+		lblSolutionIs.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSolutionIs.setForeground(Color.WHITE);
+		lblSolutionIs.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+		lblSolutionIs.setBounds(0, 236, 1027, 29);
+		about.add(lblSolutionIs);
+		
+		JLabel lblAsteriskHelpsYou = new JLabel("Asterisk* helps you to manage passwords offline with added security and also make it mobile");
+		lblAsteriskHelpsYou.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAsteriskHelpsYou.setForeground(Color.WHITE);
+		lblAsteriskHelpsYou.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+		lblAsteriskHelpsYou.setBounds(0, 274, 1027, 29);
+		about.add(lblAsteriskHelpsYou);
+		
+		JLabel lblByProvidingYou = new JLabel("by providing you a movable database, which can be moved and used on any system with");
+		lblByProvidingYou.setHorizontalAlignment(SwingConstants.CENTER);
+		lblByProvidingYou.setForeground(Color.WHITE);
+		lblByProvidingYou.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+		lblByProvidingYou.setBounds(0, 312, 1027, 29);
+		about.add(lblByProvidingYou);
+		
+		JLabel lblAsterisk = new JLabel("Asterisk*.");
+		lblAsterisk.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAsterisk.setForeground(Color.WHITE);
+		lblAsterisk.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+		lblAsterisk.setBounds(0, 349, 1027, 29);
+		about.add(lblAsterisk);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBackground(Color.YELLOW);
+		separator.setForeground(Color.ORANGE);
+		separator.setBounds(354, 389, 317, 2);
+		about.add(separator);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.ORANGE);
+		separator_1.setBackground(Color.YELLOW);
+		separator_1.setBounds(354, 524, 317, 2);
+		about.add(separator_1);
+		
+		JLabel lblCredits = new JLabel("Credits");
+		lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCredits.setForeground(Color.CYAN);
+		lblCredits.setFont(new Font("Segoe UI", Font.BOLD, 25));
+		lblCredits.setBounds(354, 537, 317, 38);
+		about.add(lblCredits);
+		
+		JLabel lblEclipse = new JLabel("Eclipse IDE       Stackoverflow       Flaticons       YouTube       Spotify");
+		lblEclipse.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEclipse.setForeground(Color.WHITE);
+		lblEclipse.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
+		lblEclipse.setBounds(0, 586, 1027, 29);
+		about.add(lblEclipse);
 		
 		
 		lng_passwd_fld = new JPasswordField();
@@ -524,7 +598,7 @@ public class Login {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 		        "SQLite Database", "sqlite");
 		fc.setFileFilter(filter);
-		final JButton db_choose_btn = new JButton("Pick");
+		final JButton db_choose_btn = new JButton(" Pick");
 		db_choose_btn.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\choose2.png"));
 		db_choose_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
@@ -1248,10 +1322,10 @@ public class Login {
 		backBtn.setBounds(15, 16, 49, 46);
 		signup.add(backBtn);
 		
-		JLabel databasename = new JLabel("Database Name & Location:");
+		JLabel databasename = new JLabel("Select Database Location & Name:");
 		databasename.setForeground(Color.WHITE);
 		databasename.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		databasename.setBounds(315, 261, 251, 34);
+		databasename.setBounds(315, 261, 297, 34);
 		signup.add(databasename);
 		
 		JLabel password = new JLabel("Password:");
@@ -1282,7 +1356,7 @@ public class Login {
 		filesave.setDialogTitle("Specify a file to save"); 
 		FileNameExtensionFilter savefilter = new FileNameExtensionFilter("SQLite Database", "sqlite");
 		filesave.setFileFilter(savefilter);
-		JButton btn_save_db = new JButton("Select");
+		JButton btn_save_db = new JButton(" Select");
 		btn_save_db.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\icons\\choose2.png"));
 		btn_save_db.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -1403,7 +1477,7 @@ public class Login {
 		display.add(disp_bk_btn);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(38, 261, 949, 300);
+		scrollPane.setBounds(41, 261, 949, 300);
 		display.add(scrollPane);
 		
         
@@ -1436,7 +1510,7 @@ public class Login {
 		search_site = new JTextField();
 		search_site.setBackground(new Color(255, 255, 255));
 		search_site.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		search_site.setBounds(368, 145, 203, 43);
+		search_site.setBounds(354, 142, 203, 43);
 		display.add(search_site);
 		search_site.setColumns(10);
 		
@@ -1444,7 +1518,7 @@ public class Login {
 		search_user.setBackground(new Color(255, 255, 255));
 		search_user.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		search_user.setColumns(10);
-		search_user.setBounds(368, 194, 203, 43);
+		search_user.setBounds(354, 191, 203, 43);
 		display.add(search_user);
 		
 		JButton site_search = new JButton("Site");
@@ -1458,7 +1532,7 @@ public class Login {
 			       
 			       try {
 			           
-			    	   String q = "SELECT * FROM Data where website = ? IGNORE CASE";
+			    	   String q = "SELECT * FROM Data where website = ?";
 			           PreparedStatement pst1 = connection.prepareStatement(q);
 			           pst1.setString(1, Encrypt.scramble(masterpass, search_site.getText().toString()));
 			           ResultSet rs1 = pst1.executeQuery();
@@ -1575,7 +1649,7 @@ public class Login {
 		}});
 		site_search.setForeground(new Color(255, 255, 255));
 		site_search.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		site_search.setBounds(576, 144, 112, 44);
+		site_search.setBounds(562, 141, 112, 44);
 		display.add(site_search);
 		
 		JButton user_search = new JButton("User");
@@ -1590,7 +1664,7 @@ public class Login {
 			       
 			       try {
 			           
-			    	   String q = "SELECT * FROM Data where username = ? IGNORE CASE";
+			    	   String q = "SELECT * FROM Data where username = ?";
 			           PreparedStatement pst1 = connection.prepareStatement(q);
 			           pst1.setString(1, Encrypt.scramble(masterpass, search_user.getText().toString()));
 			           ResultSet rs1 = pst1.executeQuery();
@@ -1636,7 +1710,7 @@ public class Login {
 			}
 			       search_site.setText(null);
 		}});
-		user_search.setBounds(576, 194, 112, 43);
+		user_search.setBounds(562, 191, 112, 43);
 		display.add(user_search);
 		
 		JButton btnDeleteData = new JButton("Delete");
@@ -1655,11 +1729,11 @@ public class Login {
 		btnDeleteData.setBounds(888, 581, 127, 45);
 		display.add(btnDeleteData);
 		
-		JLabel lblSearchDataBy = new JLabel("Search By:");
+		JLabel lblSearchDataBy = new JLabel("Search (Case-sensetive)");
 		lblSearchDataBy.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSearchDataBy.setForeground(Color.WHITE);
 		lblSearchDataBy.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblSearchDataBy.setBounds(419, 107, 198, 34);
+		lblSearchDataBy.setBounds(354, 104, 320, 34);
 		display.add(lblSearchDataBy);
 		
 		JPanel update = new JPanel();
@@ -1894,7 +1968,7 @@ public class Login {
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setIcon(new ImageIcon("C:\\College\\Mini-I\\asterisk\\Logo\\Capture.PNG"));
-		lblNewLabel_3.setBounds(133, 0, 771, 82);
+		lblNewLabel_3.setBounds(0, 0, 1027, 82);
 		display.add(lblNewLabel_3);
 		
 		JButton btnMenu = new JButton("Menu");
