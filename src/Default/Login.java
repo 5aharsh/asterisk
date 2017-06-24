@@ -1129,7 +1129,7 @@ public class Login {
 						nuPass.setText(null);
 						conNuPass.setText(null);
 						changeMP.setVisible(false);
-						display.setVisible(true);
+						menu.setVisible(true);
 						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
