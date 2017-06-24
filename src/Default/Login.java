@@ -983,8 +983,8 @@ public class Login {
 					String webo = web_input.getText();
 					String usero = user_input.getText();
 					String passo = pass_input.getText();
-					String web = Encrypt.scramble(masterpass, webo);
-					String user = Encrypt.scramble(masterpass, usero);
+					String web = Encrypt.scramble(masterpass, webo.toLowerCase());
+					String user = Encrypt.scramble(masterpass, usero.toLowerCase());
 					String pass = Encrypt.scramble(masterpass, passo);
 					
 					String query = "select * from Data where website = ? and username = ?";
@@ -1402,6 +1402,16 @@ public class Login {
 						Statement st = connection.createStatement();
 						st.execute(query);
 						
+						String WR = "warning";
+						String warn = "CREATE TABLE IF NOT EXISTS " + WR + "(Message string)";
+						Statement st3 = connection.createStatement();
+						st3.execute(warn);
+						
+						String inst = "insert into warning('Message') values ('You Are Looking At A Wrong Place Buddy, Please Use Our App To Go Through The Database!!')";
+						Statement st4 = connection.createStatement();
+						st4.execute(inst);
+						
+						
 						String WS = "whitestar";
 						String query1 = "CREATE TABLE IF NOT EXISTS " + WS + "(hash INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, content VARCHAR)";
 						Statement st1 = connection.createStatement();
@@ -1432,12 +1442,19 @@ public class Login {
 						passfield.setText(null);
 						save_dest.setText(null);
 						confirmpass.setText(null);
+						
+						
+					
+						
+						
 						welcome.setVisible(true);
 						signup.setVisible(false);
 						st.close();
 						st1.close();
 						st2.close();
 						pst3.close();
+						st3.close();
+						st4.close();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -1535,7 +1552,7 @@ public class Login {
 			           
 			    	   String q = "SELECT * FROM Data where website = ?";
 			           PreparedStatement pst1 = connection.prepareStatement(q);
-			           pst1.setString(1, Encrypt.scramble(masterpass, search_site.getText().toString()));
+			           pst1.setString(1, Encrypt.scramble(masterpass, search_site.getText().toLowerCase()));
 			           ResultSet rs1 = pst1.executeQuery();
 			           int k = 1;
 			           while(rs1.next()){
@@ -1667,7 +1684,7 @@ public class Login {
 			           
 			    	   String q = "SELECT * FROM Data where username = ?";
 			           PreparedStatement pst1 = connection.prepareStatement(q);
-			           pst1.setString(1, Encrypt.scramble(masterpass, search_user.getText().toString()));
+			           pst1.setString(1, Encrypt.scramble(masterpass, search_user.getText().toLowerCase()));
 			           ResultSet rs1 = pst1.executeQuery();
 			           int k = 1;
 			           while(rs1.next()){
@@ -1755,8 +1772,8 @@ public class Login {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				try{
-					String site = Encrypt.scramble(masterpass, update_web.getText().toString());
-					String user = Encrypt.scramble(masterpass, update_user.getText().toString());
+					String site = Encrypt.scramble(masterpass, update_web.getText().toLowerCase());
+					String user = Encrypt.scramble(masterpass, update_user.getText().toLowerCase());
 					String pass = Encrypt.scramble(masterpass, update_pass.getText());
 				
 					String query = "select * from Data WHERE website= ? and username= ?";
@@ -2178,8 +2195,8 @@ public class Login {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					
-					String site = Encrypt.scramble(masterpass, delete_site.getText().toString());
-					String user = Encrypt.scramble(masterpass, delete_user.getText().toString());
+					String site = Encrypt.scramble(masterpass, delete_site.getText().toLowerCase());
+					String user = Encrypt.scramble(masterpass, delete_user.getText().toLowerCase());
 					
 					
 					
