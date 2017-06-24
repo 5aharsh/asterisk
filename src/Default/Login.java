@@ -240,7 +240,7 @@ public class Login {
 		
 		JLabel lblDevelopedAsA = new JLabel("Asterisk* is a minimalistic password manager with complete transparency where user is the");
 		lblDevelopedAsA.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDevelopedAsA.setForeground(SystemColor.textInactiveText);
+		lblDevelopedAsA.setForeground(Color.WHITE);
 		lblDevelopedAsA.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblDevelopedAsA.setBounds(0, 133, 1027, 29);
 		about.add(lblDevelopedAsA);
@@ -264,42 +264,42 @@ public class Login {
 		
 		JLabel lblApplicationMakesUser = new JLabel("ultimate owner of all their passwords with the security of AES based encryption on your data.");
 		lblApplicationMakesUser.setHorizontalAlignment(SwingConstants.CENTER);
-		lblApplicationMakesUser.setForeground(SystemColor.textInactiveText);
+		lblApplicationMakesUser.setForeground(Color.WHITE);
 		lblApplicationMakesUser.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblApplicationMakesUser.setBounds(0, 166, 1027, 29);
 		about.add(lblApplicationMakesUser);
 		
 		JLabel lblConsideringAllYour = new JLabel("Keeping data online is the best way to make it vulnerable. Thus, it's important to have your");
 		lblConsideringAllYour.setHorizontalAlignment(SwingConstants.CENTER);
-		lblConsideringAllYour.setForeground(SystemColor.textInactiveText);
+		lblConsideringAllYour.setForeground(Color.WHITE);
 		lblConsideringAllYour.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblConsideringAllYour.setBounds(0, 199, 1027, 27);
 		about.add(lblConsideringAllYour);
 		
 		JLabel lblSolutionIs = new JLabel("sensetive information, like passwords, to be kept within your personal system. This is where");
 		lblSolutionIs.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSolutionIs.setForeground(SystemColor.textInactiveText);
+		lblSolutionIs.setForeground(Color.WHITE);
 		lblSolutionIs.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblSolutionIs.setBounds(0, 230, 1027, 29);
 		about.add(lblSolutionIs);
 		
 		JLabel lblAsteriskHelpsYou = new JLabel("Asterisk* helps you to manage passwords offline with added security and also make it mobile");
 		lblAsteriskHelpsYou.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAsteriskHelpsYou.setForeground(SystemColor.textInactiveText);
+		lblAsteriskHelpsYou.setForeground(Color.WHITE);
 		lblAsteriskHelpsYou.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblAsteriskHelpsYou.setBounds(0, 263, 1027, 29);
 		about.add(lblAsteriskHelpsYou);
 		
 		JLabel lblByProvidingYou = new JLabel("by providing you a movable database, which can be moved and used on any system with");
 		lblByProvidingYou.setHorizontalAlignment(SwingConstants.CENTER);
-		lblByProvidingYou.setForeground(SystemColor.textInactiveText);
+		lblByProvidingYou.setForeground(Color.WHITE);
 		lblByProvidingYou.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblByProvidingYou.setBounds(0, 296, 1027, 29);
 		about.add(lblByProvidingYou);
 		
 		JLabel lblAsterisk = new JLabel("Asterisk*.");
 		lblAsterisk.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAsterisk.setForeground(SystemColor.textInactiveText);
+		lblAsterisk.setForeground(Color.WHITE);
 		lblAsterisk.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		lblAsterisk.setBounds(0, 329, 1027, 29);
 		about.add(lblAsterisk);
@@ -656,7 +656,7 @@ public class Login {
 							count++;
 						}
 						if(count == 1){
-							JOptionPane.showMessageDialog(null, "Authentication Successfull");
+							JOptionPane.showMessageDialog(null, "Authentication Successful...");
 							pathField.setText(null);
 							lng_passwd_fld.setText(null);
 							if(hlp_int == 1)
@@ -1402,15 +1402,18 @@ public class Login {
 						Statement st = connection.createStatement();
 						st.execute(query);
 						
-						String WR = "warning";
+						String WR = "TABLE_OF_SINS";
 						String warn = "CREATE TABLE IF NOT EXISTS " + WR + "(Message string)";
 						Statement st3 = connection.createStatement();
 						st3.execute(warn);
 						
-						String inst = "insert into warning('Message') values ('You Are Looking At A Wrong Place Buddy, Please Use Our App To Go Through The Database!!')";
+						String inst = "insert into warning('Message') values ('Thou this action shall be counted as one sin that you made!')";
 						Statement st4 = connection.createStatement();
 						st4.execute(inst);
 						
+						String inst2 = "insert into warning('Message') values ('Get away and forget you happen to be here.')";
+						Statement st5 = connection.createStatement();
+						st5.execute(inst2);
 						
 						String WS = "whitestar";
 						String query1 = "CREATE TABLE IF NOT EXISTS " + WS + "(hash INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, content VARCHAR)";
@@ -1433,8 +1436,6 @@ public class Login {
 						pst.execute();
 						pst.close();
 						
-						
-						
 						String scrambledText = Encrypt.scramble(Encrypt.rhapsody(passwordField), passwordField);
 						String query3 = "insert into " + WS + "('content') values ('" + scrambledText + "')";
 						PreparedStatement pst3 = connection.prepareStatement(query3);
@@ -1442,10 +1443,6 @@ public class Login {
 						passfield.setText(null);
 						save_dest.setText(null);
 						confirmpass.setText(null);
-						
-						
-					
-						
 						
 						welcome.setVisible(true);
 						signup.setVisible(false);
@@ -1455,6 +1452,7 @@ public class Login {
 						pst3.close();
 						st3.close();
 						st4.close();
+						st5.close();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -1462,11 +1460,13 @@ public class Login {
 				}
 				else{
 					if(passwordField.equals("")||confirmPassword.equals(""))
-						JOptionPane.showMessageDialog(null, "Password field can't be empty");
+						JOptionPane.showMessageDialog(null, "Password field can't be empty...");
 					else if(passwordField.length()<8)
-						JOptionPane.showMessageDialog(null, "Password length should be more than 8");
+						JOptionPane.showMessageDialog(null, "Password length should be more than 8...");
+					else if(!passwordField.equals(confirmPassword))
+						JOptionPane.showMessageDialog(null, "Both passwords doesn't seems to be same...");
 					else if(passwordField.contains(" "))
-						JOptionPane.showMessageDialog(null, "No spaces are allowed in password");
+						JOptionPane.showMessageDialog(null, "No spaces are allowed in password...");
 				}
 			}
 		});
@@ -1811,7 +1811,7 @@ public class Login {
 						pstmt.execute();
 						pstmt.close();
 					
-						JOptionPane.showMessageDialog(formAsterisk, "Update Successfull");
+						JOptionPane.showMessageDialog(formAsterisk, "Update Successful");
 						update_web.setText(null);
 						update_user.setText(null);
 						update_pass.setText(null);
@@ -2306,13 +2306,6 @@ public class Login {
 		exitBtn.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		exitBtn.setBounds(394, 497, 238, 60);
 		welcome.add(exitBtn);
-		
-	
-		
-		
-		
-		
-		
 				
 	}
 }
