@@ -7,6 +7,8 @@ Asterisk* is a minimalistic password vault that helps you organise your password
 
 While using Asterisk* you are the ultimate owner of your passwords. You can create the backup of your Asterisk* Database, or even keep it in any mobile storage and view its content using this application in any other desktop. Although, you'll have to make sure to **always** keep your master password a secret and **never** forget it. Since, for security purpose, there is no possible way to recover it. Thus, your master password is your ultimate key that you can't afford to loose.
 
+### Executable file for Windows is Present in /"jars and exe" folder in repository. Downloading only Asterisk.exe will be fine.###
+
 
 ## LICENSE ##
 -------------
@@ -50,6 +52,5 @@ This is one reason why you should always remember this one password.
 
 
 ### How does searching passwords work? ###
-There are two ways to search your passwords - by website, or usernames. You can use either of them.
 
-### Executable file for Windows is Present in "jars and exe" folder in repository
+There are two ways to search your passwords - by website, or usernames. You can use either of them.
