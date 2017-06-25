@@ -48,5 +48,8 @@ This is one reason why you should always remember this one password.
 4. Decide a new password and retype it for confirmation.
 5. Wait for a moment because it may take some time **depending on the size of your database**.
 
+
 ### How does searching passwords work? ###
 There are two ways to search your passwords - by website, or usernames. You can use either of them.
+
+### Executable file for Windows is Present in "jars and exe" folder in repository
