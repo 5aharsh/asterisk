@@ -24,7 +24,9 @@ Also, because of lack of certification, Chrome or Windows may give this applicat
 ----------------
 
 Krushnal Dhandhukia - @krushnald9
+
 Saharsh Anand - @guywhogeek
+
 
 ## FAQs##
 ---------
