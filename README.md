@@ -7,7 +7,10 @@ Asterisk* is a minimalistic password vault that helps you organise your password
 
 While using Asterisk* you are the ultimate owner of your passwords. You can create the backup of your Asterisk* Database, or even keep it in any mobile storage and view its content using this application in any other desktop. Although, you'll have to make sure to **always** keep your master password a secret and **never** forget it. Since, for security purpose, there is no possible way to recover it. Thus, your master password is your ultimate key that you can't afford to loose.
 
-### Executable file for Windows is Present in /"jars and exe" folder in repository. Downloading only Asterisk.exe will be fine - [Direct download link to Asterisk.exe](https://bitbucket.org/asterisk_/asterisk/raw/5a7791102484e8f10a62c7d1ff9949326b76091d/jar%20and%20exe/Asterisk.exe)###
+### Downloading only Asterisk.exe will be fine - [Direct download link to Asterisk.exe].
+ Otherwise you can find it in "jars and exe"
+ folder in source code.
+ (https://bitbucket.org/asterisk_/asterisk/raw/5a7791102484e8f10a62c7d1ff9949326b76091d/jar%20and%20exe/Asterisk.exe)###
 
 Also, because of lack of certification, Chrome or Windows may give this application a false positive flag. Please ignore this, Asterisk is completely safe to use.
 
@@ -20,9 +23,8 @@ Also, because of lack of certification, Chrome or Windows may give this applicat
 ## DEVELOPERS ##
 ----------------
 
-    Krushnal Dhandhukia - @krushnald9
-    
-    Saharsh Anand - @guywhogeek
+Krushnal Dhandhukia - @krushnald9
+Saharsh Anand - @guywhogeek
 
 ## FAQs##
 ---------
@@ -38,7 +40,7 @@ Also, because of lack of certification, Chrome or Windows may give this applicat
 1. Navigate and select your database using **Pick** button
 2. Enter your master password
 
-### How do I recover my password? ###
+### How do I recover my master password? ###
 
 **There is no possible way to recover your password** which is strictly because of the security issues.
 This is one reason why you should always remember this one password.
