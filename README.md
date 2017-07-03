@@ -7,7 +7,7 @@ Asterisk* is a minimalistic password vault that helps you organise your password
 
 While using Asterisk* you are the ultimate owner of your passwords. You can create the backup of your Asterisk* Database, or even keep it in any mobile storage and view its content using this application in any other desktop. Although, you'll have to make sure to **always** keep your master password a secret and **never** forget it. Since, for security purpose, there is no possible way to recover it. Thus, your master password is your ultimate key that you can't afford to loose.
 
-### Executable file for Windows is Present in /"jars and exe" folder in repository. Downloading only Asterisk.exe will be fine - [Direct download link to Asterisk.exe](https://bitbucket.org/asterisk_/asterisk/src/5a7791102484e8f10a62c7d1ff9949326b76091d/jar%20and%20exe/Asterisk.exe?at=master)###
+### Executable file for Windows is Present in /"jars and exe" folder in repository. Downloading only Asterisk.exe will be fine - [Direct download link to Asterisk.exe](https://bitbucket.org/asterisk_/asterisk/raw/5a7791102484e8f10a62c7d1ff9949326b76091d/jar%20and%20exe/Asterisk.exe)###
 
 Also, because of lack of certification, Chrome or Windows may give this application a false positive flag. Please ignore this, Asterisk is completely safe to use.
 
