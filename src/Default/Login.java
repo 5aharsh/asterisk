@@ -1,40 +1,8 @@
 /*
- * Saharsh: Line 100: Login(): commented "connection = sqliteConnection.dbConnector();". Added "connection = sqliteConnection.dbConnector();" in Line 183 in lgn_button action
- * Saharsh: Line 189: clickAction() for Login. Added connection and login authentication system.
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
+ * Authored By - Krushnal and Saharsh
+ * This is the heart of Asterisk*
  * 
  * */
-
 
 
 package Default;
@@ -1407,11 +1375,11 @@ public class Login {
 						Statement st3 = connection.createStatement();
 						st3.execute(warn);
 						
-						String inst = "insert into warning('Message') values ('Thou this action shall be counted as one sin that you made!')";
+						String inst = "insert into TABLE_OF_SINS ('Message') values ('Thou this action shall be counted as one sin that you made!')";
 						Statement st4 = connection.createStatement();
 						st4.execute(inst);
 						
-						String inst2 = "insert into warning('Message') values ('Get away and forget you happen to be here.')";
+						String inst2 = "insert into TABLE_OF_SINS ('Message') values ('Get away and forget you happen to be here.')";
 						Statement st5 = connection.createStatement();
 						st5.execute(inst2);
 						
