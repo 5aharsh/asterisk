@@ -21,12 +21,12 @@ Also, because of lack of certification, Chrome or Windows may give this applicat
 ## DEVELOPERS ##
 ----------------
 
-Krushnal Dhandhukia ( @ krushnald9)
+Krushnal Dhandhukia (@krushnald9)
 
-Saharsh Anand ( @ guywhogeek)
+Saharsh Anand (@guywhogeek)
 
 
-## FAQs##
+## FAQs ##
 ---------
 
 ### How do I create a database? ###
